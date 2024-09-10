@@ -1,0 +1,339 @@
+\chapter{Metric Structure}
+
+In this chapter we introduce the metric structure on a Riemannian manifold, i.e.\ using the metric tensor to make the manifold into a metric space.
+We will prove that the topology induced by metric coincides with the topology carried by the manifold.
+Then we will study the length-minimizing problem: which curve minimize the distance between two points?
+The answer is two-sided: we will prove that length-minimizing curves are geodesics, and geodesics are \emph{locally} length-minimizing.
+
+\section{Metric Structure on Riemannian Manifolds}
+
+Let $(M,g)$ be a Riemannian manifold, $\gamma:[0,1]\to M$ be a regular curve (i.e.\ $\gamma$ is an immersion).
+We define the length functional of regular curves.
+\begin{defn}
+    The \emph{length functional} $L[\cdot]$ on the set of regular curves is defined by
+    \[L[\gamma]=\int_0^1\sqrt{g(\dot\gamma(t),\dot\gamma(t))}\d{t}.\]
+\end{defn}
+
+It is a well-known result from calculus that any regular curve can be repara\-metrized by arc-length.
+From now on the word ``curve'' means a regular curve.
+
+Now we define the distance between two points.
+\begin{defn}
+    Let $p,q\in M$ be two points on $M$, then we define their \emph{distance} by
+    \[d(p,q)=\inf_{\gamma\in C_{p,q}}L[\gamma],\]
+    where $C_{p,q}$ is the set of all regular curves joining $p$ and $q$.
+\end{defn}
+
+\begin{prop}
+    The distance function $d:M\times M\to\mathbb{R}$ has the following properties:
+    \begin{enumerate}[(1)]
+        \item $d(p,q)\geq 0$, and $d(p,q)=0\iff p=q$;
+        \item $d(p,q)=d(q,p)$;
+        \item $d(p,r)\leq d(p,q)+d(q,r)$.
+    \end{enumerate}
+    Thus the distance function makes $M$ into a metric space.
+\end{prop}
+\begin{proof}
+    Only need to show $d(p,q)=0\iff p=q$, all else are trivial.
+    We assume $p\neq q$, need to show $d(p,q)>0$.
+    Let $\gamma:[0,1]\to M$ be any curve joining $p$ and $q$.
+    Choose a local chart $(U,\varphi)$ such that $\varphi(U)=B_r(0)$, $q\neq U$.
+    By Jordan--Brouwer Separation Theorem, $\gamma$ must intersect $\partial U$ at $s:=\gamma(c)$.
+    Then we have
+    \[L[\gamma]\geq L[\gamma|_{[0,c]}]=\int_0^c\sqrt{g_{ij}\dot{x}^i(\gamma(t))\dot{x}^j(\gamma(t))}\d{t}.\]
+    Regarding $g:\overline{U}\times\mathbb{S}^{n-1}\to\mathbb{R}$, $g$ is a continuous function on a compact set, thus it attains its minimum $g(x)(v,v)\geq m$, and $m>0$ since $v\in\mathbb{S}^{n-1}\neq 0$.
+    Thus we have
+    \begin{equation}
+        L[\gamma]\geq L[\gamma|_{[0,c]}]\geq m\int_0^c|\dot{x}(\gamma(t))|\d{t}\geq mr>0.\label{estm of dist}
+    \end{equation}
+    $mr$ does not depend on $\gamma$, hence $d(p,q)\geq mr>0$.
+\end{proof}
+
+However, the metric space topology is nothing but the original topology carried by the manifold.
+
+\begin{prop}\label{metric and manifold topology}
+    The metric space topology on $M$ coincides with the manifold topology.
+\end{prop}
+
+We first need a lemma.
+\begin{lem}
+    The distance function to $p$ defined by $r(q)=d(p,q)$ is continuous with respective to the manifold topology.
+\end{lem}
+\begin{proof}
+    Since manifolds satisfy the second countable axiom, the Sequence Lemma holds.
+    Then it's equivalent to show for any $q_i\to q$ in manifold topology, we have $r(q_i)\to r(q)$.
+    Without loss of generality we can assume $\{q_i\}\subset U$ and $(U,\varphi)$ is a local chart such that $\varphi(q)=0$, $\varphi(U)=B_r(0)$.
+    Let $\delta$ be the Euclidean metric on $B_r(0)$, then by regarding $g$ as a continuous function on $\overline{U}\times\mathbb{S}^{n-1}$ again, we have $g\leq M\delta$ for some $M>0$.
+    By assumption, $q_i\to q$ in manifold topology implies $L_\delta[\psi_i]\to 0$, where $\psi_i(t)=t\varphi(q_i)$, the radial line joining $\varphi(q)$ and $\varphi(q_i)$ in $\varphi(U)=B_r(0)$.
+    Let $\varphi^{-1}\psi_i=\gamma_i$, then we have
+    \[L_g[\gamma_i]=\int_0^1\sqrt{g(\dot\gamma_i(t),\dot\gamma_i(t))}\d{t}\leq M\int_0^1\sqrt{\delta(\dot\psi_i(t),\dot\psi_i(t))}\d{t}\leq ML_\delta[\psi_i].\]
+    Since $r$ is Lipschitz, i.e.\ $|r(q)-r(s)|\leq d(q,s)$, we have
+    \[d(q_i,q)\leq L_g[\gamma_i]\leq ML_\delta[\psi_i]\to 0,\]
+    hence $r$ is continuous.
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{metric and manifold topology}]
+    Since distance function is continuous, metric balls are open in manifold topology.
+    Now we prove the converse.
+
+    Let $U$ be open with respective to manifold topology.
+    Let $p\in U$, $V$ be a neighborhood of $p$ so small that $\varphi(V)=B_r(0)$ for some $r>0$.
+    The estimate~\eqref{estm of dist}~shows if $q\notin V$ then $d(p,q)\geq mr$ for some fixed $m>0$, then by taking contrapositive statement, we have $q\in V$ if $d(p,q)<mr$.
+    Therefore $B_p(mr)\subset U$, then $U$ is open with respective to metric space topology.
+\end{proof}
+
+\section{Length-Minimizing Curves}
+
+This section and the next is guided by the following problem:
+\begin{pro}
+    Let $p,q$ be two distinct points on a Riemannian manifold $(M,g)$, then what is the curve $\gamma$ satisfying $L[\gamma]=d(p,q)$?
+\end{pro}
+
+This section we will show if the length-minimizing curve exists, then it is a \emph{geodesic}.
+Next section we will show if $p,q$ are sufficiently closed, \emph{the} geodesic joining $p$ and $q$ is length-minimizing.
+Finally, the existence of length-minimizing curves is related to Hopf-Rinow Theorem, which we will discuss at the last section of the chapter.
+
+To find the length-minimizing curve, we ``gather'' curves with same initial and end points, which is called a variation.
+\begin{defn}
+    Let $\gamma_0:[0,a]\to M$ be a curve, a \emph{variation} of $\gamma_0$ is a differentiable map $\gamma:[0,a]\times(-\varepsilon,\varepsilon)\to M$ such that $\gamma(t,0)=\gamma_0(t)$.
+    If $\gamma(0,s)=\gamma_0(0)$ and $\gamma(a,s)=\gamma_0(a)$ for any $s\in(-\varepsilon,\varepsilon)$, then we call the variation a \emph{proper variation}.
+    We call $\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\gamma(s,t)=:V(t)$ the \emph{variation vector field}.
+\end{defn}
+
+Now we introduce the energy functional, which is easier to calculate.
+\begin{defn}
+    The \emph{energy functional} on the set of curves is defined by
+    \[E[\gamma]=\int_0^a\frac{1}{2}|\dot{\gamma}(t)|^2\d{t},\]
+    where $\gamma:[0,a]\to M$ is a regular curve.
+\end{defn}
+
+We will prove that a curve is energy-minimizing if and only if it is length-minimizing.
+\begin{lem}
+    For a curve $\gamma:[0,a]\to M$, we have
+    \[L^2[\gamma]\leq 2aE[\gamma],\]
+    with equality holds if and only if $|\dot\gamma(t)|=\mathrm{const}$.
+\end{lem}
+\begin{proof}
+    This is Cauchy--Schwarz inequality.
+\end{proof}
+
+\begin{prop}
+    If $\gamma$ is length-minimizing, then it is energy-minimizing.
+\end{prop}
+\begin{proof}
+    Let $\tilde\gamma$ be another curve, then we have
+    \[2aE[\gamma]=L^2[\gamma]\leq L^2[\tilde\gamma]\leq 2aE[\tilde\gamma].\qedhere\]
+\end{proof}
+
+Our aim is to prove the converse.
+\begin{prop}\label{energy-min to length-min}
+    If $\gamma$ is an energy-minimizing curve, then it is length-minimizing.
+\end{prop}
+
+To prove this, we need to differentiate the variation.
+\begin{prop}[First variation formula]
+    Let $\gamma(t,s)$ be a variation, define its energy $\displaystyle E(s)=\int_0^a\frac{1}{2}\left|\frac{\partial}{\partial{t}}\gamma(t,s)\right|^2\d{t}$, then we have
+    \[E'(0)=\boxed{\langle V,\dot\gamma\rangle|^a_0}-\int_0^a\langle V(t),\nabla_{\dot\gamma_0(t)}\dot\gamma_0(t)\rangle.\]
+    The boxed term is called \emph{boundary term}, and it vanishes when the variation is proper.
+\end{prop}
+\begin{proof}
+    This is a calculation.
+    We have
+    \begin{align*}
+        \frac{\d{}}{\d{s}}E(s)&=\int_0^a\left\langle\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\right\rangle\d{t}\\
+        &=\int_0^a\left\langle\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial}{\partial{t}}}\frac{\partial\gamma}{\partial{s}}\right\rangle\d{t}\\
+        &=\int_0^a\frac{\partial}{\partial{t}}\left\langle\frac{\partial\gamma}{\partial{t}},\frac{\partial\gamma}{\partial{s}}\right\rangle-\left\langle\frac{\partial\gamma}{\partial{s}},\nabla_{\frac{\partial{}}{\partial{t}}}\frac{\partial\gamma}{\partial{t}}\right\rangle\d{t}.
+    \end{align*}
+    Take $s=0$, we obtain
+    \begin{align*}
+        E'(0)&=\int_0^a\frac{\partial{}}{\partial{t}}\langle V(t),\dot\gamma_0(t)\rangle-\langle V(t),\nabla_{\dot\gamma_0(t)}\dot\gamma_0(t)\rangle\d{t}\\
+        &=\langle V,\dot\gamma_0\rangle|^a_0-\int_0^a\langle V(t),\nabla_{\dot\gamma_0(t)}\dot\gamma_0(t)\rangle\d{t}.\qedhere
+    \end{align*}
+\end{proof}
+
+Now we can derive the definition of a geodesic.
+\begin{defn}
+    A curve $\gamma:[0,a]$ is called a \emph{geodesic} if $\nabla_{\dot\gamma(t)}\dot\gamma(t)=0$ for $t\in[0,a]$.
+\end{defn}
+
+\begin{rem}
+    Geodesics are constant speed, this can be shown by $\frac{\d{}}{\d{t}}|\dot\gamma(t)|^2=2\langle\dot\gamma(t),\nabla_{\dot\gamma(t)}\dot\gamma(t)\rangle=0$.
+\end{rem}
+
+\begin{cor}\label{E'(0)=0}
+    $\gamma$ is a critical value for all proper variation if and only if $\nabla_{\dot\gamma(t)}\dot\gamma(t)=0$, that is, $\gamma$ is a geodesic.
+\end{cor}
+
+We can give the proof of Proposition~\ref{energy-min to length-min}~now.
+\begin{proof}[Proof of Proposition~\ref{energy-min to length-min}]
+    Let $\gamma:[0,a]\to M$ be a curve such that for any $\tilde\gamma:[0,a]\to M$ with $\tilde\gamma(0)=\gamma(0)$, $\tilde\gamma(1)=\gamma(1)$, the inequality $E[\gamma]\leq E[\tilde\gamma]$ holds, we show that $L[\gamma]\leq L[\tilde\gamma]$.
+    Let $\gamma(t,s)$ be any proper variation with $\gamma(t,0)=\gamma(t)$, then $\gamma$ is a critical point of $E(s)$.
+    Hence by Corollary~\ref{E'(0)=0}, $\gamma$ is a geodesic.
+    Now we can reparametrize $\tilde\gamma$ into arc-length, obtaining $\hat{\tilde\gamma}$.
+    Therefore
+    \[L^2[\gamma]=2aE[\gamma]\leq 2aE\left[\hat{\tilde\gamma}\right]=L^2\left[\hat{\tilde\gamma}\right]=L^2[\tilde\gamma],\]
+    which implies $L[\gamma]\leq L[\tilde\gamma]$.
+\end{proof}
+
+Combining all results above, we have
+\begin{prop}
+    If a curve is length-minimizing, then it is a geodesic.
+\end{prop}
+
+\section{Geodesics and Exponential Maps}
+To prove the local length-minimizing property of geodesic, we need to introduce the exponential map.
+
+We first need to investigate the equation that determine a geodesic.
+\begin{prop}
+    Given $p\in M$ and $v\in T_pM$, there exists a unique geodesic $\gamma$ (whose domain may not be maximal) such that $\gamma(0)=p$, $\dot\gamma(0)=v$.
+\end{prop}
+\begin{proof}
+    Let $(U,\varphi)$ be a local chart containing $p$, compose $\varphi$ with $\gamma$ we obtain coordinate curves $x^i$'s.
+    Then the geodesic equation is equivalent to
+    \[\ddot{x}^k(t)+\Gamma^k_{ij}(\gamma(t))\dot{x}^i(t)\dot{x}^j(t)=0,\ k=1,\cdots,n.\]
+    This is a system of second order ordinary differential equations, by the unique existence theorem of ODE, the solution is completely determined by $x^i$'s and $\dot{x}^i$'s, that is, $p$ and $v$.
+\end{proof}
+
+Since the solution of an ODE relies continuously on its initial value, we have the following proposition.
+\begin{prop}\label{geodesic existence}
+    For any $p\in M$, there exists a neighborhood $V$ of $p$, such that there exists $\delta>0$, $\varepsilon>0$ and a differentiable map $\gamma:(-\delta,\delta)\times\mathscr{U}\to M$, where $\mathscr{U}=\{(q,v)\in TM:\ q\in V,\ v\in T_qM,\ |v|<\varepsilon\}$, such that $\gamma(t;q,v)$ is a geodesic with $\gamma(0)=q$, $\dot\gamma(0)=v$.
+\end{prop}
+A proof can be found in~\cite[Chapter 3, Lemma 1]{Wu}.
+
+Observe that $\gamma(\lambda t;p,v)=\gamma(t;p,\lambda v)$.
+Denote $\gamma(t;p,v)$ by $\gamma_v(t)$, then above observation can be written as $\gamma_{\lambda v}(t)=\gamma_v(\lambda t)$.
+Therefore, we can shorten the initial vector to lengthen the domain of geodesic.
+
+\begin{defn}
+    Let $U\subset T_pM$ be a neighborhood of origin, such that for any $v\in U$, $\gamma_v(1)$ is defined (existence is guaranteed by Proposition~\ref{geodesic existence}).
+    We define the \emph{exponential map} at $p$ by
+    \begin{align*}
+        \exp_p:U&\to M\\
+        v&\mapsto \gamma_v(1).
+    \end{align*}
+\end{defn}
+
+\begin{rem}
+    We can scale the initial vector and obtain
+    \[\exp_p(v)=\gamma_v(1)=\gamma_{v/|v|}(|v|).\]
+    This means the action of exponential map on $v$ is to move forward the distance $|v|$ along the geodesic with initial direction $v/|v|$.
+\end{rem}
+
+\begin{prop}
+    $\exp_{p*}|_0:T_0(T_pM)\to T_pM$ is identity (we identify $T_0(T_pM)$ with $T_pM$).
+\end{prop}
+\begin{proof}
+    We have
+    \[\exp_{p*}|_0(v)=\left.\frac{\d{}}{\d{t}}\right|_{t=0}(tv)=v.\qedhere\]
+\end{proof}
+
+\begin{cor}
+    There exists a ball $B_\varepsilon(0)\subset T_pM$ such that $\exp_p:B_\varepsilon(0)\to M$ is a diffeomorphism onto its image.
+\end{cor}
+\begin{proof}
+    Since $\exp_{p*}|_0$ is identity, it is nondegenerate, the corollary follows from Inverse Function Theorem.
+\end{proof}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item We know that the geodesics on $\mathbb{S}^n$ are great circles, hence $\exp_p$ is defined on the whole $T_pM$.
+        But $\exp_p$ is not injective, since 
+        \[\exp_p(0)=\exp(2\pi v)=p\]
+        for unit vector $v$ in $T_pM$.
+        \item Let $M=\mathbb{S}^1\times\mathbb{R}$ be the cylinder.
+        We know from elementary differential geometry that the geodesics on cylinder are directrix circles, helices and generatrix lines.
+        Then in local charts $(e^{2\pi it},s)\mapsto(t,s)$, we know $\exp_p$ is not injective in the direction $(1,0)$, and injective in other directions.
+    \end{enumerate}
+\end{eg}
+
+We postpone the discussion on whether the exponential map can be defined on the whole tangent space, the answer is Hopf--Rinow Theorem, which will be discussed in next section.
+
+Now we prove that geodesics are locally length-minimizing.
+For this, we introduce some local charts.
+Given a Riemannian manifold $(M,g)$ and $p\in M$, let $\exp_p:B_\varepsilon(0)\to\exp(B_\varepsilon(0))=B_\varepsilon(p)$ be a diffeomorphism.
+
+\begin{defn}
+    We define \emph{geodesic normal coordinate} as follows:
+    Let $\{e_i\}$ be an orthonormal basis of Euclidean space $(T_pM,\delta)$, $\{\alpha^i\}$ be its dual basis.
+    Then we define the coordinate by
+    \[q\in B_\varepsilon(p)\mapsto(\alpha^1(\exp_p^{-1}(q)),\cdots,\alpha^n(\exp_p^{-1}(q))).\]
+\end{defn}
+
+\begin{prop}
+    Under geodesic normal coordinate, we have
+    \[g_{ij}(p)=\delta_{ij},\ \Gamma^k_{ij}(p)=0.\]
+\end{prop}
+\begin{proof}
+    Since $\exp_p$ is a diffeomorphism, we have $\left.\frac{\partial{}}{\partial{x^i}}\right|_p=\exp_{p*}|_0(e_i)=e_i$, hence $g_{ij}=\delta(e_i,e_j)=\delta_{ij}$.
+    Moreover, let $x(t)=ty$ for $y\in T_pM-\{0\}$, then $x(t)$ is the coordinate of some geodesic in $B_\varepsilon(p)$, thus it satisfies the equation
+    \[\ddot{x}^k(t)+\Gamma^k_{ij}(x(t))\dot{x}^i(t)\dot{x}^j(t)=0.\]
+    Since $\dot{x}^i=y^i\neq 0$, $\ddot{x}^k=0$, we have $\Gamma^k_{ij}(ty)=0$.
+    Let $y\to 0$ we obtain the conclusion.
+\end{proof}
+
+Next we introduce the geodesic polar coordinate.
+\begin{defn}
+    We define \emph{geodesic polar coordinate} as follows:
+    Let $(r,\theta^1,\cdots,\theta^{n-1})$ be a polar coordinate on Euclidean space $(T_pM,\delta)$, then we defined the coordinate by
+    \[q\in B_\varepsilon(p)-\{p\}\mapsto(r(\exp_p^{-1}(q)),\theta^1(\exp_p^{-1}(q)),\cdots,\theta^{n-1}(\exp_p^{-1}(q))).\]
+\end{defn}
+
+\begin{prop}
+    Under geodesic polar coordinate, we have
+    \[\left\langle\frac{\partial}{\partial{r}},\frac{\partial}{\partial{r}}\right\rangle=1,\ \left\langle\frac{\partial}{\partial{r}},\frac{\partial}{\partial{\theta^i}}\right\rangle=0.\]
+\end{prop}
+\begin{proof}
+    To make things clear, we write the inverse of geodesic polar coordinate as
+    \[F:(r,\omega)\mapsto\exp_p(r\omega)\]
+    for $r\in(0,\varepsilon)$, $\omega\in\mathbb{S}^{n-1}$.
+    Then we use $\partial_0,\partial_1,\cdots,\partial_{n-1}$ to denote the tangent vectors in $(0,\varepsilon)\times\mathbb{S}^{n-1}$, we have
+    \begin{align*}
+        &\frac{\partial{}}{\partial{r}}=F_*(\partial_0),\\
+        &\frac{\partial{}}{\partial{\theta^i}}=F_*(\partial_i),\ i=1,\cdots,n-1.
+    \end{align*}
+    First we know that $\partial_0$ is the tangent vector of radial line $r\omega$, hence $\partial/\partial{r}$ is the tangent vector of a unit-speed radial geodesic, that is,
+    \[\left\langle\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{r}}\right\rangle=1.\]
+    Moreover, we have
+    \begin{align*}
+        \frac{\partial}{\partial{r}}\left\langle\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{\theta^i}}\right\rangle&=\left\langle\nabla_{\frac{\partial{}}{\partial{r}}}\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{\theta^i}}\right\rangle+\left\langle\frac{\partial{}}{\partial{r}},\nabla_{\frac{\partial{}}{\partial{r}}}\frac{\partial{}}{\partial{\theta^i}}\right\rangle\\
+        &=\left\langle\frac{\partial{}}{\partial{r}},\nabla_{\frac{\partial{}}{\partial{r}}}\frac{\partial{}}{\partial{\theta^i}}\right\rangle\\
+        &=\left\langle\frac{\partial{}}{\partial{r}},\nabla_{\frac{\partial{}}{\partial{\theta^i}}}\frac{\partial{}}{\partial{r}}\right\rangle\\
+        &=\frac{1}{2}\frac{\partial{}}{\partial{\theta^i}}\left\langle\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{r}}\right\rangle\\
+        &=0,
+    \end{align*}
+    hence $\left\langle\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{\theta^i}}\right\rangle$ is constant.
+    However, if we let $r\to 0$, we have $\partial/\partial{\theta^i}\to 0$, therefore
+    \[\left\langle\frac{\partial{}}{\partial{r}},\frac{\partial{}}{\partial{\theta^i}}\right\rangle=0.\]
+\end{proof}
+
+\begin{cor}
+    Under geodesic polar coordinate, the metric tensor has local expression
+    \[g=\d{r^2}+g_{ij}(r,\theta)\d{\theta^i}\otimes\d{\theta^j},\]
+    where $[g_{ij}]_{i,j>0}$ is positive definite.
+\end{cor}
+
+As an application, we prove that geodesics are locally length-minimizing as we promised.
+
+\begin{prop}\label{geodesic locally length-min}
+    Let $\gamma:[0,1]\to M$ be a geodesic contained in an open set $U$, where geodesic polar coordinate is defined on $U$.
+    Let $\tilde\gamma$ be any curve contained in $U$ with $\tilde\gamma(0)=\gamma(0)=p$, $\tilde\gamma(1)=\gamma(1)=q$.
+    Then $L[\gamma]\leq L[\tilde\gamma]$.
+\end{prop}
+\begin{proof}
+    Let $q=\exp_p(v)$, $\varphi$ is the geodesic polar coordinate.
+    Then we have
+    \[\gamma(t)=\varphi(tr_0,\omega_0),\ \tilde\gamma(t)=\varphi(r(t),\omega(t))\]
+    such that $r(1)=r_0$, $\omega(t)\in\mathbb{S}^{n-1}$.
+    Therefore
+    \begin{align*}
+        L[\gamma]&=\int_0^1|\dot\gamma(t)|\d{t}\\
+        &=\int_0^1|v|\d{t}=r_0,\\
+        L[\tilde\gamma]&=\int_0^1(|\dot{r}^2(t)+g_{ij}\dot\theta^i(t)\dot\theta^j(t))^{1/2}\\
+        &\geq\int_0^1|\dot{r}(t)|\d{t}\\
+        &\geq\int_0^1\dot{r}(t)\d{t}=r_0.\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{rem}
+    The hypothesis of Proposition~\ref{geodesic locally length-min}~can be weakened to $\exp_p$ is an immersion on $U$.
+\end{rem}

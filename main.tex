@@ -1,0 +1,51 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+
+\documentclass[]{book}
+
+\usepackage[paper=b5paper]{geometry}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage[shortlabels]{enumitem}
+\usepackage{mathpazo}
+% \usepackage{mathptmx}
+\usepackage{fixdif}
+\usepackage[colorlinks]{hyperref}
+
+\theoremstyle{definition}
+\newtheorem*{defn}{Definition}
+\newtheorem{eg}{Example}[chapter]
+\theoremstyle{plain}
+\newtheorem{thm}[eg]{Theorem}
+\newtheorem{prop}[eg]{Proposition}
+\newtheorem{lem}[eg]{Lemma}
+\newtheorem{cor}[eg]{Corollary}
+\theoremstyle{remark}
+\newtheorem{rem}[eg]{Remark}
+\newtheorem*{pro}{Problem}
+
+\title{A Concise Note on Differential Geometry}
+\author{Zeng Mengchen}
+\date{Last Compile: \today}
+
+\begin{document}
+\maketitle
+
+\frontmatter
+
+\chapter{Preface}
+
+\mainmatter
+
+\part{Smooth Manifolds}
+
+\part{Riemannian Geometry}
+\input{Part2/metric.tex}
+
+\backmatter
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+\end{document}
