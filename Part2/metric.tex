@@ -337,3 +337,135 @@ As an application, we prove that geodesics are locally length-minimizing as we p
 \begin{rem}
     The hypothesis of Proposition~\ref{geodesic locally length-min}~can be weakened to $\exp_p$ is an immersion on $U$.
 \end{rem}
+
+\section{Hopf--Rinow Theorem}
+
+We now answer the problem whether length-minimizing curve always exists.
+The answer is Hopf--Rinow Theorem.
+
+We adopt the metric geometry version of Hopf--Rinow Theorem from~\cite{Burago}, using geometric approach to prove the theorem and keeping the differential tools minimal.
+We first define
+\begin{defn}
+    A Riemannian manifold $(M,g)$ is called \emph{(geodesically) complete} if $M$ is complete as a metric space.
+\end{defn}
+
+Our theorem is
+\begin{thm}[Hopf--Rinow--Cohn--Vossen]\label{Hopf-Rinow}
+    Let $(M,g)$ be a Riemannian manifold, the following four assertions are equivalent:
+    \begin{enumerate}[(1)]
+        \item $M$ has the Heine--Borel property, i.e.\ every closed geodesic ball is compact;
+        \item $M$ is geodesically complete;
+        \item Every geodesic $\gamma:[0,a)\to M$ can be extended to a continuous curve $\overline{\gamma}:[0,a]\to M$;
+        \item There is a point $p\in M$ such that every length-minimizing geodesic $\gamma:[0,a)\to M$ with $\gamma(0)=p$ can be extended to a continuous curve $\overline{\gamma}:[0,a]\to M$.
+    \end{enumerate}
+\end{thm}
+
+We first establish several lemmas.
+
+\begin{lem}
+    The length functional is lower semi-continuous in the following sense:
+    let $\gamma_i,\gamma:[a,b]\to M$, if $\gamma_i\to\gamma$ pointwisely as $i\to\infty$, then
+    \[L[\gamma]\leq\lim_{i\to\infty}L[\gamma_i].\]
+\end{lem}
+\begin{proof}
+    Let $Y$ be a partition of $[a,b]$ with $a=y_0<\cdots<y_N=b$, denote
+    \[\Sigma(Y)=\sum_{i=1}^Nd(\gamma_(y_{i-1}),\gamma_(y_i)).\]
+    Take $\varepsilon>0$ and fix a partition $Z$ such that $L[\gamma]-\Sigma(Z)<\varepsilon$.
+    Now consider $\Sigma_j(Z)$ for curves $\gamma_j$ corresponding to same partition $Z$.
+    Choose $j$ so large that the inequality $d(\gamma_j(z_i),\gamma(z_i))<\varepsilon$ holds for all $z_i\in Z$.
+    Then
+    \[L[\gamma]\leq\Sigma(Z)+\varepsilon\leq\Sigma_j(Z)+\varepsilon+(N+1)\varepsilon\leq L[\gamma_j]+(N+2)\varepsilon.\]
+    Since $\varepsilon$ is arbitrary, the lemma holds.
+\end{proof}
+
+\begin{lem}\label{shortest path}
+    Let $\gamma_i$ be length-minimizing curves for $i=1,2,\cdots$, suppose $\gamma_i\to\gamma$ pointwisely, then $\gamma$ also minimizes length.
+\end{lem}
+\begin{proof}
+    Let $\gamma$ has end points $p$ and $q$, then since $L[\gamma_i]$ equals to the distance between its end points, $L[\gamma_i]\to d(p,q)$.
+    By the lower semi-continuity of length functional, we have
+    \[L[\gamma]\leq\lim_{i\to\infty}L[\gamma_i]=d(p,q)\leq L[\gamma].\qedhere\]
+\end{proof}
+
+\begin{lem}\label{compact length-min}
+    Let $(M,g)$ be a compact Riemannian manifold (maybe with boundary), then any two points $p,q\in M$ can be joined by a length-minimizing curve.
+\end{lem}
+\begin{proof}
+    By the definition of distance, there exists a sequence of curves $\{\gamma_i\}$ with constant speed such that $\gamma_i(0)=p$, $\gamma_i(1)=q$ and $L[\gamma_i]\to d(p,q)$.
+    Then let $L[\gamma_i]<A$ for all $i=1,2,\cdots$, we have $d(p,x)\leq L[\gamma_i|_{[0,a]}]<A$ for $x=\gamma_i(a)$, hence the family $\{\gamma_i\}$ is uniformly bounded.
+    Moreover, fix $\varepsilon>0$, let $\delta=\varepsilon/A$, we have
+    \[d(x,y)\leq L[\gamma_i|_{[a,b]}]\leq A(b-a)<\varepsilon\]
+    provided $x=\gamma_i(a)$, $y=\gamma_i(b)$, and $b-a<\delta$ for any $i=1,2,\cdots$, hence the family $\{\gamma_i\}$ is equicontinuous.
+    Then the family verifies the conditions of Arzela--Ascoli Theorem, it converges (up to a subsequence) to a curve $\gamma$.
+    Then by the lower semi-continuity of length functional, we have
+    \[L[\gamma]\leq\lim_{i\to\infty}L[\gamma_i]=d(p,q)\leq L[\gamma].\]
+    Thus $\gamma$ is length-minimizing.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{Hopf-Rinow}]
+    Implications (1)$\implies$(2)$\implies$(3)$\implies$(4) are all easy, we prove (4)$\implies$(1).
+
+    Let $R=\sup\{\overline{B_r(p)}\ \text{is a compact set}\}$, then $R>0$ since manifolds are locally compact, $\overline{B_r(p)}$ is compact for $r$ sufficiently small.
+    We argue by contradiction.
+    Suppose $R<+\infty$, that is, there exists noncompact geodesic balls.
+    The argument is divided into two steps.
+
+    1. First we prove $B_R(p)$ is sequentially compact.
+    Let $\{p_i\}\subset B_R(p)$, set $d(p,p_i)=r_i$.
+    We may assume $r_i\to R$ as $i\to\infty$, otherwise $\{p_i\}$ is eventually contained in a smaller geodesic ball, and it has a convergent subsequence by the definition of $R$.
+
+    Now let $\gamma_i:[0,r_i]\to M$ be a length-minimizing curve joining $p$ and $p_i$, whose existence is guaranteed by Lemma~\ref{compact length-min}.
+    Notice that $\gamma_i$'s are parametrized by arc-length.
+    We can choose a subsequence of $\{\gamma_i\}$ such that the restrictions of the curves to $[0,r_1]$ converge by Arzela--Ascoli Theorem.
+    From this subsequence, we can choose a further subsequence such that the restrictions to $[0,r_2]$ converge, and so on.
+    Then by Cantor diagonal procedure, we have a sequence $\{\gamma_{i_n}\}$ such that for $t\in[0,R)$, $\gamma_{i_n}(t)$ is well-defined for $n$ sufficiently large and $\gamma_{i_n}(t)\to\gamma(t)$ as $n\to\infty$.
+    Moreover, Arzela--Ascoli Theorem asserts $\gamma$ is smooth for any restriction to $[0,r]$ provided $r<R$ by uniform convergence, hence $\gamma$ is smooth.
+
+    Now by Lemma~\ref{shortest path}, $\gamma$ is a length-minimizing curve, hence by the hypothesis (iv), $\gamma$ can be extended to a continuous curve $\overline{\gamma}:[0,R]\to M$.
+    Then let $q=\overline{\gamma}(R)$, fix $\varepsilon>0$, take $n$ sufficiently large such that $d(p_{i_n},\gamma_{r_{i_n}})<\varepsilon/2$ and $d(\gamma(r_{i_n},q))=R-r_{i_n}<\varepsilon/2$, we have
+    \[d(p_{i_n},q)\leq d(p_{i_n},\gamma(r_{i_n}))+d(\gamma(r_{i_n}),q)<\varepsilon.\]
+    Hence $p_{i_n}\to q$ as $n\to\infty$, we have $B_R(p)$ is sequentially compact.
+
+    2. Since $B_R(p)$ is sequentially compact, we have $\overline{B_R(p)}$ is compact.
+    Now we show $\overline{B_{R+\varepsilon}(p)}$ is compact for some $\varepsilon>0$.
+    Since $M$ is locally compact, for every $x\in\overline{B_R(0)}$ there is an $r(x)>0$ such that $\overline{B_{r(x)}(x)}$ is compact.
+    Then we can choose finite $x_i\in\overline{B_R(p)}$ such that $\{B_{r(x_i)}(x_i)\}$ covers $\overline{B_R(p)}$.
+    The union of these geodesic balls is sequentially compact and contains the geodesic ball $B_{R+\varepsilon}(p)$ for $0<\varepsilon<\min\{r(x_i)\}$.
+    Hence $\overline{B_{R+\varepsilon}(p)}$ is compact, this contradicts the choice of $R$.
+\end{proof}
+
+We have two corollaries.
+
+\begin{cor}[Hopf--Rinow Theorem]
+    Let $(M,g)$ be a Riemannian manifold, the following are equivalent:
+    \begin{enumerate}[(1)]
+        \item $M$ is geodesically complete;
+        \item $\exp_p$ is defined on whole $T_pM$ for any $p\in M$;
+        \item $\exp_p$ is defined on whole $T_pM$ for one $p\in M$.
+    \end{enumerate}
+\end{cor}
+\begin{proof}
+    (1)$\implies$(2): Let $S=\{r\in\mathbb{R}_{>0}:\ \gamma:[0,r)\ \text{can be extended to }r\}$.
+    We prove $S$ is both open and closed, then the implication holds.
+    Let $r\in S$, for any $q\in\partial B_r(p)$, define $r(q)$ as follows:
+    let unit-speed geodesic $\gamma:[0,r]\to M$ joins $p$ and $q$, then there exists a geodesic $\tilde\gamma:[r,r+r(q))$ such that $\tilde\gamma(r)=q$, $\dot{\tilde\gamma}(r)=\dot\gamma(r)$, that is, $\gamma$ can be extended to $[0,r+r(q))$.
+    Cover $\partial B_r(p)$ by finite many $B_{r(q_i)}(q_i)$, then for $0<\varepsilon<\min\{r(q_i)\}$, $B_{r+\varepsilon}(p)$ is in the union of $B_r(p)$ and $B_{r(q_i)}(q_i)$, hence any geodesics $\sigma:[0,r+\varepsilon)$ can be extended to $\sigma:[0,r+\varepsilon]\to M$.
+    This implies $(r-\varepsilon,r+\varepsilon)\subset S$, $S$ is open.
+
+    Now assume $\{r_i\}\subset S$ converges to $r$.
+    Let $\gamma:[0,r)$ be a geodesic, then define $\gamma(r)=\lim_{i\to\infty}\gamma(r_i)$, the limit exists since $M$ is complete.
+    Hence $r\in S$, $S$ is closed.
+
+    (2)$\implies$(3) is trivial.
+
+    (3)$\implies$(1): If $\gamma:[0,a)$ is a length-minimizing geodesic with $\gamma(0)=p$, then $\gamma(t)=\exp_p(tv)$ for some $v$, and clearly it can be extended to $a$.
+\end{proof}
+
+\begin{cor}
+    If $M$ is geodesically complete, then any two points can be joined by a length-minimizing geodesic.
+\end{cor}
+\begin{proof}
+    Let $p,q\in M$, $R>d(p,q)$.
+    Then $q\in\overline{B_R(p)}$, the latter one is bounded and closed, hence by Theorem~\ref{Hopf-Rinow}, it is compact.
+    By Lemma~\ref{compact length-min}, there is a length-minimizing geodesic joining $p$ and $q$.
+\end{proof}
