@@ -350,3 +350,112 @@ First we need a lemma.
     \end{align*}
     This means $(n-2)\d\Scal=0$, which implies $\Scal\equiv\text{const}$ for $n\geq 3$.
 \end{proof}
+
+\section{Jacobi Fields}
+At the beginning of Section~\ref{curvature section}, we introduced the one parameter family of geodesics $\gamma(t,s)=\exp_p(t(v+s\xi))$.
+It is a variation of curve $\gamma(t)=\gamma(t,0)$, and its variation vector field $J$ satisfies~\eqref{Jacobi field}.
+Motivated by this, we give the definition of Jacobi fields.
+
+\begin{defn}
+    Let $\gamma$ be a geodesic, a vector field $J$ along $\gamma$ is called a \emph{Jacobi field}, if $\ddot{J}(t)+R(\dot\gamma(t),J(t))\dot\gamma(t)=0$.
+\end{defn}
+
+Let $\{e_i(t)\}$ be a parallel frame along $\gamma$, and $J(t)=f^ie_i$.
+Define $a^i_j(t)=R(\dot\gamma(t),e_i(t),\dot\gamma(t),e_j(t))$, then the equation of Jacobi field is equivalent to
+\[\ddot{f}^i(t)+a^i_j(t)f^j(t)=0,\ i=1,\cdots,n.\]
+Hence~\eqref{Jacobi field}~is indeed a system of ODE.
+By ODE theory, given $f^i(0),\dot{f}^i(0)$ $i=1,\cdots,n$, the $f^i(t)$'s are uniquely determined.
+Translate into geometric language, a Jacobi field $J$ is determined by $J(0)$ and $\dot{J}(0)$.
+
+We summarize above discussion.
+
+\begin{prop}
+    Let $\mathscr{J}\gamma$ be the vector space of all Jacobi fields along $\gamma$, then 
+    \[\dim\mathscr{J}(\gamma)=2n.\]
+\end{prop}
+
+The proposition below shows only Jacobi fields that perpendicular to $\gamma$ are interesting.
+\begin{prop}
+    Let $\gamma$ be a geodesic, $J$ is a Jacobi field along $\gamma$.
+    Then we have the decomposition
+    \[J(t)=J^\perp(t)+(at+b)\dot\gamma(t),\]
+    where $J^\perp(t)\perp\dot\gamma(t)$.
+    If a Jacobi field is perpendicular to $\gamma$, then we call it a \emph{normal Jacobi field}.
+\end{prop}
+\begin{proof}
+    We have
+    \begin{align*}
+        \frac{\d^2{}}{\d{t^2}}\langle J(t),\dot\gamma(t)\rangle&=\langle\ddot{J}(t),\dot\gamma(t)\rangle\\
+        &=-\langle R(\dot\gamma(t),J(t))\dot\gamma(t),\dot\gamma(t)\rangle\\
+        &=0.\qedhere
+    \end{align*}
+\end{proof}
+
+Now we can completely answer the calculation problem of differential of exponential map.
+\begin{prop}\label{compute exp*}
+    Let a Jacobi field $J$ along $\gamma(t)=\exp_p(tv)$ satisfy $J(0)=0$, $\dot{J}(0)=\xi$, then $J(t)=\exp_{p*}|_{tv}(t\xi)$.
+\end{prop}
+\begin{proof}
+    Let $J$ be the variation vector field of $\gamma(t,s)=\exp_p(t(v+s\xi))$.
+    Then
+    \begin{align*}
+        J(t)&=\frac{\partial{}}{\partial{s}}\exp_p(t(v+s\xi))\\
+        &=\exp_{p*}|_{tv}(t\xi).
+    \end{align*}
+    Now consider the initial condition for $J$, we have
+    \[J(0)=\exp_{p*}|_0(0)=0,\]
+    and
+    \begin{align*}
+        \dot{J}(0)&=\left.\frac{\partial}{\partial{t}}\right|_{t=0}\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\exp_p(t(v+s\xi))\\
+        &=\dot{J}(0)=\left.\frac{\partial}{\partial{s}}\right|_{s=0}\left.\frac{\partial{}}{\partial{t}}\right|_{t=0}\exp_p(t(v+s\xi))\\
+        &=\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\exp_{p*}|_0(v+s\xi)\\
+        &=\xi.
+    \end{align*}
+    Then the conclusion follows by the uniqueness of Jacobi fields.
+\end{proof}
+
+\begin{prop}[Gauss Lemma]
+    $\langle\exp_{p*}|_v(\xi),\dot\gamma_v(1)\rangle=\langle\xi,v\rangle$.
+\end{prop}
+\begin{proof}
+    Let $J$ be a Jacobi field along $\gamma_v$ with $J(0)=0$, $\dot{J}(0)=\xi$.
+    Then by Proposition~\ref{compute exp*}, we have
+    \begin{align*}
+        \langle\exp_{p*}|_v(\xi),\dot\gamma_v(1)\rangle&=\langle J(1),\dot\gamma_v(1)\rangle.
+    \end{align*}
+    We differentiate above inner product, obtaining
+    \[\frac{\d{}}{\d{t}}\langle J(t),\dot\gamma_v(t)\rangle=\langle\dot{J}(t),\dot\gamma_v(t),\rangle\]
+    and
+    \begin{align*}
+        \frac{\d{}}{\d{t}}\langle\dot{J}(t),\dot\gamma_v(t)\rangle&=\langle\ddot{J}(t),\dot\gamma_v(t)\rangle\\
+        &=-\langle R(\dot\gamma_v,J)\dot\gamma_v,\dot\gamma_v\rangle\\
+        &=0.
+    \end{align*}
+    Hence $\langle\dot{J}(t),\dot\gamma_v(t)\rangle$ is constant.
+    Clearly $\langle\dot{J}(0),\dot\gamma_v(0)\rangle=\langle\xi,v\rangle$, then we have
+    \begin{align*}
+        \langle J(1),\dot\gamma_v(1)\rangle-\langle J(0),\dot\gamma_v(0)\rangle&=\int_0^1\langle\xi,v\rangle\d{t}\\
+        &=\langle\xi,v\rangle.
+    \end{align*}
+    Notice that $\langle J(0),\dot\gamma_v(0)\rangle=0$ and we obtain the result.
+\end{proof}
+
+Finally we consider the case where $\exp_{p*}$ degenerates.
+\begin{defn}
+    Let $\gamma$ be a geodesic starting at $p$, if $\exp_{p*}|_{\gamma(t_0)}$ is degenerate at $\gamma(t_0)$, then $\gamma(t_0)$ is called a \emph{conjugate point} of $p$.
+\end{defn}
+
+A simple criterion for conjugate points is
+\begin{prop}
+    $\exp_{p*}$ degenerates at $\gamma(t_0)$ if and only if there is a nontrivial Jacobi field $J$ with $J(0)=J(t_0)=0$.
+\end{prop}
+\begin{proof}
+    $\exp_{p*}|_{\gamma(t_0)}(\xi)=0$ if and only if Jacobi field $J(t)=\frac{\partial{}}{\partial{s}}\exp_p(t(v+s\xi))$ satisfies $J(0)=J(t_0)=0$.
+\end{proof}
+
+\begin{rem}
+    This proposition shows conjugate is symmetric.
+\end{rem}
+
+\section{Cartan--Hadamard Theorem}
+In this section we prove the celebrated Cartan--Hadamard Theorem.
