@@ -1,0 +1,222 @@
+\chapter{Curvature}
+
+\section{Curvature Tensor and Curvaure Endomorphism}\label{curvature section}
+
+\subsection*{Riemann Curvature Tensor}
+We calculated in Proposition~\ref{exp at 0}~that $\exp_{p*}|_0$ is identity, naturally we have the following problem:
+\begin{pro}
+    Calculate $\exp_{p*}|_v:T_v(T_pM)\to T_{\exp_p(v)}M$.
+\end{pro}
+\begin{proof}[Solution]
+    To evaluate $\exp_{p*}|_v(\xi)$, we choose a line $v+s\xi$, and then
+    \[\exp_{p*}|_v(\xi)=\left.\frac{\d{}}{\d{s}}\right|_{s=0}\exp_p(v+s\xi).\]
+    Now we can introduce the one parameter family of geodesics 
+    \[\gamma(t,s)=\exp_p(t(v+s\xi)),\]
+    and denote $\gamma(t)=\gamma(t,0)$.
+    We calculate the variation vector field $J(t)$ of $\gamma$, and obtain the result by taking $t=1$.
+    Let $J_s(t)=\frac{\partial{}}{\partial{s}}\gamma(t,s)$, then $\dot{J}_s(t)=\nabla_{\dot\gamma_s(t)}\frac{\partial\gamma}{\partial{s}}$.
+    Since $\nabla_{\dot\gamma_s(t)}\frac{\partial\gamma}{\partial{t}}=0$, we have
+    \begin{align*}
+        \ddot{J}_s(t)&=\nabla_{\dot\gamma_s(t)}\nabla_{\dot\gamma_s(t)}\frac{\partial\gamma}{\partial{s}}\\
+        &=\nabla_{\dot\gamma_s(t)}\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\\
+        &=\nabla_{\frac{\partial\gamma}{\partial{t}}}\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}-\nabla_{\frac{\partial\gamma}{\partial s}}\nabla_{\frac{\partial\gamma}{\partial{t}}}\frac{\partial\gamma}{\partial{t}}.
+    \end{align*}
+    Moreover, we have $[\partial_t,\partial_s]=0$, then we denote
+    \[R\left(\frac{\partial}{\partial{t}},\frac{\partial}{\partial{s}}\right)=\nabla_{\frac{\partial}{\partial{s}}}\nabla_{\frac{\partial}{\partial{t}}}-\nabla_{\frac{\partial}{\partial{t}}}\nabla_{\frac{\partial}{\partial{s}}}+\nabla_{\left[\frac{\partial}{\partial{t}},\frac{\partial}{\partial{s}}\right]},\]
+    we obtain
+    \[\ddot{J}_s(t)+R\left(\frac{\partial\gamma}{\partial{t}},\frac{\partial\gamma}{\partial{s}}\right)\frac{\partial\gamma}{\partial{t}}=0.\]
+    Take $s=0$, we have
+    \begin{equation}
+        \ddot{J}(t)+R(\dot\gamma(t),J(t))\dot\gamma(t)=0.\label{Jacobi field}
+    \end{equation}
+    We will show later that~\eqref{Jacobi field}~is a system of ordinary differential equations, hence by solving the system with given initial value and taking $t=1$, we obtain the answer of the problem.
+\end{proof}
+
+We make it into a definition.
+
+\begin{defn}
+    The \emph{Riemann curvature tensor} $R:\mathfrak{X}(M)\times\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$ is defined by
+    \[R(X,Y)Z=\nabla_Y\nabla_XZ-\nabla_X\nabla_YZ+\nabla_{[X,Y]}Z.\]
+\end{defn}
+
+\begin{rem}
+    Many authors define the Riemann curvature tensor as the negative of above definition, e.g.\ in~\cite{Petersen}.
+    Please be careful with the sign of the tensor.
+\end{rem}
+
+We need to explain the name ``tensor'', so we must show $R$ is truly tensorial.
+\begin{lem}\label{R tensor}
+    $R$ is a tensor.
+\end{lem}
+\begin{proof}
+    $R(X,Y)Z$ is clearly tensorial in $X$ and $Y$, we show that $R(X,Y)(fZ)=fR(X,Y)Z$ for $f\in C^\infty(M)$.
+    We have
+    \begin{align*}
+        \nabla_Y\nabla_X(fZ)&=\nabla_Y((Xf)Z+f\nabla_XZ)\\
+        &=(YXf)Z+(Xf)\nabla_YZ+(Yf)\nabla_XZ+f\nabla_Y\nabla_XZ\\
+        -\nabla_X\nabla_Y(fZ)&=-(XYf)Z-(Yf)\nabla_XZ-(Xf)\nabla_YZ-f\nabla_X\nabla_YZ\\
+        \nabla_{[X,Y]}(fZ)&=([X,Y]f)Z+f\nabla_{{X,Y}}Z,
+    \end{align*}
+    add all three equalities and we reach the conclusion.
+\end{proof}
+
+Now we can look at Riemann curvature tensor locally.
+A rather complicated calculation shows:
+\begin{lem}
+    Let $R(\partial_i,\partial_j)\partial_k=R^l_{ijk}\partial_l$, then
+    \[R^l_{ijk}=\partial_j\Gamma^l_{ik}-\partial_i\Gamma^l_{jk}+\Gamma^m_{ik}\Gamma^l_{jm}-\Gamma^m_{jk}\Gamma^l_{im}.\]
+\end{lem}
+
+We also define a $(0,4)$-tensor by lowering the $l$ index of $R^l_{ijk}$, that is:
+\begin{defn}
+    $R(X,Y,Z,W):=\langle R(X,Y)Z,W\rangle$ is also called \emph{Riemann curvature tensor}.
+\end{defn}
+
+\begin{eg}
+    Euclidean space $(\mathbb{R}^n,\delta)$ has $R\equiv 0$.
+    Any metric admits zero curvature is called \emph{flat}.
+\end{eg}
+
+\subsection*{Curvature Endomorphism}
+Curvature also appears in another scene.
+Let us consider the second covariant differential of a tensor.
+
+\begin{defn}
+    Let $T(\cdots)$ be a tensor, denote $(\nabla_{X,Y}T)(\cdots):=\nabla(\nabla T)(\cdots,Y,X)$.
+\end{defn}
+
+\begin{prop}
+    For $(r,s)$-tensor $T$, we have
+    \begin{equation}
+        \nabla_{X,Y}T=\nabla_X(\nabla_YT)-\nabla_{\nabla_XY}T.\label{2nd cov deriv}
+    \end{equation}
+\end{prop}
+\begin{proof}
+    Since covariant derivative commutes with contraction, we have
+    \begin{align*}
+        \nabla_X(\nabla_YT)&=\nabla_X(\tr_{1,s}Y\otimes\nabla T)\\
+        &=\tr_{1;s+1}(\nabla_X(Y\otimes\nabla T))\\
+        &=\tr_{1;s+1}((\nabla_XY)\otimes\nabla T+Y\otimes(\nabla_X\nabla T))\\
+        &=\nabla_{\nabla_XY}T+\nabla(\nabla T)(\cdots,Y,X)\\
+        &=\nabla_{\nabla_XY}T+\nabla_{X,Y}T,
+    \end{align*}
+    then the result follows.
+\end{proof}
+
+\begin{defn}
+    Define the \emph{curvature endomorphism} $R(X,Y)$ on $(r,s)$-tensors by
+    \[R(X,Y)T=\nabla_Y\nabla_XT-\nabla_X\nabla_YT+\nabla_{[X,Y]}T.\]
+\end{defn}
+
+\begin{rem}
+    We need to show $R(X,Y)T$ is tensorial in $T$ so that $R(X,Y)$ is a well-defined endomorphism.
+    This is similar to Lemma~\ref{R tensor}.
+\end{rem}
+
+\begin{prop}
+    For any $(r,s)$-tensor $T$, we have the following \emph{Ricci identity}:
+    \[\nabla_{Y,X}T-\nabla_{X,Y}T=R(X,Y)T.\]
+    Moreover, we have a explicit formula
+    \begin{equation}
+        \begin{aligned}
+            &(R(X,Y)T)(\omega_1,\cdots,\omega_r,X_1,\cdots,X_s)\\
+            =&-\sum_{i=1}^rT(\omega_1,\cdots,R(X,Y)\omega_i,\cdots,\omega_r,X_1,\cdots,X_s)\\
+            &-\sum_{j=1}^sT(\omega_1,\cdots,\omega_r,X_1,\cdots,R(X,Y)X_j,\cdots,X_s)
+        \end{aligned}\label{curvature formula}
+    \end{equation}
+\end{prop}
+\begin{proof}
+    Using equation~\eqref{2nd cov deriv}, we have
+    \begin{align*}
+        \nabla_{Y,X}T-\nabla_{X,Y}T&=\nabla_Y\nabla_XT-\nabla_{\nabla_YX}T-\nabla_X\nabla_YT+\nabla_{\nabla_XY}T\\
+        &=\nabla_Y\nabla_XT-\nabla_X\nabla_YT+\nabla_{[X,Y]}T\\
+        &=R(X,Y)T,
+    \end{align*}
+    the second equality is torsion-freeness.
+    Since $R(X,Y)$ clearly satisfies Leibniz Law and commutes with contraction, we can deduce the formula in the same way as covariant derivative.
+\end{proof}
+
+Ricci identity shows the curvature appears when we interchange the second covariant differential.
+
+\subsection*{Properties of Curvature}
+\begin{prop}\label{curvature symmetric}
+    Riemann curvature tensor has following symmetric properties:
+    For $X,Y,Z,W\in\mathfrak{X}(M)$, we have
+    \begin{enumerate}[(1)]
+        \item $R(X,Y,Z,W)=-R(Y,X,Z,W)=-R(X,Y,W,Z)$;
+        \item $R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0$ (First Bianchi identity);
+        \item $R(X,Y,Z,W)=R(Z,W,X,Y)$;
+        \item $(\nabla_XR)(Y,Z)+(\nabla_YR)(Z,X)+(\nabla_ZR)(X,Y)=0$ (Second Bianchi identity).
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (1) The first equality is evident.
+    We show the second equality.
+    Consider the Hessian of $g(Z,W)$, then we have
+    \[\nabla^2g(Z,W)(X,Y)=\langle\nabla^2_{Y,X}Z,W\rangle+\langle\nabla_XZ,\nabla_YW\rangle+\langle\nabla_YZ,\nabla_XW\rangle+\langle Z,\nabla^2_{Y,X}W\rangle.\]
+    Interchange $X,Y$, we have
+    \[\nabla^2g(Z,W)(Y,X)=\langle\nabla^2_{X,Y}Z,W\rangle+\langle\nabla_YZ,\nabla_XW\rangle+\langle\nabla_XZ,\nabla_YW\rangle+\langle Z,\nabla^2_{X,Y}W\rangle.\]
+    These two equations must equal, hence
+    \[\langle\nabla^2_{Y,X}Z,W\rangle-\langle\nabla^2_{X,Y}Z,W\rangle=\langle Z,\nabla^2_{X,Y}W\rangle-\langle Z,\nabla^2_{Y,X}W\rangle,\]
+    this is equivalent to
+    \[R(X,Y,Z,W)=R(Y,X,W,Z).\]
+    (2) Since $R(X,Y)Z$ is tensorial, we can assume $X,Y,Z$ are frames.
+    Then all Lie bracket between $X,Y,Z$ vanish, we have
+    \begin{align*}
+        \sum_{\text{cyc}}R(X,Y)Z=&\nabla_Y\nabla_XZ-\nabla_X\nabla_YZ+\nabla_Z\nabla_YX-\nabla_Y\nabla_ZX\\
+        &+\nabla_X\nabla_ZY-\nabla_Z\nabla_XY\\
+        =&\nabla_Y[X,Z]+\nabla_Z[Y,X]+\nabla_X[Z,Y]\\
+        =&0.
+    \end{align*}
+    (3) By (1) and (2) we have
+    \begin{align*}
+        R(X,Y,Z,W)=&-R(Z,X,Y,W)-R(Y,Z,X,W)\\
+        =&R(Z,X,W,Y)+R(Y,Z,W,X)\\
+        =&-R(W,Z,X,Y)-R(X,W,Z,Y)\\
+        &-R(W,Y,Z,X)-R(Z,W,Y,X)\\
+        =&2R(Z,W,X,Y)+R(X,W,Y,Z)+R(W,Y,X,Z)\\
+        =&2R(Z,W,X,Y)-R(Y,X,W,Z)\\
+        =&2R(Z,W,X,Y)-R(X,Y,Z,W),
+    \end{align*}
+    which implies $2R(X,Y,Z,W)=2R(Z,W,X,Y)$.\\
+    (4) By the definition of covariant derivative, we have
+    \begin{align*}
+        (\nabla_XR)(Y,Z)=&[\nabla_X,R(Y,Z)]-R(\nabla_XY,Z)-R(Y,\nabla_XZ)\\
+        =&[\nabla_X,\nabla_{[Y,Z]}]-[\nabla_X,[\nabla_Y,\nabla_Z]]-R(\nabla_XY,Z)-R(Y,\nabla_XZ)\\
+        =&\nabla_{[X,[Y,Z]]}-[\nabla_X,[\nabla_Y,\nabla_Z]]-R(X,[Y,Z])\\
+        &-R(\nabla_XY,Z)-R(Y,\nabla_XZ).
+    \end{align*}
+    Take summation cyclically, we see that terms involving $\nabla$ vanish because of Jacobi identity.
+    Moreover, since $\nabla_XY-\nabla_YX=[X,Y]$, the terms involving $R$ also vanish.
+\end{proof}
+
+\section{Sectional, Ricci and Scalar Curvature}
+
+We now define some special curvatures.
+Fix a Riemannian manifold $(M,g)$.
+
+\begin{defn}
+    Let $p\in M$, $\pi\subset T_pM$ be a $2$-plane, $\pi=\Span\{u,v\}$.
+    Then define the \emph{sectional curvature} of $\pi$ at $p$ to be
+    \[\Sect_p(\pi)=\frac{R_p(u,v,u,v)}{|u|^2|v|^2-\langle u,v\rangle^2}.\]
+\end{defn}
+
+\begin{rem}
+    One can show that sectional curvature does not depend on the choice of basis.
+    For a proof, see~\cite[Proposition~3.1]{doCarmo}.
+\end{rem}
+
+\begin{defn}
+    Let $R^l_{ijk}$ be the local expression of Riemann curvature tensor, then we define the \emph{Ricci curvature} by
+    \[\Ric^l_j=\tr_{;13}R^l_{ijk}.\]
+    Equivalently, let $\{e_i\}$ be an orthonormal basis at $p$, then
+    \[\Ric_p(X)=\sum_{i=1}^nR(e_i,X)e_i.\]
+\end{defn}
+
+Clearly, $\Ric$ is self-adjoint linear transformation by Proposition~\ref{curvature symmetric}~(3).
+
+\begin{defn}
+    We define the \emph{scalar curvature} by taking trace of $\Ric$, or equivalently
+    \[\Scal(p)=\sum_{i=1}^n\langle\Ric_p(e_i),e_i\rangle\]
+    for an orthonormal basis $\{e_i\}$ at $p$.
+\end{defn}
