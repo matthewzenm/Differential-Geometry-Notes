@@ -206,6 +206,88 @@ Fix a Riemannian manifold $(M,g)$.
     For a proof, see~\cite[Proposition~3.1]{doCarmo}.
 \end{rem}
 
+\begin{prop}\label{sect to curvature}
+    The sectional curvature determines the curvature tensor.
+\end{prop}
+\begin{proof}
+    Let $R,R'$ have same sectional curvature, denote $\tilde{R}=R-R'$, then $\widetilde{\Sect}=0$.
+    We show that $\tilde{R}=0$.
+    First, we have
+    \begin{align*}
+        \tilde{R}(X,Y,X,W)&=\tilde{R}(X,Y-W,X,W)+\tilde{R}(X,W,X,W)\\
+        &=\tilde{R}(X,Y-W,X,W-Y)+\tilde{R}(X,Y-W,X,Y)\\
+        &=\tilde{R}(X,Y,X,Y)-\tilde{R}(X,W,X,Y)\\
+        &=\tilde{R}(X,Y,X,W),
+    \end{align*}
+    hence $\tilde{R}(X,Y,X,W)=0$.
+    Then we have
+    \begin{align*}
+        \tilde{R}(X,Y,Z,W)&=\tilde{R}(X,Y,Z,W-X)+\tilde{R}(X,Y,Z,X)\\
+        &=\tilde{R}(X-W,Y,Z,W-X)+\tilde{R}(W,Y,Z,W-X)\\
+        &=\tilde{R}(W,Y,Z,W)-\tilde{R}(W,Y,Z,X)\\
+        &=-\tilde{R}(W,Y,Z,X).
+    \end{align*}
+    By the same reasoning, we have
+    \begin{align*}
+        \tilde{R}(X,Y,Z,W)&=\tilde{R}(Z,W,X,Y)\\
+        &=-\tilde{R}(Y,W,X,Z)\\
+        &=-\tilde{R}(X,Z,Y,W).
+    \end{align*}
+    Passing the result to the $(1,3)$-tensor, by first Bianchi identity, we have
+    \begin{align*}
+        \tilde{R}(X,Z)Y+\tilde{R}(Y,Z)X+\tilde{R}(Z,X)Y=0,
+    \end{align*}
+    which implies $\tilde{R}(Y,Z)X=0$.
+    Then
+    \begin{align*}
+        0&=\tilde{R}(Y,Z,X,W)\\
+        &=-\tilde{R}(W,Z,X,Y)\\
+        &=-\tilde{R}(X,Y,W,Z)\\
+        &=\tilde{R}(X,Y,Z,W).
+    \end{align*}
+    Thus we proved $\tilde{R}=0$, and the result follows.
+\end{proof}
+
+We mention here a little observation.
+\begin{lem}\label{curvature of const sect}
+    If $\Sect_p$ is constant for all $2$-planes in $T_pM$, say $K_p$, then we have
+    \[R_p(X,Y,Z,W)=K_p(\langle X,Z\rangle\langle Y,W\rangle-\langle X,W\rangle\langle Y,Z\rangle).\]
+\end{lem}
+
+Then we can prove the following Schur's Theorem.
+\begin{thm}[Schur]
+    Let $(M^n,g)$ be a Riemannian manifold with $n\geq 3$.
+    If $\Sect_p(\pi)$ is independent from $\pi\subset T_pM$ for all $p\in M$, then $M$ has constant sectional curvature.
+\end{thm}
+\begin{proof}
+    Since the tensor
+    \[R'(X,Y,Z,W)=\langle X,Z\rangle\langle Y,W\rangle-\langle X,W\rangle\langle Y,Z\rangle\]
+    evidently satisfies the Proposition~\ref{curvature symmetric}, Proposition~\ref{sect to curvature}~shows $R=fR'$ for some $f\in C^\infty(M)$.
+    We show that $f$ is constant.
+    Since $n\geq 3$, there exists three orthonormal vectors $X,Y,Z$.
+    Take $W$ arbitrary, then by second Bianchi identity, we have
+    \[(\nabla_XR)(Y,Z,W)+(\nabla_YR)(Z,X,W)+(\nabla_ZR)(X,Y,W)=0.\]
+    Since $\nabla_XR=\nabla_X(fR')=(Xf)R'+f(\nabla_XR')$, by taking summation cyclically we obtain
+    \[(Xf)R'(Y,Z)W+(Yf)R'(Z,X)W+(Zf)R'(X,Y)W=0.\]
+    Since the sectional curvature is constant for any $\pi\subset T_pM$, the ``sectional curvature'' corresponding to $R'$ is also constant, hence we can use Lemma~\ref{curvature of const sect}~to obtain
+    \begin{align*}
+        0=&(Xf)K(\langle Y,W\rangle Z-\langle Z,W\rangle Y)\\
+        &+(Yf)K(\langle Z,W\rangle X-\langle X,W\rangle Z)\\
+        &+(Zf)K(\langle X,W\rangle Y-\langle Y,W\rangle X),
+    \end{align*}
+    which is equivalent to
+    \begin{align*}
+        0=&((Xf)\langle Y,W\rangle-(Yf)\langle X,W\rangle)Z\\
+        &+((Yf)\langle Z,W\rangle-(Zf)\langle Y,W\rangle)X\\
+        &+((Zf)\langle X,W\rangle-(Xf)\langle Z,W\rangle)Y.
+    \end{align*}
+    Since $X,Y,Z$ are orthonormal, the coefficient of $X,Y,Z$ must all equal to $0$.
+    Thus by taking $W=Y$, we obtain
+    \[Xf=(Xf)\langle Y,Y\rangle=(Yf)\langle X,Y\rangle=0.\]
+    Since $X$ is arbitrary, we have $f\equiv\text{const}$.
+    This deduces $M$ has constant sectional curvature.
+\end{proof}
+
 \begin{defn}
     Let $R^l_{ijk}$ be the local expression of Riemann curvature tensor, then we define the \emph{Ricci curvature} by
     \[\Ric^l_j=\tr_{;13}R^l_{ijk}.\]
@@ -213,10 +295,58 @@ Fix a Riemannian manifold $(M,g)$.
     \[\Ric_p(X)=\sum_{i=1}^nR(e_i,X)e_i.\]
 \end{defn}
 
-Clearly, $\Ric$ is self-adjoint linear transformation by Proposition~\ref{curvature symmetric}~(3).
+Clearly, $\Ric$ is a self-adjoint linear transformation by Proposition~\ref{curvature symmetric}~(3).
 
 \begin{defn}
     We define the \emph{scalar curvature} by taking trace of $\Ric$, or equivalently
     \[\Scal(p)=\sum_{i=1}^n\langle\Ric_p(e_i),e_i\rangle\]
     for an orthonormal basis $\{e_i\}$ at $p$.
 \end{defn}
+
+\begin{defn}
+    A Riemannian manifold $(M,g)$ is called an \emph{Einstein manifold} if $\Ric=\lambda\delta$ for some $\lambda\in C^\infty(M)$.
+\end{defn}
+
+We have another theorem of Schur on Einstein manifolds.
+\begin{thm}\label{schur for scal}
+    Let $M^n$ be an Einstein manifold with $n\geq 3$, then $M$ has constant scalar curvature.
+\end{thm}
+
+First we need a lemma.
+\begin{lem}
+    For any metric $g$, we have
+    \[2\tr_{1;2}\nabla\Ric=\d\Scal.\]
+\end{lem}
+\begin{proof}
+    We check the equation locally.
+    The second Bianchi identity can be written as
+    \[R^l_{ijm;k}+R^l_{kim;j}+R^l_{jkm;i}=0,\]
+    or equivalently
+    \[R^l_{ijm;k}-R^l_{ikm;j}+R^l_{jkm;i}=0.\]
+    Multiply $g^{im}$ we obtain
+    \[0=\Ric^l_{j;k}-\Ric^l_{k;j}+R^{il}_{jk;i}.\]
+    Let $l=j$, we obtain
+    \begin{align*}
+        0&=\Ric^j_{j;k}-\Ric^j_{k;j}-R^{ji}_{jk;i}\\
+        &=\Scal_{;k}-\Ric^j_{k;j}-\Ric^i_{k;i}\\
+        &=\Scal_{;k}-2\Ric^i_{k;i}.
+    \end{align*}
+    Then the result follows.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{schur for scal}]
+    Let $\Ric=\lambda\delta$, then by the lemma,
+    \begin{align*}
+        \d\Scal&=2\tr_{1;2}\nabla\Ric\\
+        &=2\tr_{1;2}\nabla(\lambda\delta)\\
+        &=2\tr_{1;2}(\delta\otimes\d{\lambda})\\
+        &=2\d{\lambda}.
+    \end{align*}
+    However, we have
+    \begin{align*}
+        \d\Scal&=\d\tr_{1;1}\Ric\\
+        &=\d{\lambda\tr_{1;1}\delta}\\
+        &=n\d{\lambda}.
+    \end{align*}
+    This means $(n-2)\d\Scal=0$, which implies $\Scal\equiv\text{const}$ for $n\geq 3$.
+\end{proof}
