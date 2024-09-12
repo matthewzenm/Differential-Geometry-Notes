@@ -63,11 +63,11 @@ We need to explain the name ``tensor'', so we must show $R$ is truly tensorial.
 Now we can look at Riemann curvature tensor locally.
 A rather complicated calculation shows:
 \begin{lem}
-    Let $R(\partial_i,\partial_j)\partial_k=R^l_{ijk}\partial_l$, then
-    \[R^l_{ijk}=\partial_j\Gamma^l_{ik}-\partial_i\Gamma^l_{jk}+\Gamma^m_{ik}\Gamma^l_{jm}-\Gamma^m_{jk}\Gamma^l_{im}.\]
+    Let $R=\R{l}{i}{j}{k}\otimes\d{x^i}\otimes\d{x^j}\otimes\d{x^k}\otimes\partial_l$, then
+    \[\R{l}{i}{j}{k}=\partial_j\Gamma^l_{ik}-\partial_i\Gamma^l_{jk}+\Gamma^m_{ik}\Gamma^l_{jm}-\Gamma^m_{jk}\Gamma^l_{im}.\]
 \end{lem}
 
-We also define a $(0,4)$-tensor by lowering the $l$ index of $R^l_{ijk}$, that is:
+We also define a $(0,4)$-tensor by lowering the $l$ index of $R{l}{i}{j}{k}$, that is:
 \begin{defn}
     $R(X,Y,Z,W):=\langle R(X,Y)Z,W\rangle$ is also called \emph{Riemann curvature tensor}.
 \end{defn}
@@ -94,9 +94,9 @@ Let us consider the second covariant differential of a tensor.
 \begin{proof}
     Since covariant derivative commutes with contraction, we have
     \begin{align*}
-        \nabla_X(\nabla_YT)&=\nabla_X(\tr_{1,s}Y\otimes\nabla T)\\
-        &=\tr_{1;s+1}(\nabla_X(Y\otimes\nabla T))\\
-        &=\tr_{1;s+1}((\nabla_XY)\otimes\nabla T+Y\otimes(\nabla_X\nabla T))\\
+        \nabla_X(\nabla_YT)&=\nabla_X(\tr_{1,s+2}Y\otimes\nabla T)\\
+        &=\tr_{1,s+2}(\nabla_X(Y\otimes\nabla T))\\
+        &=\tr_{1,s+2}((\nabla_XY)\otimes\nabla T+Y\otimes(\nabla_X\nabla T))\\
         &=\nabla_{\nabla_XY}T+\nabla(\nabla T)(\cdots,Y,X)\\
         &=\nabla_{\nabla_XY}T+\nabla_{X,Y}T,
     \end{align*}
@@ -289,8 +289,8 @@ Then we can prove the following Schur's Theorem.
 \end{proof}
 
 \begin{defn}
-    Let $R^l_{ijk}$ be the local expression of Riemann curvature tensor, then we define the \emph{Ricci curvature} by
-    \[\Ric^l_j=\tr_{;13}R^l_{ijk}.\]
+    Let $\R{l}{i}{j}{k}$ be the local expression of Riemann curvature tensor, then we define the \emph{Ricci curvature} by
+    \[\Ricij{l}{j}=\tr_{13}\R{l}{i}{j}{k}.\]
     Equivalently, let $\{e_i\}$ be an orthonormal basis at $p$, then
     \[\Ric_p(X)=\sum_{i=1}^nR(e_i,X)e_i.\]
 \end{defn}
@@ -308,28 +308,28 @@ Clearly, $\Ric$ is a self-adjoint linear transformation by Proposition~\ref{curv
 \end{defn}
 
 We have another theorem of Schur on Einstein manifolds.
-\begin{thm}\label{schur for scal}
+\begin{thm}[Schur]\label{schur for scal}
     Let $M^n$ be an Einstein manifold with $n\geq 3$, then $M$ has constant scalar curvature.
 \end{thm}
 
 First we need a lemma.
 \begin{lem}
     For any metric $g$, we have
-    \[2\tr_{1;2}\nabla\Ric=\d\Scal.\]
+    \[2\tr_{13}\nabla\Ric=\d\Scal.\]
 \end{lem}
 \begin{proof}
     We check the equation locally.
     The second Bianchi identity can be written as
-    \[R^l_{ijm;k}+R^l_{kim;j}+R^l_{jkm;i}=0,\]
+    \[\R{l}{i}{j}{m}{}_{;k}+\R{l}{k}{i}{m}{}_{;j}+\R{l}{j}{k}{m}{}_{;i}=0,\]
     or equivalently
-    \[R^l_{ijm;k}-R^l_{ikm;j}+R^l_{jkm;i}=0.\]
+    \[\R{l}{i}{j}{m}{}_{;k}-\R{l}{i}{k}{m}{}_{;j}+\R{l}{j}{k}{m}{}_{;i}=0.\]
     Multiply $g^{im}$ we obtain
-    \[0=\Ric^l_{j;k}-\Ric^l_{k;j}+R^{il}_{jk;i}.\]
+    \[0=\Ricij{l}{j}{}_{;k}-\Ricij{l}{k}{}_{;j}+R_{jk}{}^{il}{}_{;i}.\]
     Let $l=j$, we obtain
     \begin{align*}
-        0&=\Ric^j_{j;k}-\Ric^j_{k;j}-R^{ji}_{jk;i}\\
-        &=\Scal_{;k}-\Ric^j_{k;j}-\Ric^i_{k;i}\\
-        &=\Scal_{;k}-2\Ric^i_{k;i}.
+        0&=\Ricij{j}{j}{}_{;k}-\Ricij{j}{k}{}_{;j}-R_{kj}{}^{ij}{}_{;i}\\
+        &=\Scal_{;k}-\Ricij{j}{k}{}_{;j}-\Ricij{i}{k}{}_{;i}\\
+        &=\Scal_{;k}-2\Ricij{i}{k}{}_{;i}.
     \end{align*}
     Then the result follows.
 \end{proof}
@@ -337,15 +337,15 @@ First we need a lemma.
 \begin{proof}[Proof of Theorem~\ref{schur for scal}]
     Let $\Ric=\lambda\delta$, then by the lemma,
     \begin{align*}
-        \d\Scal&=2\tr_{1;2}\nabla\Ric\\
-        &=2\tr_{1;2}\nabla(\lambda\delta)\\
-        &=2\tr_{1;2}(\delta\otimes\d{\lambda})\\
+        \d\Scal&=2\tr_{1,3}\nabla\Ric\\
+        &=2\tr_{1,3}\nabla(\lambda\delta)\\
+        &=2\tr_{1,3}(\delta\otimes\d{\lambda})\\
         &=2\d{\lambda}.
     \end{align*}
     However, we have
     \begin{align*}
-        \d\Scal&=\d\tr_{1;1}\Ric\\
-        &=\d{\lambda\tr_{1;1}\delta}\\
+        \d\Scal&=\d\tr_{1,2}\Ric\\
+        &=\d{\lambda\tr_{1,2}\delta}\\
         &=n\d{\lambda}.
     \end{align*}
     This means $(n-2)\d\Scal=0$, which implies $\Scal\equiv\text{const}$ for $n\geq 3$.
@@ -388,6 +388,38 @@ The proposition below shows only Jacobi fields that perpendicular to $\gamma$ ar
         \frac{\d^2{}}{\d{t^2}}\langle J(t),\dot\gamma(t)\rangle&=\langle\ddot{J}(t),\dot\gamma(t)\rangle\\
         &=-\langle R(\dot\gamma(t),J(t))\dot\gamma(t),\dot\gamma(t)\rangle\\
         &=0.\qedhere
+    \end{align*}
+\end{proof}
+
+At the beginning of Section~\ref{curvature section}, we see that a one parameter family of geode\-sics gives rise to a Jacobi field.
+The converse is also true.
+\begin{prop}
+    Let $J$ be a Jacobi field, then $J$ is the variation field of some one parameter family of geodesics.
+\end{prop}
+\begin{proof}
+    Given a Jacobi field $J$, it is determined by $J(0)$ and $\dot{J}(0)$.
+    Let $\zeta(s)$ be the geodesic with initial tangent vector $J(0)$, and $T(s)$ be its tangent vector field.
+    Let $W(s)$ be parallel along $\zeta$ and $W(0)=\dot{J}(0)$.
+    Now set $\gamma(t,s)=\exp_{\zeta(s)}(t(T(s)+sW(s)))$.
+    Then
+    \[\left[\frac{\partial}{\partial{t}},\frac{\partial}{\partial{s}}\right]=\gamma_*[\partial_t,\partial_s]=0,\]
+    hence we can interchange the partial derivative.
+    Let $U$ be the variation field of $\gamma(t,s)$, then $U$ is a Jacobi field.
+    We verify $U$ and $J$ has same initial value.
+    We have
+    \begin{align*}
+        U(0)&=\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\gamma(0,s)\\
+        &=\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\exp_{\zeta(s)}(0)\\
+        &=\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\zeta(s)\\
+        &=\dot\zeta(0)=J(0),
+    \end{align*}
+    and
+    \begin{align*}
+        \dot{U}(0)&=\left.\left.\frac{\partial}{\partial{t}}\right|_{t=0}\frac{\partial}{\partial{s}}\right|_{s=0}\exp_{\zeta(s)}(t(T(s)+sW(s)))\\
+        &=\left.\left.\frac{\partial}{\partial{s}}\right|_{t=0}\frac{\partial}{\partial{t}}\right|_{s=0}\exp_{\zeta(s)}(t(T(s)+sW(s)))\\
+        &=\left.\frac{\partial}{\partial{s}}\right|_{s=0}\exp_{\zeta{s}*}|_0(T(s)+sW(s))\\
+        &=\left.\frac{\partial}{\partial{s}}\right|_{s=0}(T(s)+sW(s))\\
+        &=W(0)=\dot{J}(0).\qedhere
     \end{align*}
 \end{proof}
 

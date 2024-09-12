@@ -1,7 +1,7 @@
 # Differential-Geometry-Notes
 A combined notes of differentiable manifolds and Riemannian geometry.
 
-The writing plan (update tp 2024/9/9) is:
+The writing plan (update tp 2024/9/12) is:
 
 Part 1. Smooth Manifolds
 1. Smooth Manifolds
@@ -42,27 +42,28 @@ Part 2. Riemannian Geometry
 2. Curvature
   - Definition: sectional, Ricci, scalar curvature tensor.
   - Jacobi Fields: variation of geodesics and definition, conjugate points.
-  - Cartan-Hadamard Theorem
-  - Space Forms
   - Index Form: definition, index lemma, Jacobi theorem.
 3. Submanifolds
   - Second Fundamental Form: induced connection, shape operator, Weingarten equation.
   - Principal Curvatures: definition, umbilical hypersurfaces.
   - Gauss-Codazzi Equations
   - Minimal Surfaces: first variation of area, mean curvature tensor, minimal graph.
-4. Comparison Theorems I
+4. Curvature and Topology I
+  - Bonnet-Myers Theorem
+  - Cartan-Hadamard Theorem
+  - Space Forms
+5. Comparison Theorems I
   - Rauch and Hessian Comparison Theorems
   - Toponogov Comparison Theorem
-5. Comparison Theorems II
+6. Comparison Theorems II
   - Bochner Formula
   - Distance Function: cut locus, Hessian of distance function as second fundamental form.
   - Laplace Comparison Theorem: proof via Bochner formula, proof via geometric approach
   - Volume Comparison Theorem
   - Laplace Comparison Theorem in Weak Sense
   - Heintze-Karcher Comparison Theorem: general distance function, the theorem.
-6. Application of Comparison Theorems I
-  - Manifolds with Positive Ricci Curvature: Bonnet-Myers theorem.
-  - Manifolds with Nonnegative Ricci Curvature: Cheeger-Gromoll splitting theorem.
-7. Application of Comparison Theorems II
-  - Rigidity Results: maximal diameter theorem, Alexandrov’s theorem on CMC hypersurfaces.
-  - Stability Results: sphere theorem.
+7. Curvature and Topology II
+  - Sphere Theorem
+  - Maximal Diameter Theorem
+  - Cheeger-Gromoll Splitting Theorem
+  - Alexandrov's Theorem: rigidity of CMC hypersurfaces 
