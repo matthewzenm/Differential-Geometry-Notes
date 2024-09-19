@@ -489,5 +489,91 @@ A simple criterion for conjugate points is
     This proposition shows conjugate is symmetric.
 \end{rem}
 
-\section{Cartan--Hadamard Theorem}
-In this section we prove the celebrated Cartan--Hadamard Theorem.
+\section{Index Form}
+
+Using the first variation of energy, we conclude that a length-minimizing curve must be a geodesic.
+However, the converse is generally not true.
+For instance, a geodesic on sphere starting from the north pole and crossing the south pole is not length-minimizing.
+We need to find a sufficient condition for a geodesic to be length-minimizing.
+Calculus hints to us that we should differentiate energy twice.
+This lead to the second variation formula.
+
+\begin{prop}[Second variation formula]
+    Let $\gamma:[0,a]\times(-\varepsilon,\varepsilon)$ be a variation, and $\gamma_0(t)=\gamma(t,0)$ is a geodesic, then
+    \[E''(0)=\int_0^a|\dot{V}(t)|^2-\langle R(\dot\gamma_0(t),V(t))\dot\gamma_0(t),V(t)\rangle\d{t}+\boxed{\langle\nabla_{V(t)}V(t),\dot\gamma_0(t)\rangle|^a_0}.\]
+    The boxed term is called \emph{boundary term}, and it vanishes when the variation is proper.
+\end{prop}
+\begin{proof}
+    We take the expression of $E'(s)$ in the first variation formula and differentiate, we have
+    \begin{align*}
+        E''(s)&=\int_0^a\frac{\partial{}}{\partial{s}}\left\langle\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\right\rangle\d{t}\\
+        &=\int_0^a\left\langle\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\right\rangle+\left\langle\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial\gamma}{\partial{s}}}\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\right\rangle\d{t},
+    \end{align*}
+    where
+    \[\left\langle\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}},\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}\right\rangle=\left\langle\nabla_{\frac{\partial\gamma}{\partial{t}}}\frac{\partial\gamma}{\partial{s}},\nabla_{\frac{\partial\gamma}{\partial{t}}}\frac{\partial\gamma}{\partial{s}}\right\rangle=|\dot{V}(t)|^2\]
+    when $s=0$, and
+    \[\nabla_{\frac{\partial\gamma}{\partial{s}}}\nabla_{\frac{\partial\gamma}{\partial{s}}}\frac{\partial\gamma}{\partial{t}}=\nabla_{\frac{\partial\gamma}{\partial{s}}}\nabla_{\frac{\partial\gamma}{\partial{t}}}\frac{\partial\gamma}{\partial{s}}=\nabla_{\frac{\partial\gamma}{\partial{t}}}\nabla_{\frac{\partial\gamma}{\partial{t}}}\frac{\partial\gamma}{\partial{s}}-R\left(\frac{\partial\gamma}{\partial{s}},\frac{\partial\gamma}{\partial{t}}\right)\frac{\partial\gamma}{\partial{s}}.\]
+    Thus when $s=0$, we have
+    \[E''(0)=\int_0^a|\dot{V}(t)|^2-\langle R(\dot\gamma_0,V)\dot\gamma_0,V\rangle+\frac{\partial}{\partial{t}}\langle\dot\gamma_0,\nabla_VV\rangle-\langle\nabla_{\dot\gamma_0}\dot\gamma_0,\nabla_VV\rangle,\]
+    the last term is $0$ since $\gamma_0$ is a geodesic, and we obtain the formula.
+\end{proof}
+
+Second variation formula gives rise to a symmetric bilinear form on the vector space of vector fields along a geodesic $\gamma$, which we will call it index form, to deduce whether a geodesic is locally length minimizing.
+
+\begin{defn}
+    Let $\gamma:[0,a]\to M$ be a geodesic.
+    The \emph{index form} of $\gamma$ is a bilinear form on $\Gamma(TM,\gamma)$ defined by
+    \[I(X,Y)=\int_0^a\langle\dot{X},\dot{Y}\rangle-\langle R(\dot\gamma,X)\dot\gamma,Y\rangle\d{t}.\]
+\end{defn}
+
+Clearly index form is symmetric.
+
+\begin{lem}\label{Jacobi field as null space}
+    Let $U\in\Gamma_0(TM,\gamma)=\{Y\in\Gamma(TM,\gamma):\ Y(0)=Y(a)=0\}$, then $U$ is a Jacobi field if and only if $I(U,Y)=0$ for any $Y\in\mathscr{V}_0$.
+\end{lem}
+\begin{proof}
+    First we observe that by integrate by parts, we have
+    \[I(U,Y)=-\int_0^a\langle\ddot{U}+R(\dot\gamma,U)\dot\gamma,Y\rangle.\]
+    If $U$ is a Jacobi field, then $\ddot{U}+R(\dot\gamma,U)\dot\gamma=0$, which implies $I(U,Y)=0$.
+    Conversely, if $I(U,Y)=0$ for any $Y\in\Gamma_0(TM,\gamma)$, choose a smooth function $f$ with $f(0)=f(a)=0$ and positive elsewhere, let $Y=f(t)(\ddot{U}+R(\dot\gamma,U)\dot\gamma)$, then
+    \[0=-f\int_0^a|\ddot{U}+R(\dot\gamma,U)\dot\gamma|^2\d{t},\]
+    this implies $\ddot{U}+R(\dot\gamma,U)\dot\gamma=0$, that is, $U$ is a Jacobi field.
+\end{proof}
+
+We observe if a Jacobi field $J$ does not vanish at the starting or ending point of the geodesic, the above integration by parts is changed into
+\begin{align*}
+    I(Y,J)&=\langle Y,\dot{J}\rangle|_0^a-\int_0^a\langle\ddot{J}+R(\dot\gamma,J)\dot\gamma,Y\rangle\d{t}\\
+    &=\langle Y,\dot{J}\rangle|_0^a.
+\end{align*}
+
+The next proposition shows the positive definiteness of $I$ is related to conjugate points.
+\begin{prop}\label{prejacobi}
+    Let $\gamma:[0,a]\to M$ be a geodesic, $I$ be its index form.
+    \begin{enumerate}[(1)]
+        \item If $\gamma$ contains no conjugate points of $\gamma(0)$, then $I$ is positive definite on $\Gamma_0(TM,\gamma)$.
+        \item If $\gamma(a)$ is the only conjugate point of $\gamma(0)$, then $I$ is positive semidefinite but not positive definite.
+        \item If there is a $t_0<a$ such that $\gamma(t_0)$ is conjugate to $\gamma(0)$, then there is a $U\in\Gamma_0(TM,\gamma)$ such that $I(U,U)<0$. 
+    \end{enumerate}
+\end{prop}
+\begin{proof}[Proof of Proposition~\ref{prejacobi}~(1)]
+    Let $\gamma(0)=p$, $\tilde\gamma$ is the radial line in $T_pM$ defined by $\tilde\gamma(t)=t\dot\gamma(0)$.
+    Since $\gamma$ contains no conjugate points of $\gamma(0)$, $\exp_p$ is nondegenerate on the whole $\tilde\gamma$.
+    Hence there is a neighborhood $U$ of $\tilde\gamma([0,a])$ such that $\exp_p:U\to M$ is an immersion.
+    By Proposition~\ref{geodesic locally length-min}~and the subsequent remark, $\gamma$ is length-minimizing.
+    Hence by Proposition~\ref{length-min to energy-min}, $\gamma$ also minimizes energy.
+    Let $\gamma(t,s):[0,a]\times(-\varepsilon,\varepsilon)\to M$ be any proper variation, by taking $\varepsilon$ small enough, we can assume the variation is contained in $U$.
+    Then we have
+    \[E''(0)=\lim_{s\to 0}\frac{E(-s)+E(s)-2E(0)}{s^2}\geq 0.\]
+    Since $E''(0)(V)=I(V,V)$ for any variation vector field, we have $I(V,V)\geq 0$ for any $V\in\Gamma_0(TM,\gamma)$.
+    Now we must show $I(V,V)=0$ implies $V=0$.
+    Let $I(V,V)=0$, $X\in\Gamma_0(TM,\gamma)$ and $\delta>0$, we have
+    \[0\leq I(V+\delta X,V+\delta X)=I(V,V)+2\delta I(V,X)+\delta^2I(X,X),\]
+    this implies
+    \[2I(V,X)+\delta I(X,X)\geq 0.\]
+    Let $\delta\to 0$, we obtain $I(V,X)\geq 0$ for any $X\in\Gamma_0(TM,\gamma)$.
+    Similarly, consider $I(V-\delta X,V-\delta X)$, we have $I(V,X)\leq 0$ for any $X\in\Gamma_0(TM,\gamma)$.
+    This means $I(V,X)=0$ for any $X\in\Gamma_0(TM,\gamma)$.
+    Now by Lemma~\ref{Jacobi field as null space}, $V$ is a Jacobi field.
+    But $\gamma$ has no conjugate points of $\gamma(0)$, $V$ must identically equal to $0$.
+    This proves $I$ is positive definite.
+\end{proof}

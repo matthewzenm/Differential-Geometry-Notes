@@ -1,7 +1,7 @@
 # Differential-Geometry-Notes
 A combined notes of differentiable manifolds and Riemannian geometry.
 
-The writing plan (update tp 2024/9/12) is:
+The writing plan (update to 2024/9/14) is:
 
 Part 1. Smooth Manifolds
 1. Smooth Manifolds
@@ -16,6 +16,7 @@ Part 1. Smooth Manifolds
   - Construction of Vector Bundles: construct vector bundles via transition maps.
   - Sections: sections, in particular vector fields.
   - Algebraic Operation of Vector Bundles: direct sum, tensor product, quotient and dual.
+  - Sheaves: definition, etale space.
 3. Tensors
   - Tensor Bundle: tensor product of $TM$ and $T^*M$, double dual isomorphism, tensor product.
   - Differential Forms: wedge product, exterior differential, orientation.
@@ -43,6 +44,7 @@ Part 2. Riemannian Geometry
   - Definition: sectional, Ricci, scalar curvature tensor.
   - Jacobi Fields: variation of geodesics and definition, conjugate points.
   - Index Form: definition, index lemma, Jacobi theorem.
+  - Bochner Formula
 3. Submanifolds
   - Second Fundamental Form: induced connection, shape operator, Weingarten equation.
   - Principal Curvatures: definition, umbilical hypersurfaces.
@@ -52,15 +54,11 @@ Part 2. Riemannian Geometry
   - Bonnet-Myers Theorem
   - Cartan-Hadamard Theorem
   - Space Forms
-5. Comparison Theorems I
+5. Comparison Theorems
   - Rauch and Hessian Comparison Theorems
-  - Toponogov Comparison Theorem
-6. Comparison Theorems II
-  - Bochner Formula
   - Distance Function: cut locus, Hessian of distance function as second fundamental form.
-  - Laplace Comparison Theorem: proof via Bochner formula, proof via geometric approach
+  - Laplace Comparison Theorem: proof via Bochner formula, proof via geometric approach, in weak sense.
   - Volume Comparison Theorem
-  - Laplace Comparison Theorem in Weak Sense
   - Heintze-Karcher Comparison Theorem: general distance function, the theorem.
 7. Curvature and Topology II
   - Sphere Theorem

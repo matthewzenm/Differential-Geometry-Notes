@@ -117,7 +117,7 @@ We will prove that a curve is energy-minimizing if and only if it is length-mini
     This is Cauchy--Schwarz inequality.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\label{length-min to energy-min}
     If $\gamma$ is length-minimizing, then it is energy-minimizing.
 \end{prop}
 \begin{proof}
@@ -327,8 +327,8 @@ As an application, we prove that geodesics are locally length-minimizing as we p
     Therefore
     \begin{align*}
         L[\gamma]&=\int_0^1|\dot\gamma(t)|\d{t}\\
-        &=\int_0^1|v|\d{t}=r_0,\\
-        L[\tilde\gamma]&=\int_0^1(|\dot{r}^2(t)+g_{ij}\dot\theta^i(t)\dot\theta^j(t))^{1/2}\\
+        &=\int_0^1r_0\d{t}=r_0,\\
+        L[\tilde\gamma]&=\int_0^1(|\dot{r}|^2(t)+g_{ij}\dot\theta^i(t)\dot\theta^j(t))^{1/2}\\
         &\geq\int_0^1|\dot{r}(t)|\d{t}\\
         &\geq\int_0^1\dot{r}(t)\d{t}=r_0.\qedhere
     \end{align*}
