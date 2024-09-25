@@ -35,7 +35,7 @@ We calculated in Proposition~\ref{exp at 0}~that $\exp_{p*}|_0$ is identity, nat
 We make it into a definition.
 
 \begin{defn}
-    The \emph{Riemann curvature tensor} $R:\mathfrak{X}(M)\times\mathfrak{X}(M)\times\mathfrak{X}(M)\to\mathfrak{X}(M)$ is defined by
+    The \emph{Riemann curvature tensor} $R:\Gamma(TM)\times\Gamma(TM)\times\Gamma(TM)\to\Gamma(TM)$ is defined by
     \[R(X,Y)Z=\nabla_Y\nabla_XZ-\nabla_X\nabla_YZ+\nabla_{[X,Y]}Z.\]
 \end{defn}
 
@@ -113,7 +113,7 @@ Let us consider the second covariant differential of a tensor.
     This is similar to Lemma~\ref{R tensor}.
 \end{rem}
 
-\begin{prop}
+\begin{prop}\label{Ricci identity}
     For any $(r,s)$-tensor $T$, we have the following \emph{Ricci identity}:
     \[\nabla_{Y,X}T-\nabla_{X,Y}T=R(X,Y)T.\]
     Moreover, we have a explicit formula
@@ -141,7 +141,7 @@ Ricci identity shows the curvature appears when we interchange the second covari
 \subsection*{Properties of Curvature}
 \begin{prop}\label{curvature symmetric}
     Riemann curvature tensor has following symmetric properties:
-    For $X,Y,Z,W\in\mathfrak{X}(M)$, we have
+    For $X,Y,Z,W\in\Gamma(TM)$, we have
     \begin{enumerate}[(1)]
         \item $R(X,Y,Z,W)=-R(Y,X,Z,W)=-R(X,Y,W,Z)$;
         \item $R(X,Y)Z+R(Y,Z)X+R(Z,X)Y=0$ (First Bianchi identity);
@@ -576,4 +576,128 @@ The next proposition shows the positive definiteness of $I$ is related to conjug
     Now by Lemma~\ref{Jacobi field as null space}, $V$ is a Jacobi field.
     But $\gamma$ has no conjugate points of $\gamma(0)$, $V$ must identically equal to $0$.
     This proves $I$ is positive definite.
+\end{proof}
+
+Before proving the rest of Theorem~\ref{prejacobi}, we need the following \emph{Index Lemma}.
+
+\begin{prop}[Index Lemma]
+    Assume $\gamma:[0,a]\to M$ is a geodesic without conjugate points.
+    Let $U\in\Gamma(TM,\gamma)$ with $U(0)=0$, $J$ be a Jacobi field such that $J(0)=0$, $J(a)=U(a)$.
+    Then $I(J,J)\leq I(U,U)$, the equality holds if and only if $U=J$.
+\end{prop}
+\begin{proof}
+    Since $U-J\in\Gamma_0(TM,\gamma)$, by Theorem~\ref{prejacobi}~(1), we have $I(U-J,U-J)\geq 0$ with equality holds iff $U=J$.
+    Then we have
+    \[0\leq I(U-J,U-J)=I(U,U)-2I(U,J)+I(J,J).\]
+    But $I(U,J)=\langle U,\dot{J}\rangle|^a_0=\langle J,\dot{J}\rangle|^a_0=I(J,J)$, thus
+    \[I(U,U)\geq I(J,J).\qedhere\]
+\end{proof}
+
+\begin{proof}[Proof of the rest of Proposition~\ref{prejacobi}]
+    (2) For any $0<t_0<a$, let $I_{[0,t_0]}$ denote the index form of $\gamma|_{[0,t_0]}$, i.e.,
+    \[I_{[0,t_0]}(X,Y)=\int_{0}^{t_0}\langle \dot{X},\dot{Y}\rangle+\langle R(\dot\gamma,X)\dot\gamma,Y\rangle\d{t}.\]
+    Then for $X\in\Gamma_0(TM,\gamma|_{[0,t_0]})$, by (1) we have $I_{[0,t_0]}(X,X)\geq 0$.
+    We now construct $\tau_{t_0}(U)$ for any $U\in\Gamma_0(TM,\gamma)$.
+    Let $\{e_i(t)\}$ be a parallel frame along $\gamma$, $U=f^i(t)e_i(t)$.
+    Then we define
+    \[\tau_{t_0}(U)(t)=f^i\left(\frac{a}{t_0}t\right)e_i\left(\frac{a}{t_0}t\right)\in\Gamma_0(TM,\gamma|_{[0,t_0]}).\]
+    Thus we have
+    \[I_{[0,t_0]}(\tau_{t_0}(U),\tau_{t_0}(U))\geq 0,\]
+    let $t_0\to a$ we obtain the conclusion.
+    Moreover, since $\gamma(a)$ is conjugate to $\gamma(0)$, there exists a nontrivial Jacobi field $J$ with $J(0)=J(a)=0$, and $I(J,J)=\langle J,\dot{J}\rangle|^a_0=0$.
+    This shows $I$ is positive semidefinite but not positive definite.\\
+    (3) Since $\gamma(0)$ is conjugate to $\gamma(t_0)$, there exists a Jacobi field $\tilde{J}_1$ along $\gamma|_{[0,t_0]}$ such that $\tilde{J}_1(0)=\tilde{J}_1(t_0)=0$.
+    Choose a smooth $m_1:[0,a]\to\mathbb{R}$ with $\supp{m_1}=[0,t_0]$, and set $J_1=m_1\tilde{J}_1$.
+    Let
+    \[V(t)=\begin{cases}
+        J_1(t), & 0\leq t\leq t_0,\\
+        0, & t_0\leq t\leq a,
+    \end{cases}\]
+    then $V\in\Gamma(TM,\gamma)$ is smooth.
+    Let $\delta>0$ so small that $\gamma_{[t_0-\delta,t_0+\delta]}$ is contained in a normal neighborhood of $\gamma(t_0)$.
+    Then there exists a Jacobi field $\tilde{J}_2$ along $\gamma|_{[t_0-\delta,t_0+\delta]}$ with $\tilde{J}_2(t_0-\delta)=J_1(t_0-\delta)$, $\tilde{J}_2(t_0+\delta)=0$.
+    Let $m_2:[t_0-\delta,t_0+\delta]$ satisfy
+    \[\dot{J}_1=\nabla_{\dot\gamma}m_2\tilde{J}_2=\frac{\d{m_2}}{\d{t}}\tilde{J}_2+m_2\dot{\tilde{J}}_2\]
+    and
+    \[R(\dot\gamma(t_0-\delta),J_1(t_0-\delta))\dot\gamma(t_0-\delta)=m_2(t_0-\delta)R(\dot\gamma(t_0-\delta),\tilde{J}_2(t_0-\delta))\dot\gamma(t_0-\delta),\]
+    then by ODE theory, $m_2$ is the solution of a linear ODE of order $1$, hence it exists and is smooth.
+    Now set $J_2=m_2\tilde{J_2}$, and
+    \[U(t)=\begin{cases}
+        J_1(t), & 0\leq t\leq t_0-\delta,\\
+        J_2(t), & t_0-\delta\leq t\leq t_0+\delta,\\
+        0, & t_0+\delta\leq t\leq a,
+    \end{cases}\]
+    then up to a third mollification, $U(t)\in\Gamma(TM,\gamma)$.
+    Therefore by Index Lemma, we have
+    \begin{align*}
+        I(U,U)&=I_{[0,t_0-\delta]}(J_1,J_1)+I_{[t_0-\delta,t_0+\delta]}(J_2,J_2)+0\\
+        &<I_{[0,t_0-\delta]}(V,V)+I_{[t_0-\delta,t_0+\delta]}(V,V)\\
+        &=I_{[0,t_0]}(V,V)+I_{[t_0,a]}(V,V)\\
+        &=\langle J_1,\dot{J}_1\rangle|_0^{t_0}+0\\
+        &=0.\qedhere
+    \end{align*}
+\end{proof}
+
+Translating Proposition~\ref{prejacobi}~to the language of geometry, we have the following theorem.
+\begin{thm}[Jacobi]
+    Let $\gamma:[0,a]\to M$ be a geodesic, then
+    \begin{enumerate}[(1)]
+        \item If $\gamma$ has no conjugate points of $\gamma(0)$, then $\gamma$ is length-minimizing under any small proper variation.
+        \item If there is a $t_0\in(0,a)$ such that $\gamma(t_0)$ is conjugate to $\gamma(0)$, then there is a proper variation $\gamma_s$ such that $L[\gamma_s]<L[\gamma]$ for any $s$.
+    \end{enumerate}
+\end{thm}
+
+\section{Bochner Formula}
+We introduce a useful calculation tool.
+We will later apply it to distance function.
+
+\begin{thm}[Bochner formula]
+    Let $M$ be a Riemannian manifold, $f\in C^\infty(M)$.
+    Then we have
+    \[\Delta\frac{1}{2}|\nabla f|^2=|\nabla^2f|^2+\langle\nabla\Delta f,\nabla f\rangle+\langle\Ric(\nabla f),\nabla f\rangle.\]
+\end{thm}
+
+We first need a lemma.
+\begin{lem}
+    Under geodesic coordinate around $p$, the Ricci identity (Proposition~\ref{Ricci identity}) of $1$-forms is equivalent to
+    \[f_{;kij}-f_{;kji}=-f_{;l}\R{l}{i}{j}{k},\]
+    where $f_{;i}$ means $\partial_if$.
+\end{lem}
+\begin{proof}
+    On the one hand, since all Christoffel symbols vanish at $p$, we have
+    \begin{align*}
+        \nabla_{\partial_i}\nabla_{\partial_j}\d{f}&=\nabla_{\partial_i}\nabla_{\partial_j}f_{;k}\d{x^k}\\
+        &=\nabla_{\partial_i}(\partial_jf_{;k}\d{x^k}+f_{;k}\nabla_{\partial_j}\d{x^k})\\
+        &=\nabla_{\partial_i}(\partial_jf_{;k}\d{x^k}-f_{;k}\Gamma^k_{jl}\d{x^l})\\
+        &=\partial_i\partial_jf_{;k}\d{x^k}+\partial_jf_{;k}\nabla_{\partial_i}\d{x^k}\\
+        &=f_{;kji}-\partial_jf_{;k}\Gamma^k_{il}\d{x^l}\\
+        &=f_{;kji}\d{x^k},
+    \end{align*}
+    then we have
+    \begin{align*}
+        (R(\partial_i,\partial_j)\d{f})(\partial_k)&=(\nabla_{\partial_j}\nabla_{\partial_i}-\nabla_{\partial_i}\nabla_{\partial_j}+\nabla_{[\partial_i,\partial_j]})\d{f}(\partial_k)\\
+        &=f_{;kij}-f_{;kji}.
+    \end{align*}
+    On the other hand, we have
+    \begin{align*}
+        (R(\partial_i,\partial_j)\d{f})(\partial_k)&=-\d{f}(R(\partial_i,\partial_j)\partial_k)\\
+        &=-\d{f}(\R{l}{i}{j}{k}\partial_l)\\
+        &=-f_{;m}\d{x^m}(\R{l}{i}{j}{k}\partial_l)\\
+        &=-f_{;l}\R{l}{i}{j}{k},
+    \end{align*}
+    hence the equality holds.
+\end{proof}
+
+\begin{proof}[Proof of Bochner formula]
+    Under geodesic normal coordinate we have the following calculation:
+    \begin{align*}
+        \Delta\frac{1}{2}|\nabla f|^2&=\sum_{i,j}\left(\frac{1}{2}f_{;j}^2\right)_{;ii}\\
+        &=\sum_{i,j}(f_{;j}f_{;ji})_{;i}\\
+        &=\sum_{i,j}(f_{;ji}^2+f_{;j}f_{;jii})\\
+        &=\sum_{i,j}(f_{;ij}^2+f_{;j}f_{;iji})\\
+        &=\sum_{i,j}f_{;ij}^2+\sum_{i,j}f_{;j}(f_{;iij}-f_{;k}\R{k}{j}{i}{i})\\
+        &=\sum_{i,j}f_{;ij}^2+\sum_{i,j}f_{;j}f_{;iij}+\sum_{i,j}f_{;j}f_{;k}\R{k}{i}{j}{i}\\
+        &=\sum_{i,j}f_{;ij}^2+\sum_{i,j}f_{;j}f_{;iij}+\sum_{j}f_{;j}f_{;k}\Ricij{k}{j}\\
+        &=|\nabla^2f|^2+\langle\nabla f,\nabla\Delta f\rangle+\langle\Ric(\nabla f),\nabla f\rangle.\qedhere
+    \end{align*}
 \end{proof}

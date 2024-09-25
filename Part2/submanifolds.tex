@@ -1,0 +1,118 @@
+\chapter{Submanifolds}
+
+\section{Second Fundamental Form}
+
+We first set up our stage.
+Let $f:\Sigma^k\to(M^n,g)$ be an immersion, equip $\Sigma$ with pullback metric $f^*g$ (still denoted by $g$ for simplicity).
+There is a decomposition $\nabla_XY=(\nabla_XY)^\top+(\nabla_XY)^\perp$ for $X,Y\in\Gamma(T\Sigma)$, and simple observation shows
+\begin{prop}
+    Let $\nabla^\Sigma$ be the Levi--Civita connection on $(\Sigma,g)$, then $\nabla^\Sigma$ is given by
+    \[\nabla^\Sigma_XY=(\nabla_XY)^\top\]
+    for $X,Y\in\Gamma(T\Sigma)$.
+\end{prop}
+
+Now we need the concept of normal bundle.
+\begin{defn}
+    Let $\Sigma$ be a submanifold of $M$, then for any $p\in M$ we have the decomposition
+    \[T_pM=T_p\Sigma\oplus N_p\Sigma,\]
+    where $N_p\Sigma$ is the orthogonal complement of $T_p\Sigma$.
+    Then define the \emph{normal bundle} of $\Sigma$ to be
+    \[N\Sigma=\bigsqcup_{p\in M}N_p\Sigma.\]
+    It is similar to tangent bundle to make $N\Sigma$ into a vector bundle.
+\end{defn}
+
+Thus we can define the second fundamental form of a submanifold.
+\begin{defn}
+    Let $\Sigma$ be a submanifold of $M$, then we define the \emph{second fundamental form} of $\Sigma$ to be
+    \begin{align*}
+        \II:\Gamma(T\Sigma)\times\Gamma(T\Sigma)&\to\Gamma(N\Sigma)\\
+        (X,Y)&\mapsto(\nabla_XY)^\perp.
+    \end{align*}
+\end{defn}
+\begin{lem}
+    The second fundamental form is symmetric.
+\end{lem}
+\begin{proof}
+    We have
+    \[\II(X,Y)-\II(Y,X)=(\nabla_XY)^\perp-(\nabla_YX)^\perp=([X,Y])^\perp=0.\qedhere\]
+\end{proof}
+
+Moreover, we can define the shape operator.
+\begin{defn}
+    For a fixed $\xi\in\Gamma(N\Sigma)$, we define
+    \begin{align*}
+        S_\xi:\Gamma(T\Sigma)&\to\Gamma(T\Sigma)\\
+        X&\mapsto\nabla_X\xi-(\nabla_X\xi)^\perp.
+    \end{align*}
+\end{defn}
+
+We have the following Weingarten formula.
+\begin{prop}
+    For $\xi\in\Gamma(N\Sigma)$ and $X,Y\in\Gamma(T\Sigma)$, we have
+    \[\langle S_\xi(X),Y\rangle=\langle\II(X,Y),-\xi\rangle.\]
+    In particular, shape operator is self-adjoint.
+\end{prop}
+\begin{proof}
+    We have the calculation
+    \begin{align*}
+        \langle S_\xi(X),Y\rangle&=\langle\nabla_X\xi-(\nabla_X\xi)^\perp,Y\rangle\\
+        &=\langle\nabla_X\xi,Y\rangle-\langle(\nabla_X\xi)^\perp,Y\rangle\\
+        &=X\langle\xi,Y\rangle-\langle\xi,\nabla_XY\rangle\\
+        &=\langle-\xi,\nabla_XY\rangle\\
+        &=\langle-\xi,(\nabla_XY)^\perp\rangle\\
+        &=\langle\II(X,Y),-\xi\rangle.\qedhere
+    \end{align*}
+\end{proof}
+
+For a two-sided hypersurface $\Sigma^{n-1}\subset M^n$, choose a unit normal vector field $N$, we can introduce the \emph{second fundamental form tensor} $h$, which is defined by $h(X,Y):=\langle\II(X,Y),N\rangle$.
+In other words, $\II(X,Y)=h(X,Y)N$, and the Weingarten formula is $h(X,Y)=-\langle S(X),Y\rangle$.
+
+\section{Gauss--Codazzi Equations}
+
+In this section, our goal is to prove the following Gauss--Codazzi equations on the relation of curvature between a hypersurface and ambient manifold.
+After this, we give a brief discussion on principal curvatures.
+
+In the following contents, we assume $\Sigma^{n-1}\subset M^{n-1}$, $\Sigma$ is two-sided.
+We will use $\D_XY$ to denote the Levi--Civita connection of $M$, and $\nabla_XY$ for $\Sigma$.
+$N$ will denote the unit normal vector field of $\Sigma$.
+
+\begin{thm}
+    Under above settings, for $X,Y,Z,W\in\Gamma(T\Sigma)$ and $N\in\Gamma(N\Sigma)$, we have
+    \begin{itemize}
+        \item Gauss equation:
+        \begin{align*}
+            R^\Sigma(X,Y,Z,W)=&R^M(X,Y,Z,W)+h(X,Z)h(Y,W)-h(X,W)h(Y,Z);
+        \end{align*}
+        \item Codazzi equation:
+        \[R^M(X,Y,Z,N)=(\nabla_Yh)(X,Z)-(\nabla_Xh)(Y,Z).\]
+    \end{itemize}
+\end{thm}
+\begin{proof}
+    We first calculate $R^\Sigma(X,Y)Z$.
+    We have
+    \begin{align*}
+        R^\Sigma(X,Y)Z=&\nabla_Y\nabla_XZ-\nabla_X\nabla_YZ+\nabla_{[X,Y]}Z\\
+        =&\D_Y\nabla_XZ-h(\nabla_XZ,Y)N-\D_X\nabla_YZ+h(\nabla_YZ,X)N\\
+        &+D_{[X,Y]}Z-h([X,Y],Z)N\\
+        =&\D_Y\D_XZ-\D_Yh(X,Z)N-h(\nabla_XZ,Y)N\\
+        &-\D_X\D_YZ+\D_Xh(Y,Z)N+h(\nabla_YZ,X)N\\
+        &+\D_{[X,Y]}Z-h(\nabla_XY-\nabla_YX,Z)N\\
+        =&R^M(X,Y)Z-\D_Yh(X,Z)N+h(\nabla_YX,Z)+h(X,\nabla_YZ)N\\
+        &+\D_Xh(Y,Z)N-h(\nabla_XY,Z)N-h(Y,\nabla_XZ)N\\
+        =&R^M(X,Y)Z\\
+        &-Yh(X,Z)N-h(X,Z)\D_YN+h(\nabla_YX,Z)+h(X,\nabla_YZ)N\\
+        &+Xh(Y,Z)N+h(Y,Z)\D_XN-h(\nabla_XY,Z)N-h(Y,\nabla_XZ)N.
+    \end{align*}
+    First we consider $\langle R^\Sigma(X,Y)Z,W\rangle$, by Weingarten formula we have
+    \begin{align*}
+        \langle R^\Sigma(X,Y)Z,W\rangle&=\langle R^M(X,Y)Z,W\rangle+\langle h(Y,Z)\D_XN,W\rangle-\langle h(X,Z)\D_YN,W\rangle\\
+        &=\langle R^M(X,Y)Z,W\rangle+h(X,Z)h(Y,W)-h(X,W)h(Y,Z).
+    \end{align*}
+    Next we consider $\langle R^\Sigma(X,Y)Z,N\rangle$, notice that $\langle D_XN,N\rangle=\frac{1}{2}X\langle N,N\rangle=0$, we have
+    \begin{align*}
+        0=&\langle R^M(X,Y)Z,N\rangle+Xh(Y,Z)-h(\nabla_XY,Z)-h(Y,\nabla_XZ)\\
+        &-Yh(X,Z)+h(\nabla_YX,Z)+h(X,\nabla_YZ)\\
+        =&\langle R^M(X,Y)Z,N\rangle+(\nabla_Xh)(Y,Z)-(\nabla_Yh)(X,Z),
+    \end{align*}
+    which is equivalent to Codazzi equation.
+\end{proof}

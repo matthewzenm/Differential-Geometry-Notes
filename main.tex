@@ -14,6 +14,8 @@
 \usepackage{fixdif}
 \usepackage[colorlinks]{hyperref}
 
+\allowdisplaybreaks[4]
+
 \theoremstyle{definition}
 \newtheorem*{defn}{Definition}
 \newtheorem{eg}{Example}[chapter]
@@ -31,11 +33,14 @@
 \DeclareMathOperator{\Sect}{Sect}
 \DeclareMathOperator{\Ric}{Ric}
 \DeclareMathOperator{\Scal}{Scal}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\II}{II}
+\newcommand{\D}{\mathrm{D}}
 \newcommand{\R}[4]{R_{#2#3#4}{}^{#1}} % contravariant index is put the first
 \newcommand{\Ricij}[2]{\mathrm{Ric}_{#2}{}^{#1}} % as above
 
 \title{A Concise Note on Differential Geometry}
-\author{Zeng Mengchen}
+\author{Mengchen Zeng}
 \date{Last Compile: \today}
 
 \begin{document}
@@ -53,6 +58,7 @@
 \part{Riemannian Geometry}
 \input{Part2/metric.tex}
 \input{Part2/curvature.tex}
+\input{Part2/submanifolds.tex}
 
 \backmatter
 \bibliographystyle{plain}
