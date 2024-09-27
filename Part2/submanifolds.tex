@@ -116,3 +116,268 @@ $N$ will denote the unit normal vector field of $\Sigma$.
     \end{align*}
     which is equivalent to Codazzi equation.
 \end{proof}
+
+We now turn to principal curvatures.
+
+\begin{defn}
+    Let $p\in\Sigma^{n-1}\subset M^n$, the \emph{principal curvatures} at $p$ are the eigenvalues of shape operator $S$.
+    Usually we denote $\kappa_i$, $i=1,\cdots,n-1$ for principal curvatures.
+\end{defn}
+
+Principal curvatures are extrinsic geometry quantities, but on $2$-dimensional surfaces, their product happens to be intrinsic.
+This is the \emph{Theorema Egregium}, a glorious achievement of classical differential geometry.
+At the era of Gauss, who discovered the theorem, Theorema Egregium needs tedious calculation to be proved.
+But using modern language, Theorema Egregium is almost self-evident.
+We now state and prove this theorem.
+
+\begin{thm}[Theorema Egregium]
+    On a surface $\Sigma^2\subset\mathbb{R}^3$, we define \emph{Gaussian curvature} $\kappa=\kappa_1\kappa_2$, the product of principal curvatures.
+    The Gaussian curvature is equal to the sectional curvature on a point, hence Gaussian curvature is intrinsic, i.e.\ only depends on metric.
+\end{thm}
+\begin{proof}
+    Since $S^i_j=-g^{ik}h_{kj}$, we have
+    \[\kappa=\kappa_1\kappa_2=\det(S^i_j)=\frac{\det(h_{ij})}{\det(g_{ij})}.\]
+    However, by Gauss equation, we have
+    \begin{align*}
+        \Sect_p(T_p\Sigma)&=\frac{\langle R(\partial_i,\partial_j)\partial_i,\partial_j\rangle}{g_{ii}g_{jj}-g_{ij}^2}\\
+        &=\frac{1}{\det(g_{ij})}(0+h_{ii}h_{jj}-h_{ij}^2)\\
+        &=\kappa.\qedhere
+    \end{align*}
+\end{proof}
+
+Finally we discuss totally umbilical hypersurfaces.
+\begin{defn}
+    A point $p\in\Sigma^{n-1}\subset M^n$ is called \emph{umbilical} if $h_p=cg_p$ for some $c\in\mathbb{R}$.
+    $\Sigma^{n-1}$ is called \emph{totally umbilical} if $h=fg$ for some $f\in C^\infty(M)$.
+\end{defn}
+
+\begin{lem}\label{totally umbilical}
+    A point is umbilical if and only if all the principal curvatures at this point are equal.
+\end{lem}
+\begin{proof}
+    This follows by $S^i_j=-g^{ik}h_{kj}=-fg^{ik}g_{kj}=-f\delta^i_j$.
+\end{proof}
+
+\begin{prop}
+    If $\Sigma$ is a totally umbilical hypersurface in $(\mathbb{R}^n,\delta)$, i.e.\ $h=f\delta$, then $f$ must be constant.
+\end{prop}
+\begin{proof}
+    By Codazzi equation, at $p\in\Sigma$, for $u,w,v\in T_p\Sigma$, we have
+    \begin{equation}
+        0=\langle R(u,v)w,n\rangle=(\nabla h)(u,w,v)-(\nabla h)(v,w,u).\label{codazzi umbilical}
+    \end{equation}
+    Since $h=f\delta$, we have
+    \[\nabla h=\nabla (f\delta)=\delta\otimes\d{f}+f\nabla\delta=\delta\otimes\d{f}.\]
+    Hence equation~\ref{codazzi umbilical}~is equivalent to
+    \[0=\langle u,w\rangle\d{f}_p(v)-\langle v,w\rangle\d{f}|_p(u).\]
+    Choose $v$ arbitrarily, $w\neq 0$ satisfying $\langle v,w\rangle=0$ and $u=w$, we have $\d{f}|_p(v)=0$.
+    This shows $\d{f}|_p=0$.
+    Since $p$ is arbitrary, $\d{f}=0$ and this implies $f\equiv\text{const}$. 
+\end{proof}
+
+\begin{rem}
+    Some authors mistakenly think this proposition holds for general ambient manifold.
+    We have a counterexample as follows.
+    Let's consider the warped product $\mathbb{R}\times\mathbb{R}^2$ with metric $g=(\d{x^1})^2+F^2(x^1)((\d{x^2})^2+(\d{x^3})^2)$, where $F$ is a nonconstant function of $x^1$.
+    If $\{\partial_i\}$ is coordinate vector field, then $N=\partial_1$ is orthonormal to $\Sigma=\mathbb{R}^2$.
+    We have
+    \[\Gamma^1_{13}=\frac{1}{2}g^{11}(\partial_3g_{11}+\partial_1g_{13}-\partial_1g_{13})=\frac{\partial_3F}{F}=\Gamma^2_{23},\]
+    and
+    \[\Gamma^2_{13}=\frac{1}{2}g^{22}(\partial_3g_{12}+\partial_1g_{23}-\partial_2g_{13})=0.\]
+    Therefore we have
+    \[h(\partial_1,\partial_1)=-\langle\nabla_{\partial_1}\partial_3,\partial_1\rangle=-F^2\Gamma^1_{13}=-F\partial_3F=h(\partial_2,\partial_2),\]
+    and
+    \[h(\partial_1,\partial_2)=-\langle\nabla_{\partial_1}\partial_3,\partial_2\rangle=-F^2\Gamma^2_{13}=0.\]
+    Hence we have
+    \[h=-\frac{\partial_3F}{F}g=:fg,\]
+    $f$ is not constant as $F$ is not constant.
+\end{rem}
+
+If we assume a priori the classification theorem of constant sectional curvature spaces, we can have the following corollary.
+\begin{cor}
+    A complete totally umbilical hypersurface $\Sigma$ in $(\mathbb{R}^n,\delta)$ is either a hyperplane or a sphere.
+\end{cor}
+\begin{proof}
+    Let $p\in\Sigma$, $u,v\in T_p\Sigma$, then by Gauss equation, we have
+    \begin{align*}
+        \Sect_p(\Span\{u,v\})&=0+\frac{h(u,u)h(v,v)-h^2(u,v)}{\delta(u,u)\delta(v,v)-\delta^2(u,v)}\\
+        &=f^2\frac{\delta(u,u)\delta(v,v)-\delta^2(u,v)}{\delta(u,u)\delta(v,v)-\delta^2(u,v)}\\
+        &=f^2\\
+        &\equiv\text{const}\geq 0.
+    \end{align*}
+    When the constant is $0$, $\Sigma$ is a hyperplane; when the constant is positive, $\Sigma$ is a sphere.
+\end{proof}
+
+\section{Minimal Surfaces}
+
+We now give a brief introduction to minimal surfaces.
+We will use the word ``area'' to denote the volume of a submanifold.
+
+\begin{defn}
+    Let $\Sigma^k\subset M^n$ be a submanifold (maybe with boundary), the \emph{area functional} is defined as
+    \[A[\Sigma]=\int_{\Sigma}\d{A_\Sigma},\]
+    where $A_\Sigma$ is the volume element on $\Sigma$.
+\end{defn}
+
+The guiding problem of this section is
+\begin{pro}[Generalized Plateau problem]
+    Given a fixed boundary submanifold $B^{k-1}\subset M^n$ ($k<n$), find the area-minimi\-zer in all submanifolds $\Sigma^k$ with $\partial\Sigma=B$.
+\end{pro}
+
+We use variation to deduce a necessary condition for a submanifold to be area-minimizing.
+To describe the first variation formula of area, we introduce the notion of mean curvature.
+
+\begin{defn}
+    Let $\Sigma^k\subset M$, define the \emph{mean curvature vector} at a point $p\in\Sigma$ to be
+    \[\mathbf{H}_p=\sum_{i=1}^k\II_p(e_i,e_i),\]
+    where $\{e_i\}$ is an orthonormal basis of $T_p\Sigma$.
+    When $k=n-1$, i.e.\ $\Sigma$ is a hypersurface, we define \emph{mean curvature} $H=\tr h$, the trace of second fundamental form tensor.
+\end{defn}
+
+\begin{prop}[First variation of area]
+    Let $M^n$ be a Riemannian manifold, $\Sigma^k$ be a manifold with boundary with $k<n$, $f:\Sigma\times(-\varepsilon,\varepsilon)\to M$ be a family of immersions, denote $\Sigma_t=f(\Sigma,t)$.
+    Suppose $f(p,t)=p$ for $p\in\partial\Sigma$ and $t\in(-\varepsilon,\varepsilon)$, the variation vector field $X:=\left.\frac{\partial}{\partial{t}}\right|_{t=0}f\in\Gamma(TM,\Sigma_0)$.
+    Then we have
+    \[\left.\frac{\d{}}{\d{t}}\right|_{t=0}A[\Sigma_t]=-\int_{\Sigma_0}\langle\mathbf{H},X\rangle\d{A_{\Sigma_0}}.\]
+\end{prop}
+\begin{proof}
+    Denote $g_t=f^*_tg$ and $A_t=A_{\Sigma_t}$.
+    Let
+    \[\mathscr{J}(p,t)=\frac{\sqrt{\det{g_t}}}{\sqrt{\det{g_0}}},\]
+    then we have $A_t(p)=\mathscr{J}(p,t)A_0(p)$.
+    Now we can calculate (omitting $p$)
+    \begin{align*}
+        \left.\frac{\d{}}{\d{t}}\right|_{t=0}\mathscr{J}(t)&=\frac{1}{\sqrt{\det{g_0}}}\cdot\frac{1}{2\sqrt{\det{g_0}}}\cdot\det{g_0}\cdot g_0^{ij}\left.\frac{\d{}}{\d{t}}\right|_{t=0}g_{ij}\\
+        &=\frac{1}{2}g_0^{ij}\left(\left\langle\nabla_{\partial_t}\frac{\partial{f}}{\partial{x^i}},\frac{\partial{f}}{\partial{x^j}}\right\rangle+\left\langle\frac{\partial{f}}{\partial{x^i}},\nabla_{\partial_t}\frac{\partial{f}}{\partial{x^j}}\right\rangle\right)\\
+        &=g_0^{ij}\left\langle\nabla_{\partial_t}\frac{\partial{f}}{\partial{x^i}},\frac{\partial{f}}{\partial{x^j}}\right\rangle\\
+        &=g_0^{ij}\left\langle\nabla_{\partial_i}\frac{\partial{f}}{\partial{t}},\frac{\partial{f}}{\partial{x^j}}\right\rangle\\
+        &=g_0^{ij}\left\langle\nabla_{\partial_i}X^\perp,\frac{\partial{f}}{\partial{x^j}}\right\rangle+g_0^{ij}\left\langle\nabla_{\partial_i}X^\top,\frac{\partial{f}}{\partial{x^j}}\right\rangle\\
+        &=-\left\langle g_0^{ij}\II\left(\frac{\partial{f}}{\partial{x^i}},\frac{\partial{f}}{\partial{x^j}}\right),X^\perp\right\rangle+\div{X^\top}\\
+        &=-\langle\mathbf{H},X^\perp\rangle+\div{X^\top}.
+    \end{align*}
+    Notice that $-\langle\mathbf{H},X^\perp\rangle=-\langle\mathbf{H},X\rangle$, take integral we have
+    \[\left.\frac{\d{}}{\d{t}}\right|_{t=0}A[\Sigma_t]=-\int_{\Sigma_0}\langle\mathbf{H},X\rangle\d{A_{\Sigma_0}}+\int_{\Sigma_0}\div{X^\top}\d{A_{\Sigma_0}}.\]
+    Since the variation fixes boundary, we have $X|_{\partial\Sigma_0}=0$, then by divergence theorem, let $N$ denote the outer unit normal vector field of $\partial\Sigma_0$, we have
+    \[\int_{\Sigma_0}\div{X^\top}\d{A_{\Sigma_0}}=\int_{\partial\Sigma_0}\langle X^\top,N\rangle\d{A_{\partial\Sigma_0}}=0.\]
+    Hence we proved the first variation formula of area.
+\end{proof}
+
+Thus we have a necessary condition for area-minimizing submanifold.
+\begin{cor}
+    If $\Sigma$ is a solution of generalized Plateau problem, then $\mathbf{H}=0$.
+\end{cor}
+
+The corollary gives rise to the notion of minimal submanifolds.
+
+\begin{defn}
+    Let $\Sigma$ be a submanifold of $M$, if the mean curvature vector field $\mathbf{H}\equiv 0$, then we call $\Sigma$ a \emph{minimal submanifold}.
+\end{defn}
+
+\begin{rem}
+    We do not demand a minimal submanifold is with boundary or actually minimzes area.
+    But if the minimal submanifold is a graph, then it minimzes area.
+\end{rem}
+
+\begin{lem}
+    Let $u:\Omega\subset\mathbb{R}^{n-1}\to\mathbb{R}$ be a smooth function, then its graph
+    \[G[u]:=\{(x^1,\cdots,x^{n-1},u(x^1,\cdots,x^{n-1}))\}\]
+    is a minimal surface if and only if it satisfies the following \emph{minimal surface equation (MSE)}:
+    \[\div_{\mathbb{R}^{n-1}}\left(\frac{\D u}{\sqrt{1+|\D u|^2}}\right)=0,\]
+    where $\D$ is the Euclidean connection, and norm is Euclidean norm.
+\end{lem}
+\begin{proof}
+    Let
+    \begin{align*}
+        r:\Omega\subset\mathbb{R}^{n-1}&\to\mathbb{R}^n\\
+        (x^1,\cdots,x^{n-1})&\mapsto(x^1,\cdots,x^{n-1},u(x^1,\cdots,x^{n-1})),
+    \end{align*}
+    $r(\Omega)=G[u]$ has a unit normal vector field
+    \[N=\frac{(\D u,-1)}{\sqrt{1+|\D u|^2}}.\]
+    Then we have
+    \[g_{ij}=\delta_{ij}+\frac{\partial u}{\partial{x^i}}\frac{\partial u}{\partial{x^j}},\]
+    or $g=I+\D u(\D u)^t$.
+    Hence we have formally
+    \begin{align*}
+        (I+\D u(\D u)^t)^{-1}&=I-\D u(\D u)^t+(\D u(\D u)^t)^2-(\D u(\D u)^t)^3+\cdots\\
+        &=I-\D u(\D u)^t(1-|\D u|^2+|\D u|^4+\cdots)\\
+        &=I-\frac{1}{1+|\D u|^2}\D u(\D u)^t,
+    \end{align*}
+    and one can check we indeed obtain the inverse matrix.
+    Moreover, we have second fundamental form tensor
+    \[h_{ij}=\langle r_{;ij},N\rangle=-\frac{1}{\sqrt{1+|\D u|^2}}\cdot\frac{\partial^2u}{\partial{x^i}\partial{x^j}}.\]
+    Thus by taking trace, we have
+    \begin{align*}
+        H&=g^{ij}h_{ij}\\
+        &=-\sum_{i,j}\left(\delta_{ij}-\frac{1}{1+|\D u|^2}\frac{\partial{u}}{\partial{x^i}}\frac{\partial{u}}{\partial{x^j}}\right)\left(\frac{1}{\sqrt{1+|\D u|^2}}\cdot\frac{\partial^2u}{\partial{x^i}\partial{x^j}}\right)\\
+        &=-\sum_{i,j}\frac{\partial_i(\partial_iu)\sqrt{1+|\D u|^2}-\partial_ju\partial_iu\partial_i(\partial_ju)(1+|\D u|^2)^{-1/2}}{1+|\D u|^2}\\
+        &=-\sum_{i,j}\frac{\partial{}}{\partial{x^i}}\left(\frac{\partial_iu}{\sqrt{1+|\D u|^2}}\right)\\
+        &=-\div_{\mathbb{R}^{n-1}}\left(\frac{\D u}{\sqrt{1+|\D u|^2}}\right),
+    \end{align*}
+    where we used the fact
+    \begin{align*}
+        \frac{\partial{}}{\partial{x^i}}\sqrt{1+|\D u|^2}&=\frac{\partial_i(1+\sum_j(\partial_ju)^2)}{2\sqrt{1+|\D u|^2}}\\
+        &=\sum_j\frac{\partial_i(\partial_j u)\partial_ju}{\sqrt{1+|\D u|^2}}.
+    \end{align*}
+    Hence we proved MSE.
+\end{proof}
+
+\begin{rem}
+    When $n=3$, MSE was found by Lagrange in 1762.
+\end{rem}
+
+\begin{prop}
+    A minimal graph in $\mathbb{R}^n$ is area-minimizing.
+\end{prop}
+\begin{proof}
+    We need to show if $\Sigma_u$ is a minimal graph, $\Sigma$ is a surface such that $\partial\Sigma_u=\partial\Sigma$, then $A[\Sigma_u]\leq A[\Sigma]$.
+    Define a vector field $X\in\Gamma(T\mathbb{R}^n)$ such that
+    \[X=\frac{(-\D u,1)}{\sqrt{1+|\D u|^2}}.\]
+    Since $X$ does not depend on $x^n$, by MSE we have
+    \[\div_{\mathbb{R}^n}X=\div_{\mathbb{R}^{n-1}}\left(\frac{-\D u}{\sqrt{1+|\D u|^2}}\right)=0.\]
+    Let $\Omega$ be the domain enclosed by $\Sigma_u$ and $\Sigma$, $N_{\Sigma_u}$ and $N_\Sigma$ be the outward unit normal vector field of $\Sigma_u$ and $\Sigma$ respectively.
+    Then by divergence theorem, we have
+    \begin{align*}
+        0&=\int_\Omega\div_{\mathbb{R}^n}X\d\Vol_\Omega\\
+        &=\int_{\Sigma_u}\langle X,N_{\Sigma_u}\rangle\d{A_{\Sigma_u}}+\int_\Sigma\langle X,N_\Sigma\rangle\d{A_\Sigma}.
+    \end{align*}
+    Since $N_{\Sigma_u}=\frac{(\D u,-1)}{\sqrt{1+|\D u|^2}}$, we have $\langle X,N_{\Sigma_u}\rangle=-1$, hence by Cauchy--Schwarz inequality,
+    \begin{align*}
+        A[\Sigma_u]=\int_\Sigma\langle X,N_\Sigma\rangle\d{A_\Sigma}\leq\int_\Sigma|X||N_\Sigma|\d{A_\Sigma}=A[\Sigma],
+    \end{align*}
+    where $|X|=|N_\Sigma|=1$.
+\end{proof}
+
+Finally we have a characterization of immersed minimal surfaces in Euclidean space.
+\begin{prop}
+    Let $f:\Sigma^k\to\mathbb{R}^n$ ($k<n$) be an immersion, denote $\Delta f=(\Delta f^1,\cdots,\Delta f^n)$, then we have
+    \[\Delta f=\mathbf{H}.\]
+\end{prop}
+\begin{proof}
+    We use $\D$ to denote the Levi--Civita connection of $\mathbb{R}^n$ (i.e.\ directional derivative) and $\nabla$ for $\Sigma$.
+    First, we notice that this proposition is local, thus we can prove it on a sufficiently small coordinate neighborhood $W$ on which $f$ is an embedding.
+    Moreover, notice that we have an identification
+    \[f_*Y=Yf=Yf^i\frac{\partial}{\partial{x^i}}=(Yf^1,\cdots,Yf^n)\in T\mathbb{R}^n,\]
+    thus we have $Y=Yf\in\Gamma(Tf(\Sigma))$.
+    Now let $\{X_i\}$ be an orthonormal frame on $W$, we have
+    \begin{align*}
+        \Delta f&=\sum_iX_i(X_if)-(\nabla_{X_i}X_i)f\\
+        &=\sum_iX_i(X_i)-\nabla_{X_i}X_i\\
+        &=\sum_i\D_{X_i}X_i-\nabla_{X_i}X_i\\
+        &=\sum_i\II(X_i,X_i)\\
+        &=\mathbf{H}.\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{cor}
+    An submanifold in Euclidean space is a minimal surface if and only if its every coordinate function is harmonic.
+\end{cor}
+
+\begin{cor}
+    There is no compact minimal submanifold without boundary in Euclidean space.
+\end{cor}
+\begin{proof}
+    Since the submanifold is minimal, all its coordinate functions are harmonic.
+    But the submanifold is compact, the coordinate functions reach their maximum and minimum.
+    Hence by Liouville's theorem, every coordinate functions is constant.
+    This is impossible.
+\end{proof}
