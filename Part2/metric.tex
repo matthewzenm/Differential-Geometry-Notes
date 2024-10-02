@@ -1,4 +1,4 @@
-\chapter{Metric Structure}
+\chapter{Metric Structure of Riemannian Manifolds}
 
 In this chapter we introduce the metric structure on a Riemannian manifold, i.e.\ using the metric tensor to make the manifold into a metric space.
 We will prove that the topology induced by metric coincides with the topology carried by the manifold.
@@ -231,7 +231,20 @@ Therefore, we can shorten the initial vector to lengthen the domain of geodesic.
     There exists a ball $B_\varepsilon(0)\subset T_pM$ such that $\exp_p:B_\varepsilon(0)\to M$ is a diffeomorphism onto its image.
 \end{cor}
 \begin{proof}
-    Since $\exp_{p*}|_0$ is identity, it is nondegenerate, the corollary follows from Inverse Function Theorem.
+    Since $\exp_{p*}|_0$ is identity, it is nondegenerate, the corollary follows from inverse function theorem.
+\end{proof}
+
+Exponential maps enjoys naturality.
+\begin{prop}\label{exp natural}
+    Let $f:M\to N$ be a local isometry, $p\in M$, $q\in N$ and $f(p)=q$.
+    Then we have the following commutative diagram
+    \[\begin{tikzcd}
+        U\subset T_pM \ar[r, "{f_{*p}}"] \ar[d, "{\exp_p}"] & V\subset T_qN \ar[d, "{\exp_q}"] \\
+        M \ar[r, "f"] & N.
+    \end{tikzcd}\]
+\end{prop}
+\begin{proof}
+    This is simply because local isometry preserves geodesics.
 \end{proof}
 
 \begin{eg}

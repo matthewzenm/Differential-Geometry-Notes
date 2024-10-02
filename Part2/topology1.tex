@@ -1,0 +1,64 @@
+\chapter{Curvature and Topology I}
+In this chapter, we will disucss some topological results derived by curvature restrictions.
+We will follow the order of Ricci curvature with positive lower bound, nonpositive sectional curvature and constant sectional curvature.
+The corresponding results are Bonnet--Myers Theorem, Cartan--Hadamard Theorem and classification theorem of space forms.
+More results on topology by curvature restrictions involves comparison theorem, which will be discussed later.
+
+From this chapter, we will assume that all Riemannian manifolds are complete.
+
+\section{Bonnet--Myers Theorem}
+
+Bonnet--Myers Theorem asserts that a Riemannian manifold with positive lower bound for Ricci curvature is bounded, hence compact.
+Precisely, we have
+\begin{thm}[Bonnet--Myers]
+    Let $(M^n,g)$ be a complete Riemannian manifold with $\Ric\geq(n-1)Kg>0$ (here we lowered the index of Ricci tensor), then $\operatorname{diam}(M)\geq\pi/\sqrt{K}$.
+    In particular, $M$ is compact.
+\end{thm}
+\begin{proof}
+    We may scale the metric to make $K=1$.
+    Use contradiction argument, we may assume there exists $p,q\in M$ with $d(p,q)>\pi$.
+    By completeness, there exists a unit speed geodesic $\gamma:[0,a]\to M$ such that $\gamma(0)=p$, $\gamma(a)=q$, so $d(p,q)=a>\pi$, $\gamma$ is length-minimizing.
+    Let $\{E_i(t)\}$ be a parallel orthonormal frame along $\gamma$ with $E_n(t)=\dot\gamma(t)$, define
+    \[U_i(t)=\sin\left(\frac{\pi t}{a}\right).\]
+    Let $I$ be the index form on $\gamma$, then we have
+    \begin{align*}
+        \sum_{i=1}^{n-1}I(U_i,U_i)&=\sum_{i=1}^n\int_0^a\langle\dot U_i,\dot U_i\rangle-\langle R(\dot\gamma,U_i)\dot\gamma,U_i\rangle\d{t}\\
+        &=\sum_{i=1}^{n-1}\int_0^a-\langle\ddot{U}_i,U_i\rangle-\langle R(U_i,\dot\gamma)U_i,\dot\gamma\rangle\d{t}\\
+        &=\sum_{i=1}^{n-1}\int_0^a\frac{\pi^2}{a^2}\sin^2\left(\frac{\pi t}{a}\right)-\sin^2\left(\frac{\pi t}{a}\right)\langle R(E_i,\dot\gamma)E_i,\dot\gamma\rangle\d{t}\\
+        &=\int_0^a\left((n-1)\frac{\pi^2}{a^2}-\langle\Ric(\gamma),\gamma\rangle\right)\sin^2\left(\frac{\pi t}{a}\right)\\
+        &\leq\int_0^a(n-1)\left(\frac{\pi^2}{a^2}-1\right)\sin^2\left(\frac{\pi t}{a}\right)\d{t}\\
+        &<0,
+    \end{align*}
+    the second equality is integration by parts.
+    But $\gamma$ is a length-minimizing geo\-desic, $I$ must be positive definite, hence
+    \[\sum_{i=1}^{n-1}I(U_i,U_i)\geq 0,\]
+    this is a contradiction.
+\end{proof}
+
+\begin{rem}
+    \begin{enumerate}[(1)]
+        \item If we know a priori Cheng's maximal diameter theorem, the above proof can be regarded as a comparison between Jacobi fields on $M$ and sphere.
+        Thus this is a prototype of our proof to Rauch's comparison theorem.
+        \item The condition cannot be weakened to $K=0$, in fact, $\Sect>0$ is not enough.
+        The surface $z=x^2+y^2$ in $\mathbb{R}^3$ is an counterexample.
+    \end{enumerate}
+\end{rem}
+
+\begin{cor}
+    Under above settings, the universal covering $\pi:\tilde{M}\to M$ is compact.
+    Moreover, $\pi_1(M)$ is finite.
+\end{cor}
+\begin{proof}
+    We can lift the metric of $M$ to make $\pi$ a Riemannian covering, then $\pi^*g$ has also a Ricci lower bound, and we can apply Bonnet--Myers Theorem.
+    For the next claim, let $p\in M$, then $\pi^{-1}(p)$ is a discrete closed set in $\tilde{M}$, hence must be finite since $\tilde{M}$ is compact.
+    Then the covering map is of finite sheet, $\pi_1(\tilde{M})$ has finite index in $\pi_1(M)$.
+    But $\pi_1(\tilde{M})$ is trivial, hence $\pi_1(M)$ is finite.
+\end{proof}
+
+\section{Cartan--Hadamard Theorem}
+
+Cartan--Hadamard Theorem gives the topological characterization of a Riemannian manifold with nonpositive sectional curvature.
+
+\begin{thm}[Cartan--Hadamard]
+    Let $M^n$ be a complete Riemannian manifold with $\Sect\leq 0$, then for any $p\in M$ the exponential map $\exp_p:T_pM\to M$ is a universal covering.
+\end{thm}

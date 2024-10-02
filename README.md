@@ -6,17 +6,17 @@ The writing plan (update to 2024/9/14) is:
 Part 1. Smooth Manifolds
 1. Smooth Manifolds
   - Category of Smooth Manifolds: definition of smooth manifolds and smooth maps, partition of unity.
-  - Submanifolds
-  - Manifolds with Boundary
   - Tangent Space and Differential
-  - Immersion and Embedding
+  - Submanifolds: definition, immersion and embedding
+  - Manifolds with Boundary
+  - Group Actions and Quotients
   - Tangent Bundle
 2. Vector Bundles
   - Definition: standard definition.
   - Construction of Vector Bundles: construct vector bundles via transition maps.
   - Sections: sections, in particular vector fields.
+  - Integral Curves and Flows
   - Algebraic Operation of Vector Bundles: direct sum, tensor product, quotient and dual.
-  - Sheaves: definition, etale space.
 3. Tensors
   - Tensor Bundle: tensor product of $TM$ and $T^*M$, double dual isomorphism, tensor product.
   - Differential Forms: wedge product, exterior differential, orientation.
@@ -60,7 +60,7 @@ Part 2. Riemannian Geometry
   - Laplace Comparison Theorem: proof via Bochner formula, proof via geometric approach, in weak sense.
   - Volume Comparison Theorem
   - Heintze-Karcher Comparison Theorem: general distance function, the theorem.
-7. Curvature and Topology II
+6. Curvature and Topology II
   - Sphere Theorem
   - Maximal Diameter Theorem
   - Cheeger-Gromoll Splitting Theorem

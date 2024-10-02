@@ -11,6 +11,9 @@
 \usepackage[shortlabels]{enumitem}
 \usepackage{mathpazo}
 % \usepackage{mathptmx}
+\usepackage{indentfirst}
+\usepackage{tikz-cd}
+\usepackage{tocbibind}
 \usepackage{fixdif}
 \usepackage[colorlinks]{hyperref}
 
@@ -36,9 +39,15 @@
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\II}{II}
 \DeclareMathOperator{\Vol}{Vol}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\codim}{codim}
 \newcommand{\D}{\mathrm{D}}
 \newcommand{\R}[4]{R_{#2#3#4}{}^{#1}} % contravariant index is put the first
 \newcommand{\Ricij}[2]{\mathrm{Ric}_{#2}{}^{#1}} % as above
+\newcommand{\Gr}{\mathrm{Gr}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SU}{\mathrm{SU}}
+\newcommand{\SO}{\mathrm{SO}}
 \renewcommand{\div}{\operatorname{div}}
 
 \title{A Concise Note on Differential Geometry}
@@ -50,17 +59,19 @@
 
 \frontmatter
 
+\input{preface.tex}
 \tableofcontents
-\chapter{Preface}
 
 \mainmatter
 
-\part{Smooth Manifolds}
+% \part{Smooth Manifolds}
+\input{Part1/manifolds.tex}
 
-\part{Riemannian Geometry}
+% \part{Riemannian Geometry}
 \input{Part2/metric.tex}
 \input{Part2/curvature.tex}
 \input{Part2/submanifolds.tex}
+\input{Part2/topology1.tex}
 
 \backmatter
 \bibliographystyle{plain}

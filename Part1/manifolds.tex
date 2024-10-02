@@ -1,0 +1,356 @@
+\chapter{Smooth Manifolds}
+
+In this chapter we will introduce the basic object of differential geometry: smooth (or differentiable) manifolds and smooth maps.
+In the meanwhile, we will introduce the main idea of differential geometry: linearization.
+To be specific, we will introduce tangent spaces and tangent maps, i.e.\ the linearization of smooth maps.
+The notion of manifolds with boundary and submanifolds will be discussed as well.
+
+\section{Category of Smooth Manifolds}
+
+Feel free if you know nothing about category theory, the section title just indicates we will define the notions of smooth manifolds and smooth maps.
+Throughout the note, we will use ``smooth'' to mean being $C^\infty$.
+
+We first have a topological object.
+\begin{defn}
+    Let $n\in\mathbb{N}$, a \emph{topological manifold} $M^n$ is a second countable Hausdorff space that is locally Euclidean, i.e.\ for any $p\in M$, there is an open neighborhood $U$ of $p$ and a map $\varphi_U:U\to\mathbb{R}^n$ that maps $U$ to an open set in $\mathbb{R}^n$ and homeomorphically onto its image.
+    $(U,\varphi_U)$ is called a \emph{chart}.
+    $n$ is called the \emph{dimension} of the manifold, denoted by $\dim{M}$.
+    We will omit the superscript that indicates dimension if the dimension is clear.
+\end{defn}
+
+By gluing chart smoothly, we can have the notion of a smooth manifold.
+\begin{defn}
+    Let $M$ be a topological manifold, two charts $(U,\varphi_U)$ and $(V,\varphi_V)$ are called \emph{compatible} if both $\varphi_V\circ\varphi_U^{-1}$ and $\varphi_U\circ\varphi_V^{-1}$ are smooth.
+    If compatible charts $\{(U_i,\varphi_i)\}$ consist an open cover of $M$, then it is called an \emph{atlas}.
+    A maximal atlas is called a \emph{smooth structure}.
+    A topological manifold together with a smooth structure is called a \emph{smooth manifold}.
+\end{defn}
+
+\begin{rem}
+    \begin{enumerate}[(1)]
+        \item Not all topological manifolds admit a smooth structure, see for isntance, \cite{Kervaire}.
+        \item Dimension of manifolds are well-defined, that is, there is no diffeomorphisms between open subsets of $\mathbb{R}^m$ and $\mathbb{R}^n$ if $m\neq n$.
+        The proof requires topological invariants, such as homology groups.
+        See for instance, \cite[Theorem~2.55]{LeeTM}.
+        \item We will assume all the manifolds occur in our note are path connected unless we specially claim.
+        \item Notice that we only need to give an atlas of a manifold to define a smooth structure.
+    \end{enumerate}
+\end{rem}
+
+We now present some examples of smooth manifolds.
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item $\mathbb{R}^n$ itself is a smooth manifold, with single chart $\operatorname{id}$.
+        \item Any open subset $U$ of a smooth manifold $M$.
+        If $\{U_i,\varphi_i\}$ is an atlas of $M$, then $\{U_i\cap U,\varphi_i|_{U_i\cap U}\}$ is an atlas of $U$.
+        In particular, any open set of $\mathbb{R}^n$ is a smooth manifold.
+    \end{enumerate}
+\end{eg}
+
+\begin{eg}
+    Sphere $\mathbb{S}^n=\{x\in\mathbb{R}^{n+1}:\ |x|=1\}$.
+    An atlas is given by stereographic projections from north pole and south pole.
+    We give the formula explicitly.
+    Let $U=\mathbb{S}^n-\{(0,\cdots,0,1)\}$, $V=\mathbb{S}^n-\{(0,\cdots,0,-1)\}$, then
+    \begin{gather*}
+        U\xrightarrow{\varphi}\mathbb{R}^n,\ (x_1,\cdots,x_{n+1})\mapsto\left(\frac{x_1}{1-x_{n+1}},\cdots,\frac{x_n}{1-x_{n+1}}\right),\\
+        V\xrightarrow{\psi}\mathbb{R}^n,\ (x_1,\cdots,x_{n+1})\mapsto\left(\frac{x_1}{1+x_{n+1}},\cdots,\frac{x_n}{1+x_{n+1}}\right).
+    \end{gather*}
+    It's easy to see $(U,\varphi)$ and $(V,\psi)$ are compatible.
+\end{eg}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item If $M$, $N$ are smooth manifolds, then $M\times N$ is a smooth manifold with atlas $\{U_i\times V_j,\varphi_i\times\psi_j\}$, provided $\{U_i,\varphi_i\}$ and $\{V_j,\psi_j\}$ are atlases of $M$ and $N$ respectively.
+        \item The torus $\mathbb{T}^n$ is defined by $\mathbb{S}^1\times\cdots\times\mathbb{S}^1$ for $n$ times.
+    \end{enumerate}
+\end{eg}
+
+To complete the definition of category of smooth manifolds, we need to define smooth maps.
+\begin{defn}
+    A map $f:M\to N$ is called \emph{smooth} at $p\in M$, if there exists chart $(U,\varphi)$ of $p$ and $(V,\psi)$ of $f(p)$, such that $\psi\circ f\circ\varphi$ is smooth on $\varphi(U)$.
+    If $f$ is smooth everywhere, we simply say $f$ is smooth.
+    If $N=\mathbb{R}$, then we call $f$ a smooth \emph{function}, and we denote the set (actually $\mathbb{R}$-algebra) of smooth functions on $M$ by $C^\infty(M)$.
+\end{defn}
+
+The isomorphisms in the category of smooth manifolds are called diffeomorphisms, and we repeat the definition here.
+\begin{defn}
+    A smooth map $f:M\to N$ is called a \emph{diffeomorphism} if there exists a smooth $g:N\to M$, such that $g\circ f=\operatorname{id}_M$ and $f\circ g=\operatorname{id}_N$.
+\end{defn}
+
+At the end of the section, we discuss partition of unity.
+
+\begin{defn}
+    A collection of subsets $\{X_i\}_{i\in I}$ of topological space $X$ is called \emph{locally finite} if for any $x\in X$, there is a neighborhood $U$ of $x$ such that only finite many $i\in I$ satisfy $U\cap X_i\neq\varnothing$.
+\end{defn}
+
+\begin{defn}
+    The \emph{support} of a smooth function $f\in C^\infty(M)$ is the closure of $\{p\in M:\ f(p)\neq 0\}$, denoted by $\supp{f}$.
+\end{defn}
+
+Now we can state the partition of unity theorem here, but we will not present the long and complicated proof.
+For a proof, one can check~\cite[Theorem~2.23]{LeeSM}.
+
+\begin{thm}[Partition of unity]
+    Let $M$ be a smooth manifold with an open cover $\{U_i\}_{i\in I}$.
+    Then there exists a family of smooth functions $\{\varphi_i\}_{i\in I}$ satisfying
+    \begin{enumerate}[(1)]
+        \item $0\leq\varphi_i\leq 1$;
+        \item $\supp\varphi_i\subset U_i$ for each $i\in I$;
+        \item $\{\supp\varphi_i\}_{i\in I}$ is locally finite;
+        \item $\sum_{i\in I}\varphi_i(p)=1$ for $p\in M$.
+    \end{enumerate}
+\end{thm}
+
+\begin{rem}
+    By (3), the summation in (4) is a finite sum, so we will not encounter convergence problem here.
+\end{rem}
+
+Partition of unity plays an important role in defining many geometric objects, such as integral, metric, connection and so on.
+But any of them is beyond our scope in this section, so we have to postpone the illustration of applications of partition of unity.
+
+\section{Tangent Spaces and Tangent Maps}
+
+In this section we discuss the linearization of smooth maps, the main idea of differential geometry.
+
+We first define tangent spaces.
+In modern textbooks, tangent vectors are defined to be derivatives on the germ of smooth functions.
+This definition can show directly that tangent vectors consists a vector space.
+However, we will adopt traditional definition via curves on manifolds, which will make our calculation more convenient.
+
+\begin{defn}
+    The \emph{germ of smooth functions} at $p\in M$ is a ring defined by
+    \[\{(f,U)|\ U\subset M\text{ open, }f\in C^\infty(U)\}/\sim,\]
+    where $(f,U)\sim(g,V)$ if there exists a $W\subset U\cap V$ such that $f|_W=g|_W$.
+    Ring operations are defined in natural way.
+    Elements in $C^\infty_p(M)$ are denoted by $f_p$ if it has representative element $f$.
+\end{defn}
+
+\begin{defn}
+    Let $\gamma:[0,1]\to M$ be a smooth curve, i.e.\ a smooth map, with $\gamma(0)=p$.
+    Define the \emph{tangent vector at $p$ along $\gamma$} to be a map
+    \begin{align*}
+        \dot\gamma(0):C^\infty_p(M)&\to\mathbb{R}\\
+        f_p&\mapsto(f\circ\gamma)'(0).
+    \end{align*}
+    Then we define the \emph{tangent space at $p$} to be
+    \[T_pM:=\{\dot\gamma(0)|\ \gamma:[0,1]\to M\text{ smooth, }\gamma(0)=p\}.\]
+\end{defn}
+
+\begin{rem}
+    The assignment of curve to its tangent vector is not a bijection.
+    For instance, on $T_0\mathbb{R}^2$, $y=0$ and $y-x^2=0$ yield same tangent vector at $(0,0)$.
+\end{rem}
+
+It's easy to see that
+\begin{prop}
+    We have \emph{Leibniz rule} 
+    \[\dot\gamma(0)(f_pg_p)=f(p)\dot\gamma(0)(g_p)+g(p)\dot\gamma(0)(f_p).\]
+    Therefore a tangent vector is a \emph{derivative} on $C^\infty_p(M)$.
+\end{prop}
+
+We will show that $T_pM$ has a real vector space structure.
+In fact, we have an enhanced conclusion.
+\begin{prop}\label{local tangent vector}
+    Let $M^n$ be a smooth manifold, $(U,\varphi)$ be a chart containing $p$, $\varphi=(x^1,\cdots,x^n)$.
+    Define $\left.\frac{\partial}{\partial{x^i}}\right|_p$ to be the tangent vector of $\sigma_i=\varphi^{-1}(\varphi(p)+te_i)$, where $e_i=(0,\cdots,1,\cdots,0)$ with only $i$-th component being $1$.
+    Then we have
+    \[T_pM=\Span\left\{\left.\frac{\partial{}}{\partial{x^i}}\right|_p\right\}\]
+    as sets, so we can equip $T_pM$ a real vector space structure.
+\end{prop}
+\begin{proof}
+    Notice that
+    \[\left.\frac{\partial{}}{\partial{x^i}}\right|_pf=\frac{\partial}{\partial{x^i}}(f\circ\varphi^{-1})(p),\]
+    the partial derivative on right hand side is the usual Euclidean partial derivative.
+    Hence by chain rule, we have
+    \begin{align*}
+        \dot\gamma(0)f&=\left.\frac{\d{}}{\d{t}}\right|_{t=0}(f\circ\gamma)(t)\\
+        &=\left.\frac{\d{}}{\d{t}}\right|_{t=0}(f\circ\varphi^{-1})\circ(\varphi\circ\gamma)(t)\\
+        &=\left.\frac{\partial{}}{\partial{x^i}}\right|_{\varphi(p)}(f\circ\varphi^{-1})\left.\frac{\d{}}{\d{t}}\right|_{t=0}x^i(\gamma(t))\\
+        &=\left.\frac{\d{}}{\d{t}}\right|_{t=0}x^i(\gamma(t))\left.\frac{\partial{}}{\partial{x^i}}\right|_pf.
+    \end{align*}
+    Therefore we have
+    \[\dot\gamma(0)=\dot\gamma(0)(x^i)\left.\frac{\partial{}}{\partial{x^i}}\right|_p\in\Span\left\{\left.\frac{\partial{}}{\partial{x^i}}\right|_p\right\},\]
+    and we obtain
+    \[T_pM\subset\Span\left\{\left.\frac{\partial{}}{\partial{x^i}}\right|_p\right\}.\]
+    The reverse inclusion is trivial.
+\end{proof}
+
+\begin{rem}
+    The vector space structure of tangent space does not depend on the choice of chart, since for any charts $(U_1,\varphi_1)$ and $(U_2,\varphi_2)$, the Jacobian of transition function $\varphi_1\circ\varphi_2^{-1}$ is a vector space isomorphism.
+    However, this is again rely on the well-definedness of dimension of manifolds, but we have assumed it automatically.
+\end{rem}
+
+Next we define tangent maps.
+\begin{defn}
+    Let $f:M\to N$ be a smooth map, $p\in M$.
+    We define $f_{*p}:T_pM\to T_{f(p)}N$ by
+    \[f_{*p}(v)(g)=v(g\circ f)\]
+    for any $v\in T_pM$ and $g\in C^\infty_{f(p)}N$.
+\end{defn}
+
+\begin{rem}
+    We often write $f_{*p}$ as $\d{f}|_p$ if $f$ is a smooth function.
+    This coincides the notation for $1$-form we will define later.
+\end{rem}
+
+\begin{lem}
+    On charts $(U,\varphi)$ of $p\in M$ and $(V,\psi)$ of $q\in N$, the smooth map $f:M\to N$ that $f(p)=q$ satisfies
+    \[f_{*p}\left(\left.\frac{\partial{}}{\partial{x^i}}\right|_p\right)=\frac{\partial{}}{\partial{x^i}}(\psi\circ f\circ\varphi)^j(\varphi(p))\left.\frac{\partial{}}{\partial{y^j}}\right|_q.\]
+\end{lem}
+The proof is similar to Proposition~\ref{local tangent vector}.
+
+Moreover, we have the chain rule.
+\begin{prop}
+    Let $f:M\to N$, $g:N\to P$ be two smooth maps, then for $p\in M$ we have
+    \[(g\circ f)_{*p}=g_{*f(p)}\circ f_{*p}.\]
+\end{prop}
+\begin{proof}
+    Let $v\in T_pM$, then for any $\varphi\in C^\infty_{g(f(p))}(M)$ we have
+    \begin{align*}
+        (g\circ f)_{*p}(v)(\varphi)&=v(\varphi\circ(g\circ f))\\
+        &=v((\varphi\circ g)\circ f)\\
+        &=(f_{*p}(v))(\varphi\circ g)\\
+        &=(g_{*f(p)}(f_{*p}(v)))(\varphi)\\
+        &=(g_{*f(p)}\circ f_{*p})(v)(\varphi).\qedhere
+    \end{align*} 
+\end{proof}
+
+Since we linearize smooth maps, we can talk about rank of a map at a point.
+\begin{defn}
+    Let $f:M\to N$ be a smooth map and $p\in M$, the \emph{rank} of $f$ at $p$, denoted by $\rank_p{f}$, is defined by the rank of $f_{*p}$.
+\end{defn}
+
+\begin{defn}
+    Let $f:M^m\to N^n$ be a smooth map.
+    \begin{enumerate}[(1)]
+        \item Assume $m\leq n$, if $f_{*p}$ is injective for any $p\in M$, then we call $f$ an \emph{immersion}.
+        \item Assume $f$ is an immersion, if $f$ maps $M$ homeomorphically onto its image, then we call $f$ an \emph{embedding}.
+        \item Assume $m\geq n$, if $f_{*p}$ is surjective for any $p\in M$, then we call $f$ a \emph{submersion}.
+    \end{enumerate}
+\end{defn}
+
+\begin{rem}
+    An equivalent description for immersion and submersion is that they are of constant maximal rank.
+    Also notice that a map is both an immersion and submersion if and only if it is a diffeomorphism.
+\end{rem}
+
+\begin{eg}
+    The definition of embedding $f:M\to N$ asks $f(M)$ is equipped with subspace topology from $N$, so $f$ being injective is not enough.
+    For example, consider the injective map
+    \[r:(-\pi,\pi)\to\mathbb{R}^2,\ t\mapsto(2\sin{t},\sin(2t)).\]
+    The image of $r$ is the zero locus of $4y^2=x^2(4-x^2)$, it's easy to see it is compact.
+    But $(-\pi,\pi)$ is not compact, hence $r$ does not map the interval homeomorphically onto its image.
+\end{eg}
+
+\section{Submanifolds}
+
+In this section, we discuss submanifolds of an ambient manifold.
+We first present the definition.
+Then, we will discuss rank theorem, a powerful tool to discuss submanifolds.
+We will use rank theorem to derive inverse function theorem and implicit function theorem, and discuss submanifolds and embedded submanifolds.
+
+\begin{defn}
+    Let $M$ be a smooth manifold, $\Sigma\subset M$ be a subset.
+    $\Sigma$ is called a \emph{($k$-dimensional) submanifold} of $M$ if for any $p\in\Sigma$, there exists a chart $(U,\varphi)$ of $p$ in $M$ such that 
+    \[\varphi(U\cap\Sigma)=\varphi(U)\cap\{(x^1,\cdots,x^k,0,\cdots,0)\in\mathbb{R}^n|\ x^1,\cdots,x^k\in\mathbb{R}\}.\]
+    We define the \emph{codimension} of $\Sigma$ to be $n-k$, denoted by $\codim\Sigma=n-k$.
+\end{defn}
+
+We will not linger to give any examples.
+On the contrary, we will discuss rank theorem at once.
+
+\begin{thm}[Rank theorem]
+    Let $f:M^m\to N^n$ be a smooth map that has constant rank $r(\leq m)$.
+    For any $p\in M$, there exists charts $(U,\varphi)$ of $p$ and $(V,\psi)$ of $f(p)$, such that
+    \[(\psi\circ f\circ\varphi^{-1})(x^1,\cdots,x^r,\cdots,x^m)=(x^1,\cdots,x^r,0,\cdots,0)\]
+    on $\varphi(U)$.
+\end{thm}
+
+The proof of rank theorem is also complicated, and we just refer to~\cite[Theorem~4.12]{LeeSM}.
+Rank theorem has important applications.
+First, as corollary, we have inverse function theorem and implicit function theorem.
+\begin{thm}[Inverse function theorem]
+    Let $f:M\to N$ be a smooth map, $p\in M$.
+    Suppose $f_{*p}$ is an isomorphism, then there exists a neighborhood $U$ of $p$ such that $f|_U$ is an diffeomorphism on $U$.
+\end{thm}
+\begin{proof}
+    Since determinant function is smooth, $\det{f_{*p}}\neq 0$ in a neighborhood of $p$.
+    Then by rank theorem, there exists sufficiently small charts $(U,\varphi)$ of $p$ and $(V,\psi)$ of $f(p)$ such that $\psi\circ f\circ\varphi^{-1}$ is identity on $\varphi(U)$.
+    Thus $f|_U=\psi^{-1}\circ\varphi$ is a homeomorphism, and it is a diffeomorphism since $f$ is smooth.
+\end{proof}
+
+\begin{thm}[Implicit function theorem]
+    Let $f:M^{k+n}\to\mathbb{R}^k$ be a smooth map.
+    Suppose $f_{*p}$ is a submersion for any $p\in f^{-1}(0)$, then $f^{-1}(0)$ is an $n$-dimensional submanifold of $M$ (may not be connected).
+\end{thm}
+\begin{proof}
+    For $p\in f^{-1}(0)$, since determinant function is smooth, there exists a neighborhood of $p$ such that the tangent map has constant rank.
+    Hence by rank theorem, there exists sufficiently small charts $(U,\varphi)$ of $p$ and $(V,\psi)$ of $0$ such that
+    \[(\psi\circ f\circ\varphi^{-1})(x^1,\cdots,x^k,x^{k+1},\cdots,x^{k+n})=(x^1,\cdots,x^k).\]
+    Then $f^{-1}(0)$ restricts on $U$ has coordinate
+    \[\varphi(f^{-1}(0)\cap U)=\{(0,\cdots,0,x^{k+1},\cdots,x^{k+n})\in\mathbb{R}^{n+k}\}\cap\varphi(U).\]
+    Thus $f^{-1}(0)$ is an $n$-dimensional submanifold.
+\end{proof}
+\begin{rem}
+    \begin{enumerate}[(1)]
+        \item The value $0$ plays an unimportant role in the proof.
+        In fact, we can replace $0$ by $r_0$ and consider $g(x)=f(x)-r_0$.
+        \item The condition of $f_{*p}$ being a submersion for any $p\in f^{-1}(r_0)$ is seemingly hard to verify.
+        However, we will prove later that such property holds \emph{almost everywhere} in $\mathbb{R}$.
+        (In fact, $\mathbb{R}^k$ for all $k\in\mathbb{N}$. This is Sard's Theorem, but we only need $k=1$ case in this note.)
+    \end{enumerate}
+\end{rem}
+
+We now characterize submanifolds.
+\begin{defn}
+    Let $f:\Sigma\to M$ be an immersion, then the image of $f$ is called an \emph{immersed submanifold}.
+    Moreover, if $f$ is an embedding, the image of $f$ is called an \emph{embedded manifold}.
+\end{defn}
+
+\begin{prop}
+    Any immersed manifold is locally an embedded manifold.
+\end{prop}
+\begin{proof}
+    Only need to show any immersion is locally an embedding, and this is clear from rank theorem.
+\end{proof}
+
+\begin{prop}
+    A subset of a smooth manifold is a submanifold if and only if it is an embedded submanifold.
+\end{prop}
+\begin{proof}
+    Let $M$ be a smooth manifold, $S\subset M$ be a submanifold, then the inclusion $i:S\to M$ is an embedding.
+    Conversely, let $f:\Sigma^k\to M^n$ be an embedding.
+    Let $p\in f(\Sigma)$, $f(q)=p$, then by rank theorem, there exists charts $(U,\varphi)$ of $q$ and $(V,\psi)$ of $p$ such that
+    \[(\psi\circ f\circ\varphi^{-1})(x^1,\cdots,x^k)=(x^1,\cdots,x^k,0,\cdots,0).\]
+    Since $\Sigma\cong f(\Sigma)$ with latter equipped with subspace topology, $f(U)=\tilde{V}\cap f(\Sigma)$ for some open $\tilde{V}\subset M$.
+    By shrinking $\tilde{V}$ (and $U$), we can assume $\tilde{V}\subset V$, then
+    \[\psi(\tilde{V}\cap f(\Sigma))=\{(x^1,\cdots,x^k,0,\cdots,0)\in\mathbb{R}^n\}\cap\psi(\tilde{V}),\]
+    hence $f(\Sigma)$ is a submanifold of $M$.
+\end{proof}
+
+Now we provide some examples of submanifolds.
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item Open subsets of a smooth manifold.
+        This is obvious.
+        \item \emph{Surfaces} in $\mathbb{R}^3$.
+        This means a submanifold of codimension $1$.
+        In classical differential geometry, a surface means a $2$-dimensional immersed submanifold.
+        That is, a smooth map $r:\Omega\subset\mathbb{R}^2\to\mathbb{R}^3$ with $r_{;1}\times r_{;2}\neq 0$.
+        Generally, a submanifold of codimension $1$ (no matter what ambient manifold) is called a \emph{hypersurface}.
+        \item \emph{Zero locus} of $f:M\to\mathbb{R}$ such that $f_{*p}$ has maximal rank for all $p\in f^{-1}(0)$.
+        In particular, $n$-sphere $\mathbb{S}^n$ is the zero locus of $|x|^2-1=\sum_{i=1}^n(x^i)^2-1$.
+        \item \emph{(Affine) algebraic manifolds}, i.e.\ \emph{smooth algebraic varieties}\footnote{Usually we only discuss algebraic varieties on algebraic closed fields, such as $\mathbb{C}$. But define varieties on arbitrary field does not violate the definition in algebraic geometry.}.
+        Algebraic varieties are common zero locus of a family of polynomials $\{f^i\}_{i\in I}$.
+        By Hilbert's basis theorem, we can assume the index set $I$ is finite (see for example, \cite[Theorem~B-1.16]{Rotman}).
+        Hence we can have a differential smoothness condition that $f=(f^1,\cdots,f^{|I|})$ has maximal rank everywhere, instead of using commutative algebra.
+    \end{enumerate}
+\end{eg}
+
+\section{Manifolds with Boundary}
+
+\begin{defn}
+    A \emph{(smooth) manifold with boundary} is (what?)
+\end{defn}
