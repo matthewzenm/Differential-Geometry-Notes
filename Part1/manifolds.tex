@@ -110,9 +110,10 @@ For a proof, one can check~\cite[Theorem~2.23]{LeeSM}.
 Partition of unity plays an important role in defining many geometric objects, such as integral, metric, connection and so on.
 But any of them is beyond our scope in this section, so we have to postpone the illustration of applications of partition of unity.
 
-\section{Tangent Spaces and Tangent Maps}
-
+\section{Linearization}
 In this section we discuss the linearization of smooth maps, the main idea of differential geometry.
+
+\subsection*{Tangent Spaces and Tangent Maps}
 
 We first define tangent spaces.
 In modern textbooks, tangent vectors are defined to be derivatives on the germ of smooth functions.
@@ -182,6 +183,11 @@ In fact, we have an enhanced conclusion.
     However, this is again rely on the well-definedness of dimension of manifolds, but we have assumed it automatically.
 \end{rem}
 
+\begin{eg}
+    Let $M,N$ be smooth manifolds, and $(p,q)\in M\times N$.
+    Then $T_{(p,q)}M\times N=T_pM\oplus T_qN$.
+\end{eg}
+
 Next we define tangent maps.
 \begin{defn}
     Let $f:M\to N$ be a smooth map, $p\in M$.
@@ -243,6 +249,89 @@ Since we linearize smooth maps, we can talk about rank of a map at a point.
     The image of $r$ is the zero locus of $4y^2=x^2(4-x^2)$, it's easy to see it is compact.
     But $(-\pi,\pi)$ is not compact, hence $r$ does not map the interval homeomorphically onto its image.
 \end{eg}
+
+\subsection*{Tangent Bundles and Vector Fiels}
+
+We want to collect the tangent spaces and tangent maps together to obtain a global linearization.
+\begin{defn}[Tangent bundle]
+    Assume smooth manifold $M^n$ has atlas $\{U_\alpha,\varphi_\alpha\}$, define
+    \begin{gather*}
+        TM:=\bigsqcup_{p\in M}T_pM\\
+        \pi:TM\to M,\ (p,v)\mapsto p
+    \end{gather*}
+    We give an atlas of $TM$ to make it into a $2n$-dimensional smooth manifold.
+    Let
+    \begin{align*}
+        \Phi_\alpha&:\bigsqcup_{p\in U_\alpha}T_pM\to\mathbb{R}^{2n}\\
+        &(p,v)\mapsto(\varphi_\alpha(p),(v^1,\cdots,v^n))
+    \end{align*}
+    where $v=v^i\left.\frac{\partial{}}{\partial{x^i}}\right|_p$.
+    Let's check
+    \begin{gather*}
+        \Phi_\beta\circ\Phi_\alpha^{-1}:\varphi_{\alpha}(U_\alpha\cap U_\beta)\times\mathbb{R}^n\to\varphi_\beta(U_\alpha\cap U_\beta)\times\mathbb{R}^n\\
+        (x^1,\cdots,x^n,v^1,\cdots,v^n)\mapsto\left(\varphi_\beta\circ\varphi_\alpha^{-1}(x),\frac{\partial(\varphi_\beta\circ\varphi_\alpha^{-1})^1}{\partial{x^i}}v^i,\cdots,\frac{\partial(\varphi_\beta\circ\varphi_\alpha^{-1})^n}{\partial{x^i}}v^i\right)
+    \end{gather*}
+    Clearly it is smooth, then $\{(\pi^{-1}(U_\alpha),\Phi_\alpha)\}$ induces a smooth structure on $TM$.
+
+    We call $T_pM$ a \emph{fiber} over $p$, and $\pi:TM\to M$ the \emph{projection}.
+\end{defn}
+
+\begin{defn}[Vector field]
+    A \emph{vector field} is a smooth map $X:M\to TM$ such that $\pi\circ X=\operatorname{id}_M$.
+\end{defn}
+
+We will use the symbol $\Gamma(TM)$ to denote the set (or in fact, $C^\infty(M)$-module) of vector fields.
+The explanation for this symbol will be given after we introduced the notion of vector bundles.
+
+\begin{prop}
+    $X\in\Gamma(TM)$ if and only if in any local chart $(U,\varphi)$, we have $X(p)=X^i(p)\left.\frac{\partial{}}{\partial{x^i}}\right|_p$ for $X^i\in C^\infty(U)$, $i=1,2,\cdots,n$.
+\end{prop}
+
+\begin{rem}
+    This proposition is equivalent to $X$ can be a mapping $C^\infty(M)\to C^\infty(M)$ defined by $Xf(p)=X(p)f$.
+\end{rem}
+
+We now provide some approaches to generate new vector fields.
+
+\begin{defn}
+    For $X,Y\in\Gamma(TM)$, define \emph{Lie bracket} of $X,Y$ as $[X,Y]=XY-YX$, then $[X,Y]\in\Gamma(TM)$.
+\end{defn}
+\begin{rem}
+    We explain the definition more explicitly.
+    If we act two vector fields on the product of two functions, we have
+    \begin{align*}
+        (XY)_p(fg)&=X_p(Y(fg))=X_p(gYf+fYg)\\
+        &=\boxed{X_pg\cdot Y_pf+X_pf\cdot Y_pg}+g(p)X_pYf+f(p)X_pYg
+    \end{align*}
+    The boxed thing is bad, it spoils Leibniz rule.
+    But if we substract $YX_p(fg)$, the boxed thing is cancelled.
+    So $XY-YX\in\Gamma(TM)$.
+\end{rem}
+
+\begin{prop}
+    On some local chart, we have $\left[\left.\frac{\partial{}}{\partial{x^i}}\right|_p,\left.\frac{\partial{}}{\partial{x^j}}\right|_p\right]=0$.
+\end{prop}
+\begin{proof}
+    This is equivalent to mixed partial derivative is commutative for smooth functions in $\mathbb{R}^n$.
+\end{proof}
+
+Moreover, we can pass a vector field to another manifold via a diffeomorphism.
+
+\begin{prop}
+    Let $f:M\to N$ be a diffeomorphism and $X\in\Gamma(TM)$.
+    Then there exists a vector field $Y\in\Gamma(TN)$ such that $Y=f_*X$, called the \emph{pushforward} of $X$.
+\end{prop}
+\begin{proof}
+    Just define $Y$ pointwisely.
+\end{proof}
+
+\begin{prop}
+    Let $f:M\to N$ be a diffeomorphism and $X,Y\in\Gamma(TM)$, then
+    \[f_*[X,Y]=[f_*X,f_*Y].\]
+\end{prop}
+\begin{proof}
+    Clear when considering the corresponding derivatives.
+\end{proof}
 
 \section{Submanifolds}
 
@@ -351,6 +440,262 @@ Now we provide some examples of submanifolds.
 
 \section{Manifolds with Boundary}
 
+A manifold with boundary is locally an upper half space.
+First we difine the upper half space.
+
 \begin{defn}
-    A \emph{(smooth) manifold with boundary} is (what?)
+    The \emph{upper half space} $\mathcal{H}^n$ is defined as $\{(x^1,\cdots,x^n)\in\mathbb{R}^n|\ x^n\geq 0\}$ equipped with subpace topology.
+    Denote the \emph{boundary} of $\mathcal{H}$, i.e.\ $\mathbb{R}^{n-1}\times\{0\}$, by $\partial\mathcal{H}^n$.
 \end{defn}
+
+Now we can define manifolds with boundary as a topological object.
+\begin{defn}
+    Let $n\in\mathbb{N}$, a \emph{(topological) manifold with boundary} $M^n$ is a second countable Hausdorff space that is locally $\mathcal{H}^n$, i.e.\ for any $p\in M$, there is an open neighborhood $U$ of $p$ and a map $\varphi_U:U\to\mathcal{H}^n$ that maps $U$ to an open set in $\mathcal{H}^n$ and homeomorphically onto its image.
+    If $p$ is mapped to $\partial\mathcal{H}^n$, then we call $p$ a \emph{boundary point}, otherwise we call it an \emph{interior point}.
+    We demand that the set of boundary points is nonempty.
+\end{defn}
+
+\begin{rem}
+    The invariance of domain theorem~\cite[Theorem~2B.3]{Hatcher}~ensures that boundary points and interior points are well-defined.
+\end{rem}
+
+If we want to equip manifolds with boundary smooth structures, we need to extend our calculus to functions defined on arbitrary subsets of $\mathbb{R}^n$.
+
+\begin{defn}
+    Let $S\subset\mathbb{R}^n$ be an arbitrary subset, $f:S\to\mathbb{R}^m$ be a mapping.
+    $f$ is called \emph{smooth} if for any $p\in S$, there is an open neighborhood $U$ of $p$ and $\tilde{f}:U\to\mathbb{R}^m$, such that $\tilde{f}$ is smooth at $p$ and $\tilde{f}|_S=f$.
+\end{defn}
+
+By this definition, we can carry the definition of smooth structures on manifolds without boundary verbatim to manifolds with boundary.
+
+A simple observation shows
+\begin{lem}
+    Let $M^n$ be a smooth manifold with boundary.
+    Then $\partial M$, i.e.\ the set of boundary points is an $n-1$-dimensional smooth manifold with induced smooth structure.
+    A chart of $\partial M$ is a chart of $M$'s boundary point restricted to $\partial M$.
+\end{lem}
+
+\begin{rem}We have some remarks on manifolds with boundary.
+    \begin{enumerate}[(1)]
+        \item Topological boundary may not coincide with manifold boundary.
+        Let $A=\{x\in\mathbb{R}^2:\ |x|<1\}$, then $A$ is a manifold without boundary, but its topological boundary is unit circle $\mathbb{S}^1$.
+        \item $\partial M$ may not be connected even if $M$ is connected.
+        For example, the cylinder $\mathbb{S}^1\times[0,1]$ has two disjoint circles as boundary.
+    \end{enumerate}
+\end{rem}
+
+Next we discuss the tangent spaces on manifold with boundary.
+If $p\in M-\partial M$, then $T_pM$ is the ordinary tangent space.
+We need to figure out what $T_pM$ is when $p\in\partial M$.
+
+\begin{prop}\label{I_pM}
+    Let $I_pM$ be the set of all tangent vectors along a curve start from $p\in\partial M$.
+    Then $I_pM=T_p\partial M\times\mathbb{R}_{\geq 0}$ as sets.
+\end{prop}
+\begin{proof}
+    Use same calculation in Proposition~\ref{local tangent vector}, we have
+    \[\dot\gamma(0)=\dot\gamma(0)(x^i)\left.\frac{\partial}{\partial{x^i}}\right|_p,\]
+    where $\{\partial/\partial{x^i}\}$ consists a basis for $T_p\partial M$, and $\partial/\partial{x^n}$ is the tangent vector along $\sigma^n(t)=\varphi^{-1}(\varphi(p)+te_n)$.
+    Since $\varphi$ maps a neighborhood of $p$ to the neighborhood of $\varphi(p)$ on $\mathcal{H}^n$, we have $x^n\geq 0$.
+    Hence
+    \[\dot\gamma(0)(x^n)=\lim_{t\to 0^+}\frac{x^n(\sigma(t))}{t}\geq 0,\]
+    and the result follows.
+\end{proof}
+
+\begin{defn}
+    Let $M$ be a smooth manifold with boundary, $p\in\partial M$.
+    Then we define the \emph{tangent space} at $p$ to be $T_pM:=\Span{I_pM}$.
+    If a nonzero tangent vector in $T_pM-T_p\partial M$ is a tangent vector along some curve, then we call it an \emph{inward-pointing vector}, otherwise we call it an \emph{outward-pointing vector}.
+\end{defn}
+
+From Proposition~\ref{I_pM}, we have the following lemma.
+\begin{lem}
+    A nonzero tangent vector at a boundary point $p$ is either in $T_p\partial M$, or inward-pointing, or outward-pointing.
+\end{lem}
+
+\section{Lie Groups and Quotient Manifolds}
+
+\subsection*{Lie Groups}
+
+We first introduce the notion of Lie groups, which lie in the intersection of geometry, algebra and analysis.
+Moreover, we will use Lie groups to discuss the quotient manifolds.
+
+An abstract nonsense definition for Lie groups is they are group objects in the category of smooth manifolds.
+We want to write the definition explicitly.
+\begin{defn}
+    A group $G$ is called a \emph{Lie group} if $G$ has a (not necessarily connected) smooth manifold structure and the map $G\times G\to G$, $(g,h)\mapsto gh^{-1}$ is smooth.
+\end{defn}
+
+More generally, we have the notion of Lie algebras.
+\begin{defn}
+    A \emph{Lie algebra} is a real vector space $V$ equipped with a bilinear form $[\cdot,\cdot]$, satisfying
+    \begin{enumerate}[(1)]
+        \item $[v,v]=0$ for $v\in V$;
+        \item $[u,[v,w]]+[v,[w,u]]+[w,[v,u]]=0$ for $u,v,w\in V$ (Jacobi identity).
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}\label{Jacobi identity for vector fields}
+    The real vector space $\Gamma(TM)$ with Lie bracket is a Lie algebra.
+    We only need to verify Jacobi identity.
+    We have
+    \begin{gather*}
+        [X,[Y,Z]]=XYZ-XZY-YZX+ZYX\\
+        [Y,[Z,X]]=YZX-YXZ-ZXY+XZY\\
+        [Z,[X,Y]]=ZXY-ZYX-XYZ+YXZ,
+    \end{gather*}
+    add all three equations and we see all derivatives are cancelled.
+\end{eg}
+
+An important Lie algebra is the Lie algebra associated to a Lie group.
+
+\begin{defn}
+    Let $G$ be a Lie group, a vector field $X\in\Gamma(TG)$ is called \emph{left invariant} if for any left translation $L_g:h\mapsto gh$, we have $(L_g)_*X=X$.
+\end{defn}
+
+\begin{prop}
+    Left invariant vector fields consist a Lie algebra.
+\end{prop}
+\begin{proof}
+    Clearly left invariant vector fields consist a real vector space.
+    We need to show $[X,Y]$ is left invariant provided $X,Y$ left invariant, then the Jacobi identity holds automatically.
+    But this is because 
+    \[(L_g)_*[X,Y]=[(L_g)_*X,(L_g)_*Y]=[X,Y].\qedhere\]
+\end{proof}
+
+\begin{prop}
+    The vector space of left invariant vector fields is isomorphic to $T_eG$.
+    Moreover, we can make $T_eG$ a Lie algebra.
+\end{prop}
+\begin{proof}
+    Let $X$ be a left invariant vector field.
+    For any $g\in G$, we have
+    \[(L_{g^{-1}})_{*g}X|_g=X|_e,\]
+    hence the value of $X$ is determined by its value at $e$.
+    This gives the isomorphism.
+    With this isomorphism, we can carry the Lie algebra structure to $T_eG$.
+\end{proof}
+
+\begin{defn}
+    We define the \emph{Lie algebra of Lie group} $G$ by $T_eG$ equipped with Lie algebra structure.
+    The Lie algebra of $G$ is denoted by $\mathfrak{g}$.
+\end{defn}
+
+We give some examples of Lie groups and Lie algebras.
+
+\begin{eg}
+    If a group is at most countable, we often equip it with discrete topology, and regard it as a $0$-dimensional manifold.
+    Hence they are Lie groups.
+    $\mathbb{Z}$ and $\mathbb{Z}_n$ are prototypes of these groups.
+\end{eg}
+
+\begin{eg}\label{linear group 1}
+    \emph{Real general linear group} $\GL(n,\mathbb{R})$ and its subgroups.
+    $\GL(n,\mathbb{R})$ is the preimage of open set $\mathbb{R}-\{0\}$ under determinant function, hence is open in $\mathbb{R}^{n\times n}$.
+    Thus $\mathfrak{gl}(n,\mathbb{R})$ is isomorphic to $\mathbb{R}^{n\times n}$.
+    \begin{enumerate}[(1)]
+        \item \emph{Complex general linear group} $\GL(n,\mathbb{C})$.
+        It is the preimage of open set $\mathbb{C}-\{0\}$ under determinant function, hence is open in $\mathbb{C}^n$.
+        Thus $\mathfrak{gl}(n,\mathbb{C})$ is isomorphic to $\mathbb{R}^{2n^2}$.
+        It can be embedded into $\GL(2n,\mathbb{R})$ by writing $a+b\sqrt{-1}$ as the matrix
+        \[\begin{bmatrix}
+            a & -b \\ b & a
+        \end{bmatrix}.\]
+        \item \emph{Real special linear group} $\SL(n,\mathbb{R})$.
+        It is the zero locus of $A\mapsto(\det{A}-1)$.
+        To figure out what $\mathfrak{sl}(n,\mathbb{R})$ is, we choose a curve $X(t)$ on $\SL(n,\mathbb{R})$ and $X(0)=I$, then
+        \[0=(\det{X(t)})'=\det{X(t)}\tr(X(t)X'(t)),\]
+        take $t=0$ we have $\tr{X'(0)}=0$, this means $\mathfrak{sl}(n,\mathbb{R})$ is the vector space of matrices with vanishing trace, which has dimension $n^2-1$.
+        \item \emph{Complex special linear group} $\SL(n,\mathbb{C})$.
+        It is also the zero locus of $A\mapsto(\det{A}-1)$, by same argument above we know that $\mathfrak{sl}(n,\mathbb{C})$ is the vector space of complex matrices with vanishing trace, which has real dimension $2n^2-2$.
+    \end{enumerate}
+\end{eg}
+
+\begin{eg}\label{linear group 2}
+    Automorphisms of bilinear forms.
+    \begin{enumerate}[(1)]
+        \item The automorphism group of standard real inner product on $\mathbb{R}^n$, that is $(v,w)\mapsto v^tw$, is defined to be \emph{orthonormal group}, denoted by $\mathrm{O}(n)$.
+        This group can be characterized by
+        \[\mathrm{O}(n)=\{X\in\GL(n,\mathbb{R}):\ X^tX=I\}.\]
+        To figure out what $\mathfrak{o}(n)$ is, we choose a curve $X(t)$ on $\mathrm{O}(n)$ with $X(0)=I$.
+        Then
+        \[0=(X(t)^tX(t))'=X(t)^tX'(t)+X'(t)^tX(t),\]
+        let $t=0$, we obtain $X'(0)^t+X'(0)=0$.
+        This means $\mathfrak{o}(n)$ is the vector space of antisymmetric matrices, hence $\dim\mathfrak{o}(n)=\frac{n(n-1)}{2}$.
+        \item The subgroup of $\mathrm{O}(n)$ with determinant $1$ is called the \emph{special orthonormal group}, denoted by $\SO(n)$.
+        It is a component of $\mathrm{O}(n)$, hence $\mathfrak{so}(n)=\mathfrak{o}(n)$.
+        \item The automorphism group of standard Hermitian inner product on $\mathbb{C}^n$, that is $(v,w)\mapsto \bar{v}^tw$, is defined to be \emph{unitary group}, denoted by $\mathrm{U}(n)$.
+        It can be characterized by
+        \[\mathrm{U}(n)=\{X\in\GL(n,\mathbb{C}):\ \bar{X}^tX=0\}.\]
+        Use the same argument above we can show that $\mathfrak{u}(n)=\{X\in\mathbb{C}^{n\times n}:\ \bar{X}^t+X=I\}$.
+        Hence $\dim\mathfrak{u}(n)=n^2$.
+        \item The subgroup of $\mathrm{U}(n)$ with determinant $1$ is called the \emph{special unitary group}, denoted by $\SU(n)$.
+        By the very definition we know that $\SU(n)=\mathrm{U}(n)\cap\SL(n,\mathbb{C})$, hence $\mathfrak{su}(n)$ is the matrices in $\mathfrak{u}(n)$ with vanishing trace, hence has real dimension $n^2-1$.
+        \item The automorphism group of Lorentz bilinear form on $\mathbb{R}^{n,1}$, that is the bilinear form of $L=\operatorname{diag}{(1,\cdots,1,-1)}$ and preserves upper half space, denoted by $\mathrm{O}^+(n,1)$.
+        We will not meet the Lie algebra of $\mathrm{O}^+(n,1)$ generally.
+    \end{enumerate}
+\end{eg}
+
+\begin{rem}
+    The Lie groups in Example~\ref{linear group 1}~and~\ref{linear group 2}~are called \emph{linear groups}, since they are subgroups of general linear group $\GL(n,\mathbb{R})$.
+\end{rem}
+
+\subsection*{Quotient Manifolds}
+
+We first review the notion of group actions.
+\begin{defn}
+    A \emph{smooth (left) action} of group $G$ on smooth manifolds $M$ is an assignment of each $g\in G$ a smooth map $\rho_g:M\to M$, which satisfies
+    \begin{enumerate}[(1)]
+        \item $\rho_e=\operatorname{id}_M$;
+        \item $\rho_h\circ\rho_g=\rho_{hg}$ for $g,h\in G$.
+    \end{enumerate}
+    We often write $gx$ for $\rho_g(x)$.
+    The \emph{orbit} of $x\in M$ is the set $\{gx:\ g\in G\}$.
+    The \emph{isotropy group} (or \emph{stabilizer}) of $x\in M$ is the subgroup $G_x:=\{g\in G:\ gx=x\}$.
+\end{defn}
+
+Group actions give rise to quotient manifolds.
+\begin{defn}
+    Let a Lie group $G$ acts smoothly on a manifold $M$, we define the \emph{quotient space} $M/G$ by collecting all orbits, and equip $M/G$ the finest topology to make $\pi:M\to M/G$ continuous.
+\end{defn}
+
+Next we discuss when the quotient space of a smooth manifold admits a smooth manifold structure.
+\begin{defn}Let group $G$ has a smooth action of $M$.
+    \begin{enumerate}[(1)]
+        \item The action is called \emph{proper} if for any $x,y\in M$ with $y$ not in the orbit of $x$, there exists two neighborhood $U$ and $V$ of $x$ and $y$ such that $gU\cap V=\varnothing$ for all $g$.
+        \item The action is called \emph{free} if $gx=x$ for some $x\in M$ implies $g=\operatorname{id}$.
+    \end{enumerate}
+\end{defn}
+
+\begin{thm}
+    Let Lie group $G$ has a smooth, proper and free action of $M$.
+    Then the quotient space $M/G$ is a topological manifold with $\dim(M/G)=\dim{M}-\dim{G}$.
+    Moreover, $M/G$ has a unique smooth structure that makes $\pi:M\to M/G$ a smooth submersion.
+\end{thm}
+
+The proof is very complicated, please see~\cite[Theorem~21.10]{LeeSM}.
+
+We now give some examples of quotient manifolds.
+\begin{eg}
+    If $G$ is discrete, then $\pi:M\to M/G$ is a covering.
+    \begin{enumerate}[(1)]
+        \item $\mathbb{RP}^n=\mathbb{S}^n/\mathbb{Z}_2$, where the nontrivial element in $\mathbb{Z}_2$ corresponds to the antipodal map.
+        \item $\mathbb{S}^1=\mathbb{R}/2\pi\mathbb{Z}\cong\mathbb{R}/\mathbb{Z}$, $2\pi\mathbb{Z}$ acts on $\mathbb{R}$ by addition.
+        \item $\mathbb{T}^n=\mathbb{R}^n/\mathbb{Z}^n$.
+        This is equivalent to the definition of $\mathbb{S}^1\times\cdots\times\mathbb{S}^1$ by third isomorphism theorem.
+    \end{enumerate}
+\end{eg}
+
+\begin{eg}
+    By algebra, if $G$ acts on $M$ transitively, then $M$ equals to $G/G_x$, $x\in M$.
+    \begin{enumerate}[(1)]
+        \item The isometry group of Euclidean space $\Isom{\mathbb{R}^n}$ is equal to the semidirect product $\mathrm{O}(n)\ltimes\mathbb{R}^n$, where $\mathbb{R}^n$ represent translations.
+        Notice that $\mathrm{O}(n)$ fixes origin, hence $\mathbb{R}^n\cong\mathrm{O}(n)\ltimes\mathbb{R}^n/\mathrm{O}(n)$.
+        \item Let $\mathbb{S}^n$ defined by $1$'s preimage of quadric form $\sum_{i=1}^{n+1}(x^i)^2$, its automorphism group $\mathrm{O}(n+1)$ acts naturally on $\mathbb{S}^n$.
+        Notice that $\mathrm{O}(n)$ acting on first $n$ coordinates fixes $(0,\cdots,0,1)$, hence $\mathbb{S}^n=\mathrm{O}(n+1)/\mathrm{O}(n)$.
+        \item Let the hyperboloid defined by $-1$'s preimage of quadric form $\sum_{i=1}^n(x^i)^2-(x^{n+1})^2$ and taking upper component, its automorphism group $\mathrm{O}^+(n,1)$ acts naturally on it.
+        Notice that $\mathrm{O}(n)$ acting on first $n$ coordinates fixes $(0,\cdots,0,1)$, hence the upper component of  hyperboloid is diffeomorphic to $\mathrm{O}^+(n,1)/\mathrm{O}(n)$.
+    \end{enumerate}
+    These three spaces are called \emph{space forms}.
+    We will show in Riemannian geometry part that they have constant sectional curvature.
+\end{eg}

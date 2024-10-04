@@ -95,7 +95,7 @@ Finally, the existence of length-minimizing curves is related to Hopf-Rinow Theo
 
 To find the length-minimizing curve, we ``gather'' curves with same initial and end points, which is called a variation.
 \begin{defn}
-    Let $\gamma_0:[0,a]\to M$ be a curve, a \emph{variation} of $\gamma_0$ is a differentiable map $\gamma:[0,a]\times(-\varepsilon,\varepsilon)\to M$ such that $\gamma(t,0)=\gamma_0(t)$.
+    Let $\gamma_0:[0,a]\to M$ be a curve, a \emph{variation} of $\gamma_0$ is a smooth map $\gamma:[0,a]\times(-\varepsilon,\varepsilon)\to M$ such that $\gamma(t,0)=\gamma_0(t)$.
     If $\gamma(0,s)=\gamma_0(0)$ and $\gamma(a,s)=\gamma_0(a)$ for any $s\in(-\varepsilon,\varepsilon)$, then we call the variation a \emph{proper variation}.
     We call $\left.\frac{\partial{}}{\partial{s}}\right|_{s=0}\gamma(s,t)=:V(t)$ the \emph{variation vector field}.
 \end{defn}
@@ -196,7 +196,7 @@ We first need to investigate the equation that determine a geodesic.
 
 Since the solution of an ODE relies continuously on its initial value, we have the following proposition.
 \begin{prop}\label{geodesic existence}
-    For any $p\in M$, there exists a neighborhood $V$ of $p$, such that there exists $\delta>0$, $\varepsilon>0$ and a differentiable map $\gamma:(-\delta,\delta)\times\mathscr{U}\to M$, where $\mathscr{U}=\{(q,v)\in TM:\ q\in V,\ v\in T_qM,\ |v|<\varepsilon\}$, such that $\gamma(t;q,v)$ is a geodesic with $\gamma(0)=q$, $\dot\gamma(0)=v$.
+    For any $p\in M$, there exists a neighborhood $V$ of $p$, such that there exists $\delta>0$, $\varepsilon>0$ and a smooth map $\gamma:(-\delta,\delta)\times\mathscr{U}\to M$, where $\mathscr{U}=\{(q,v)\in TM:\ q\in V,\ v\in T_qM,\ |v|<\varepsilon\}$, such that $\gamma(t;q,v)$ is a geodesic with $\gamma(0)=q$, $\dot\gamma(0)=v$.
 \end{prop}
 A proof can be found in~\cite[Chapter 3, Lemma 1]{Wu}.
 

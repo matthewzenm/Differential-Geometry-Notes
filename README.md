@@ -6,29 +6,30 @@ The writing plan (update to 2024/9/14) is:
 Part 1. Smooth Manifolds
 1. Smooth Manifolds
   - Category of Smooth Manifolds: definition of smooth manifolds and smooth maps, partition of unity.
-  - Tangent Space and Differential
+  - Tangent Space and Tangent Bundle
   - Submanifolds: definition, immersion and embedding
   - Manifolds with Boundary
   - Group Actions and Quotients
-  - Tangent Bundle
 2. Vector Bundles
   - Definition: standard definition.
   - Construction of Vector Bundles: construct vector bundles via transition maps.
   - Sections: sections, in particular vector fields.
-  - Integral Curves and Flows
   - Algebraic Operation of Vector Bundles: direct sum, tensor product, quotient and dual.
-3. Tensors
+3. Vector Fiels and Lie Groups
+  - Integral Curves and Flows
+  - More Lie Groups
+4. Tensors
   - Tensor Bundle: tensor product of $TM$ and $T^*M$, double dual isomorphism, tensor product.
   - Differential Forms: wedge product, exterior differential, orientation.
   - Contraction and Trace
   - Riemannian Metric: definition, existence.
   - Musical Isomorphisms
   - Some Differential Operator: gradient, Hessian, Laplacian, divergence.
-4. Measure and Integral
+5. Measure and Integral
   - Rudiments of Measure Theory: Borel measure, Lebesgue integral, LDCT.
   - Integration on Riemannian Manifolds: Lebesgue integral on arbitrary manifolds,  integral of differential forms on orientable manifolds, Sard's theorem.
   - Stokes Theorem and Divergence Theorem
-5. Covariant Derivation
+6. Covariant Derivation
   - Parallel Transportation: axiomatic definition.
   - Covariant Derivation: definition via parallel transport, Leibniz law.
   - Covariant Differential: definition, Ricci identity.
