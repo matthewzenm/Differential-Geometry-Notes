@@ -62,3 +62,103 @@ Cartan--Hadamard Theorem gives the topological characterization of a Riemannian 
 \begin{thm}[Cartan--Hadamard]
     Let $M^n$ be a complete Riemannian manifold with $\Sect\leq 0$, then for any $p\in M$ the exponential map $\exp_p:T_pM\to M$ is a universal covering.
 \end{thm}
+
+We decompose the proof into several lemmas.
+
+\begin{lem}[Ambrose]\label{Ambrose}
+    Let $\varphi:(M,g)\to(N,h)$ be a local isometry.
+    If $(M,g)$ is complete, then $\varphi$ is a Riemannian covering map.
+\end{lem}
+\begin{proof}
+    We first show that $\varphi$ is surjective.
+    Since $\varphi$ is a local isometry, $\varphi(M)$ is open in $N$.
+    Let $y\in N$ be a limit point of $\varphi(M)$, then there exists a $x\in M$ such that there is a geodesic $\sigma:[0,1]\to N$ connecting $\varphi(x)$ and $y$.
+    Since $M$ is complete, this geodesic can be lifted to $\tilde\sigma:[0,1]\to M$, and clearly $\varphi(\tilde\gamma(1))=y$.
+    Hence $\varphi$ is surjective.
+
+    Now let $x\in M,x'\in N$ with $\varphi(x)=x'$.
+    Choose $\delta$ so small that $\exp_{x'}:B'(\delta)\to B_{x'}(\delta)$ is a diffeomorphism, where $B'(\delta)=\{v\in T_{x'}N:\ |v|<\delta\}$.
+    Since $\varphi$ is a local isometry, $\varphi^{-1}(x')$ is discrete, say $\{x_i\}_{i\in I}$.
+    For each $i\in I$, define
+    \begin{gather*}
+        B^i(\delta):=\{v\in T_{x_i}M:\ |v|<\delta\},\\
+        B^i_\delta:=\{y\in M:\ d(y,x_i)<\delta\}.
+    \end{gather*}
+    We now show the following three claims sequentially:
+    \begin{enumerate}[(1)]
+        \item $\varphi^{-1}(B_{x'}(\delta))=\bigcup_{i\in I}B^i_\delta$;
+        \item For each $i\in I$, $\varphi:B^i_\delta\to B_{x'}(\delta)$ is a diffeomorphism;
+        \item If $i\neq j$, then $B^i_\delta$ and $B^j_\delta$ are disjoint.
+    \end{enumerate}
+
+    For (1), $\bigcup_{i\in I}B^i_\delta\subset\varphi^{-1}(B_{x'}(\delta))$ is clear.
+    Suppose $z\in\varphi^{-1}(B_{x'}(\delta))$, then there exists a unique geodesic $\gamma:[0,1]\to N$ contained in $B_{x'}(\delta)$ such that $\gamma(0)=x'$, $\gamma(1)=\varphi(z)$ (combine Proposition~\ref{geodesic locally length-min}~and~Corollary~\ref{join points}).
+    Since $M$ is complete, we can lift $\gamma$ to $\tilde\gamma$.
+    Then by $\varphi(\tilde\gamma(0))=x'$, we have some $\tilde\gamma(0)=x_i$ for some $i\in I$.
+    Moreover, since $L[\tilde\gamma]=L[\gamma]<\delta$, we have $z\in B^i_\delta$.
+    Hence $\varphi^{-1}(B_{x'}(\delta))\subset\bigcup_{i\in I}B^i_\delta$.
+    This is (1).
+
+    For (2), since $M$ is complete, $\exp_{x_i}:B^i(\delta)\to B^i_\delta$ is well-defined.
+    By naturality of exponential map (Proposition~\ref{exp natural}), we have the following commutative diagram:
+    \[\begin{tikzcd}
+        B^i(\delta) \ar[r, "{\d\varphi}"] \ar[d, "{\exp_{x_i}}"] & B'(\delta) \ar[d, "{\exp_{x'}}"] \\
+        B^i_\delta \ar[r, "\varphi"] & B_{x'}(\delta).
+    \end{tikzcd}\]
+    Then
+    \[\varphi\circ\exp_{x_i}=\exp_{x'}\circ\d\varphi\]
+    is a diffeomorphism.
+    Since $\varphi$ is a local isometry, $\exp_{x_i}$ is an immersion, but $\exp_{x_i}$ is surjective, hence $\exp_{x_i}$ is a diffeomorphism.
+    Therefore $\varphi=\exp_{x'}\circ\d\varphi\circ(\exp_{x_i})^{-1}$ is a diffeomorphism.
+    This is (2).
+
+    For (3), let $z\in B^i_\delta\cap B^j_\delta$ for some $i,j$, then let $\gamma_i:[0,1]\to M$ and $\gamma_j:[0,1]\to M$ be the unique geodesics contained in $B^i_\delta$ and $B^j_\delta$ with $\gamma_i(0)=\gamma_j(0)=z$, $\gamma_i(1)=x_i$ and $\gamma_j(1)=x_j$.
+    Let $\zeta:[0,1]\to N$ be the unique geodesic contained in $B_{x'}(\delta)$ with $\zeta(0)=\varphi(z)$, $\zeta(1)=x'$.
+    Then by uniqueness, we have $\varphi\circ\gamma_i=\varphi\circ\gamma_j$.
+    However, since $\varphi$ is a local isometry, we have
+    \[\dot\gamma_i(0)=\d\varphi^{-1}(\dot\zeta(0))=\dot\gamma_j(0)\]
+    and
+    \[L[\gamma_i]=L[\zeta]=L[\gamma_j],\]
+    hence $\gamma_i(1)=\gamma_j(1)$, that is, $x_i=x_j$.
+    This is (3).
+\end{proof}
+
+\begin{lem}\label{C-H 1}
+    Let $(M,g)$ be a Riemannian manifold, $p\in M$.
+    If $M$ contains no conjugate points of $p$, then $\exp_p:T_pM\to M$ is a covering map.
+\end{lem}
+\begin{proof}
+    Since $p$ has no conjugate points, $\exp_p$ is nonsingular on $T_pM$, hence is an immersion.
+    Then we can equip $T_pM$ with pullback metric $\exp_p^*g$.
+    If we can show $(T_pM,\exp_p^*g)$ is complete, then by Lemma~\ref{Ambrose}, $\exp_p$ is a covering map.
+    Let $\gamma:[0,a)\to T_pM$ be a length-minimizing geodesic, then since $\exp_p$ is a local isometry between $(T_pM,\exp_p^*g)$ and $(M,g)$, $\exp_p\circ\gamma:[0,a)\to M$ must be a geodesic.
+    By the definition of exponential map, we have $\exp_p\circ\gamma(t)=\exp_p(\dot\gamma(0)t)$, then it clearly can be extended to $a$.
+    Thus by Theorem~\ref{Hopf-Rinow}~(4), $(T_pM,\exp_p^*g)$ is complete.
+    This proves the lemma.
+\end{proof}
+
+\begin{lem}\label{C-H 2}
+    Let $(M,g)$ be a complete Riemannian manifold with $\Sect\leq 0$, then for any $p\in M$, $p$ contains no conjugate points.
+\end{lem}
+\begin{proof}
+    Only need to show for any geodesic $\gamma:[0,+\infty)\to M$ with $\gamma(0)=p$, the nontrivial Jacobi field $J$ along $\gamma$ with $J(0)=0$ has no zeros besides $0$.
+    Consider the function $f(t)=\langle J(t),J(t)\rangle$, then we have
+    \[\dot{f}(t)=2\langle J(t),\dot{J}(t)\rangle,\]
+    and
+    \begin{align*}
+        \ddot{f}(t)&=2(\langle\dot{J}(t),\dot{J}(t)\rangle+\langle J(t),\ddot{J}(t)\rangle)\\
+        &=2(\langle\dot{J}(t),\dot{J}(t)\rangle-\langle R(\dot\gamma,J)\dot\gamma,J\rangle(t)\\
+        &\geq\langle\dot{J}(t),\dot{J}(t)\rangle.
+    \end{align*}
+    Hence
+    \begin{align*}
+        \dot{f}(t)&\geq\int_{0}^{t}\langle\dot{J}(t),\dot{J}(t)\rangle\d{t}+\dot{f}(0)\\
+        &=\int_{0}^{t}\langle\dot{J}(t),\dot{J}(t)\rangle\d{t}+\langle\dot{J}(0),J(0)\rangle\\
+        &=\int_{0}^{t}\langle\dot{J}(t),\dot{J}(t)\rangle\d{t}\\
+        &>0,
+    \end{align*}
+    unless $\dot{J}(t)\equiv 0$ for all $t\geq 0$, but this contradicts $J$ being nontrivial.
+    Hence by integrating $\dot{f}(t)$ we obtain $|J(t)|^2>0$ for $t>0$, i.e.\ $J$ has no zero other than $0$.
+\end{proof}
+
+Now Cartan--Hadamard Theorem is the corollary of Lemma~\ref{C-H 1}~and~\ref{C-H 2}.

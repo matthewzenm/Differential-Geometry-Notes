@@ -1,0 +1,204 @@
+\chapter{Bundles and Sheaves}
+
+In this chapter we generalize the construction of tangent bundle to obtain general vector bundles.
+This will allow us to define tensors, an important class of functions on smooth manifolds.
+Moreover, we will discuss sheaves and fiber bundles, which are two generalizations of vector bundles.
+
+\section{Vector Bundles}
+
+\subsection*{Definitions}
+
+\begin{defn}
+    A \emph{vector bundle} $E$ of rank $k$ over $M$ consists of two manifolds $E$ and $M$, a surjective smooth map $\pi:E\to M$ which satisfies:
+    \begin{enumerate}[(1)]
+        \item For each $p\in M$, there exists a neighborhood $U$ of $p$ such that there is a diffeomorphism $\varphi_U:\pi^{-1}(U)\to U\times\mathbb{R}^k$, the pair $(U,\varphi_U)$ is called a \emph{local trivialization}.
+        \item The diffeomorphism above restricted on $\pi^{-1}(p)$ is a vector space isomorphism $\varphi_U|_{\pi^{-1}(p)}:\pi^{-1}(p)\xrightarrow{\sim}\{p\}\times\mathbb{R}^k$.
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}\label{eg2.1}
+    \begin{enumerate}[(1)]
+        \item We have \emph{trivial bundle} $M\times\mathbb{R}^k$.
+        \item The tangent bundle $TM$ of a smooth manifold $M$ is a vector bundle of rank $n$.
+        \item A vector bundle of rank $1$ is called a \emph{line bundle}.
+        \item Infinite M\"{o}bius band $I\times\mathbb{R}$ with $(0,x)$ and $(1,-x)$ identified is a nontrivial line bundle over $\mathbb{S}^1$.
+    \end{enumerate}
+\end{eg}
+
+\begin{defn}
+    Let $\pi:E\to M$ and $\pi':E'\to M$ be two vector bundles, a smooth map $f:E\to E'$ is called a \emph{bundle map} if
+    \begin{enumerate}[(1)]
+        \item the following diagram is commutative
+        \[\begin{tikzcd}
+            E \ar[rr, "f"] \ar[rd, "\pi"'] & & E' \ar[ld, "{\pi'}"] \\
+            \ & M, & \
+        \end{tikzcd}\]
+        \item $f$ restricted on fiber $f|_{\pi^{-1}(p)}:E|_{\pi^{-1}(p)}\to E'|_{(\pi')^{-1}(p)}$ is a linear transformation.
+    \end{enumerate}
+    An invertible bundle map is called an \emph{isomorphism} between bundles.
+\end{defn}
+
+Therefore we obtain the notion of category of vector bundles over $M$.
+Moreover, we can define the sub-object in this category as Proposition~\ref{submanifold embedded}.
+
+\begin{defn}
+    Let $\pi:E\to M$ be a vector bundle, a submanifold $F\subset E$ is called a \emph{subbundle} if
+    \begin{enumerate}[(1)]
+        \item $\pi|_F:F\to M$ is a vector bundle;
+        \item the inclusion $F\hookrightarrow E$ is a bundle map.
+    \end{enumerate}
+\end{defn}
+
+At the end of this subsection, we provide a method to construct a vector bundle.
+
+\begin{defn}
+    Let $\pi:E\to M$ be a vector bundle, and $\{U_i,\varphi_i\}_{i\in I}$ be a cover of local trivializations.
+    The \emph{transition functions} with respective to this cover is a collection of smooth maps $g_{ij}:=\varphi_j^{-1}\circ\varphi_i$ for all indices $i,j\in I$.
+    Clearly $g_{ij}$ can be regard as a map $U_i\cap U_j\to\GL(k,\mathbb{R})$.
+\end{defn}
+
+\begin{prop}\label{transition function}
+    Let $M$ be a manifold, $\{U_i\}_{i\in I}$ be an open cover of $M$.
+    Given a collection of smooth maps $g_{ij}:U_i\cap U_j\to\GL(k,\mathbb{R})$ for any indices $i,j\in I$, which satisfy
+    \begin{gather*}
+        g_{ij}\cdot g_{ji}=I,\\
+        g_{ij}\cdot g_{jk}\cdot g_{ki}=I,
+    \end{gather*}
+    then the cover together with the collection of maps determine a vector bundle of rank $k$ over $M$ with same transition functions with respective to the cover.
+    The conditions on $\{g_{ij}\}$ is called \emph{cocycle condition}.
+\end{prop}
+\begin{proof}
+    Let $E_i:=U_i\times R^k$, define
+    \[E=\left.\bigsqcup_{i\in I}E_i\right/\sim,\]
+    where the equivalence relation $(p,v)\in E_i\sim(q,w)\in E_j$ if and only if $p=q$ and $w=g_{ij}(v)$.
+    It's easy to check this construction indeed gives a vector bundle, and clearly $g_{ij}$'s are the transition functions with respective to $\{U_i\}_{i\in I}$.
+\end{proof}
+
+\begin{eg}
+    We revisit the vector bundles in Example~\ref{eg2.1}.
+    \begin{enumerate}[(1)]
+        \item Trivial bundle is given by single transition function $U_1=M$, $g_{11}=I$.
+        \item Tangent bundle $TM$ of $M$.
+        Let $\{U_i,\varphi_i\}$ be an atlas, then the transition functions are $g_{ij}=\varphi_j^{-1}\circ\varphi_i$, where we equip $\mathbb{R}^n$ with natural smooth structure.
+        Then cocycle conditions are immediately verified.
+        \item Line bundles.
+        The transition functions of line bundles are nonzero real numbers, this hints us that we can define a group associated to line bundles over $M$ in some way.
+        \item M\"obius bundle.
+        Let $I_1,I_2$ be two intervals that cover $\mathbb{S}^1$, then $g_{12}$ is given by $-1$.
+    \end{enumerate}
+\end{eg}
+
+The transition function approach to vector bundle allows us to define algebraic operations on vector bundles.
+We will turn to this topic now.
+
+\subsection*{Algebraic Operations}
+
+We can migrate the methods to construct new vector spaces from old to vector bundles.
+
+Let $E\to M$ and $F\to M$ be two vector bundles, with local trivialization cover $\{U_i\}_{i\in I}$ (up to a common refinement), and transition functions $\{g_{ij}\}$ and $\{h_{ij}\}$ with respective to this cover.
+Assume $g_{ij}$ and $h_[ij]$ have matrix representation $A_{ij}$ and $B_{ij}$.
+Then we have:
+
+\noindent\emph{Direct sum}.
+The bundle $E\oplus F\to M$ is given by transition functions $g_{ij}\oplus h_{ij}$.
+In matrix form, the transition functions are
+\[\begin{bmatrix}
+    A_{ij} & 0 \\
+    0 & B_{ij}
+\end{bmatrix}.\]
+
+\noindent\emph{Tensor product}.
+The bundle $E\otimes F\to M$ is given by transition functions $g_{ij}\otimes h_{ij}$.
+In matrix form, assume that $A_{ij}=[a_{ij}{}^\alpha_\beta]_{1\leq\alpha,\beta\leq k}$, then $A_{ij}\otimes B_{ij}$ has blocked form
+\[\begin{bmatrix}
+    a_{ij}{}^1_1B_{ij} & a_{ij}{}^2_1B_{ij} & \cdots & a_{ij}{}^k_1B_{ij} \\
+    a_{ij}{}^1_2B_{ij} & a_{ij}{}^2_2B_{ij} & \cdots & a_{ij}{}^k_2B_{ij} \\
+    \vdots & \vdots & \ddots & \cdots \\
+    a_{ij}{}^1_kB_{ij} & a_{ij}{}^2_kB_{ij} & \cdots & a_{ij}{}^k_kB_{ij} \\
+\end{bmatrix}.\]
+
+\noindent\emph{Dual bundle}.
+The bundle $E^*$ is given by transition functions $(g_{ij}^{-1})^t$.
+We will explain the term ``dual'' later.
+
+Using above algebraic operations, we can easy to define algebraic operation on the set of equivalence classes of line bundles over $M$.
+\begin{prop}
+    The set of equivalence classes of line bundles over $M$ can be made into a group, where the multiplication is given by $E\otimes F$, and the inverse is given by $E^*$.
+    This group is called \emph{Picard group}, and denoted by $\operatorname{Pic}M$.
+\end{prop}
+
+\section{Sections}
+
+Sections are the main tool to investigate vector bundles.
+
+\begin{defn}
+    Let $\pi:E\to M$ be a vector bundle, a \emph{section} of $E$ is a smooth map $s:M\to E$ with $\pi\circ s=\operatorname{id}_M$.
+    The set of all sections of $E$ is denoted by $\Gamma(E)$.
+\end{defn}
+
+\begin{rem}
+    In differential, or Riemannian geometry, we are particularly interested in the sections of tangent bundles, that is, vector fields.
+    The notation above for vector fields coincides with the notation we introduced in Section~\ref{section linearization}.
+\end{rem}
+
+Clearly we have
+\begin{prop}
+    Let $E\to M$ be a vector bundle, then $\Gamma(E)$ is a $C^\infty(M)$-module, the scalar product is given pointwisely.
+\end{prop}
+
+Now we use transition functions to characterize sections.
+\begin{prop}
+    Let vector bundle $E\to M$ be defined by transition functions $\{g_{ij}\}$, then a section is equivalent to a collection of smooth functions $s_i:U_i\to\mathbb{R}^k$, which satisfies $s_j=g_{ij}s_i$ on each $U_i\cap U_j$.
+\end{prop}
+The proof is similar to Proposition~\ref{transition function}, just glue each local section.
+
+We can use the local expression of sections to give a explanation of ``dual bundle''.
+\begin{prop}
+    Let $E\to M$ be a vector bundle, there is a natural bilinear paring $\langle\cdot,\cdot\rangle:E\times E^*\to C^\infty(M)$.
+\end{prop}
+\begin{proof}
+    Let $E$ and $E^*$ have transition functions $\{g_{ij}\}$ and $\{(g_{ij}^{-1})^t\}$.
+    Let $s=\{s_i\}\in\Gamma(E)$ and $t=\{t_i\}\in\Gamma(E^*)$ be sections, then we define
+    \[\langle s,t\rangle|_{U_i}=s_i^tt_i.\]
+    We must show $\langle s,t\rangle$ is well-defined.
+    Consider $\langle s,t\rangle$ restricted on $U_i\cap U_j$, we have another expression
+    \begin{align*}
+        \langle s,t\rangle|_{U_i\cap U_j}&=s_j^tt_j\\
+        &=(g_{ij}s_i)^t((g_{ij}^{-1})^tt_i)\\
+        &=s_i^tg_{ij}^t(g_{ij}^{-1})^tt_i\\
+        &=s_i^tt_i,
+    \end{align*}
+    hence $\langle s,t\rangle$ is well-defined.
+\end{proof}
+
+\section{Fiber Bundles and Principal Bundles}
+
+In this and next sections we generalize vector bundle in two ways.
+
+\begin{defn}
+    A \emph{fiber bundle} with fiber $F$ consists of two manifolds $E$ and $M$, a surjective smooth map $\pi:E\to M$ which satisfies
+    \begin{enumerate}[(1)]
+        \item For each $p\in M$, there exists a neighborhood $U$ of $p$ such that there is a diffeomorphism $\varphi_U:\pi^{-1}(U)\to U\times F$, the pair $(U,\varphi_U)$ is called a \emph{local trivialization};
+        \item The diffeomorphism above restricted on $\pi^{-1}(p)$ is a bijection $\varphi_U|_{\pi^{-1}(p)}:\pi^{-1}(p)\xrightarrow{\sim}\{p\}\times F$.
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item Any covering space is a fiber bundle with discrete fiber.
+        \item Any vector bundle is a fiber bundle with fiber to be $\mathbb{R}^k$.
+        \item We have the \emph{Hopf fibration}:
+        \begin{align*}
+            H_n:\mathbb{S}^{2n+1}&\to\mathbb{CP}^n\\
+            (z^0,\cdots,z^n)&\mapsto[z^0,\cdots,z^n].
+        \end{align*}
+        This is a fiber bundle with fiber $\mathbb{S}^1$.
+        In particular, when $n=1$, we have an explicit formula
+        \begin{align*}
+            H_1:\mathbb{S}^3&\to\mathbb{S}^2(1/2)\\
+            (z,w)&\mapsto\left(z\bar{w},\frac{1}{2}\left(|w|^2-|z|^2\right)\right),
+        \end{align*}
+        where we regard $\mathbb{S}^2(1/2)\subset\mathbb{C}\oplus\mathbb{R}$.
+        The radius $1/2$ is chosen to make $H_1$ a \emph{Riemannian submersion}, we will explain this later.
+    \end{enumerate}
+\end{eg}

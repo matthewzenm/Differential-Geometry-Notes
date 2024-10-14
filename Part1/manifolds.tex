@@ -110,7 +110,7 @@ For a proof, one can check~\cite[Theorem~2.23]{LeeSM}.
 Partition of unity plays an important role in defining many geometric objects, such as integral, metric, connection and so on.
 But any of them is beyond our scope in this section, so we have to postpone the illustration of applications of partition of unity.
 
-\section{Linearization}
+\section{Linearization}\label{section linearization}
 In this section we discuss the linearization of smooth maps, the main idea of differential geometry.
 
 \subsection*{Tangent Spaces and Tangent Maps}
@@ -253,7 +253,7 @@ Since we linearize smooth maps, we can talk about rank of a map at a point.
 \subsection*{Tangent Bundles and Vector Fiels}
 
 We want to collect the tangent spaces and tangent maps together to obtain a global linearization.
-\begin{defn}[Tangent bundle]
+\begin{defn}
     Assume smooth manifold $M^n$ has atlas $\{U_\alpha,\varphi_\alpha\}$, define
     \begin{gather*}
         TM:=\bigsqcup_{p\in M}T_pM\\
@@ -276,7 +276,7 @@ We want to collect the tangent spaces and tangent maps together to obtain a glob
     We call $T_pM$ a \emph{fiber} over $p$, and $\pi:TM\to M$ the \emph{projection}.
 \end{defn}
 
-\begin{defn}[Vector field]
+\begin{defn}
     A \emph{vector field} is a smooth map $X:M\to TM$ such that $\pi\circ X=\operatorname{id}_M$.
 \end{defn}
 
@@ -405,7 +405,7 @@ We now characterize submanifolds.
     Only need to show any immersion is locally an embedding, and this is clear from rank theorem.
 \end{proof}
 
-\begin{prop}
+\begin{prop}\label{submanifold embedded}
     A subset of a smooth manifold is a submanifold if and only if it is an embedded submanifold.
 \end{prop}
 \begin{proof}
@@ -513,9 +513,7 @@ From Proposition~\ref{I_pM}, we have the following lemma.
     A nonzero tangent vector at a boundary point $p$ is either in $T_p\partial M$, or inward-pointing, or outward-pointing.
 \end{lem}
 
-\section{Lie Groups and Quotient Manifolds}
-
-\subsection*{Lie Groups}
+\section{Lie Groups}
 
 We first introduce the notion of Lie groups, which lie in the intersection of geometry, algebra and analysis.
 Moreover, we will use Lie groups to discuss the quotient manifolds.
@@ -592,7 +590,7 @@ We give some examples of Lie groups and Lie algebras.
 \begin{eg}\label{linear group 1}
     \emph{Real general linear group} $\GL(n,\mathbb{R})$ and its subgroups.
     $\GL(n,\mathbb{R})$ is the preimage of open set $\mathbb{R}-\{0\}$ under determinant function, hence is open in $\mathbb{R}^{n\times n}$.
-    Thus $\mathfrak{gl}(n,\mathbb{R})$ is isomorphic to $\mathbb{R}^{n\times n}$.
+    Thus $\mathfrak{gl}(n,\mathbb{R})$ is isomorphic to $\mathbb{R}^{n\times n}$, with Lie bracket to be usual commutator $AB-BA$.
     \begin{enumerate}[(1)]
         \item \emph{Complex general linear group} $\GL(n,\mathbb{C})$.
         It is the preimage of open set $\mathbb{C}-\{0\}$ under determinant function, hence is open in $\mathbb{C}^n$.
@@ -640,7 +638,7 @@ We give some examples of Lie groups and Lie algebras.
     The Lie groups in Example~\ref{linear group 1}~and~\ref{linear group 2}~are called \emph{linear groups}, since they are subgroups of general linear group $\GL(n,\mathbb{R})$.
 \end{rem}
 
-\subsection*{Quotient Manifolds}
+\section{Quotient Manifolds}
 
 We first review the notion of group actions.
 \begin{defn}
@@ -698,4 +696,18 @@ We now give some examples of quotient manifolds.
     \end{enumerate}
     These three spaces are called \emph{space forms}.
     We will show in Riemannian geometry part that they have constant sectional curvature.
+\end{eg}
+
+\begin{eg}
+    We give the example on real and complex Grassmannians.
+    \begin{enumerate}[(1)]
+        \item (Real) Grassmannians $\Gr(n,k)$ are the collection of all $k$-dimensional subspaces of $\mathbb{R}^n$.
+        Let $V$ be a $k$-dimensional subspace of $\mathbb{R}^n$, then $\mathbb{R}^n$ splits into $V\oplus V^\perp$.
+        Thus an isometry on $V$ and an isometry on $V^\perp$ acts separately, together fixes $V$.
+        Hence $\Gr(n,K)$ has a smooth structure induced by $\mathrm{O}(n)/(\mathrm{O}(k)\times\mathrm{O}(n-k))$.
+        In particular, $\Gr(n+1,1)$ is the $n$-dimensional projective space $\mathbb{RP}^n$.
+        \item We can carry the same procedure to complex vector spaces.
+        Hence we have complex Grassmannians are $\mathrm{U}(n)/(\mathrm{U}(k)\times\mathrm{U}(n-k))$.
+        But one notices that even complex Grassmannians have complex structure, $\mathrm{U}(n)$ is never a complex manifold.
+    \end{enumerate}
 \end{eg}
