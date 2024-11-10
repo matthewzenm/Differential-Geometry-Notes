@@ -174,6 +174,8 @@ We can use the local expression of sections to give a explanation of ``dual bund
 \section{Fiber Bundles and Principal Bundles}
 
 In this and next sections we generalize vector bundle in two ways.
+First, we replace the fiber of a vector space by arbitrary fiber, obtaining fiber bundle.
+Moreoever, when the fiber is chosen to be Lie groups, we obtain principal bundles.
 
 \begin{defn}
     A \emph{fiber bundle} with fiber $F$ consists of two manifolds $E$ and $M$, a surjective smooth map $\pi:E\to M$ which satisfies
@@ -199,6 +201,124 @@ In this and next sections we generalize vector bundle in two ways.
             (z,w)&\mapsto\left(z\bar{w},\frac{1}{2}\left(|w|^2-|z|^2\right)\right),
         \end{align*}
         where we regard $\mathbb{S}^2(1/2)\subset\mathbb{C}\oplus\mathbb{R}$.
-        The radius $1/2$ is chosen to make $H_1$ a \emph{Riemannian submersion}, we will explain this later.
+        The radius $1/2$ is chosen to make $H_1$ a \emph{Riemannian submersion}, which will be explained this later.
     \end{enumerate}
 \end{eg}
+
+Now we discuss principal bundles.
+\begin{defn}
+    \begin{enumerate}[(1)]
+        \item Let $f:M\to N$ be a smooth map, $G$ acts smoothly on $M$ and $N$.
+        $f$ is called \emph{$G$-equivariant} if $f(gx)=gf(x)$.
+        \item Let $G$ be a Lie group.
+        A \emph{principal $G$-bundle} is a fiber bundle $\pi:P\to M$ with fiber $G$, together with a smooth left action of $G$ on $P$ and each local trivialization $\pi^{-1}(U)\to U\times G$ is $G$-equivariant, where $G$ acts on $U\times G$ by $g(x,h)=(x,gh)$.
+    \end{enumerate}
+\end{defn}
+
+Principal bundles also have cocycle construction.
+But instead of gluing $U\times\mathbb{R}^k$'S, principal bundles glue $U\times G$'s.
+\begin{prop}
+    A principal $G$-bundle $P$ over $M$ is equivalent to the following data:
+    given an open cover $\{U_i\}$ of $M$, the collection of smooth maps $g_{ij}:U_i\cap U_j\to G$ which satisfies
+    \begin{gather*}
+        g_{ij}\cdot g_{ji}=e\\
+        g_{ij}\cdot g_{jk}\cdot g_{ki}=e
+    \end{gather*}
+    determines a principal $G$-bundle uniquely.
+\end{prop}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item Frame bundle $F(E)$ of a rank $k$ vector bundle $E\to M$.
+        $F(E)$ is the submanifold of $E^{\oplus k}$ consisting of $k$-tuples $(e_1,\cdots,e_k)$ which give a basis over the base point.
+        Locally $\pi^{-1}(U)$ is diffeomorphic to $U\times\GL(k,\mathbb{R})$, and has a natural action of $\GL(k,\mathbb{R})$, hence $F(E)$ is a principal $\GL(k,\mathbb{R})$-bundle.
+        \item Principal $\GL(k,\mathbb{R})$ bundles.
+        Using same transition functions, one can construct the corresponding rank $k$ vector bundle of the principal bundle.
+        This gives a functor from the category of principal $\GL(k,\mathbb{R})$-bundles to the category of vector bundles of rank $k$, it is also a categorical equivalence, whose inverse is given by taking frame bundle, although we don't want to explain what all these mean.
+    \end{enumerate}
+\end{eg}
+
+\section{Sheaves}
+
+In this section we release the requirement of local trivializations being fiber preserving, obtaining sheaves.
+But instead of defining sheaves like vector bundles, we adopt a modern definition.
+
+\begin{defn}
+    Let $X$ be a topological space, a \emph{presheaf} $\mathcal{F}$ of sets (abelian groups, rings, $A$-modules, etc.) over $X$ is an assignment of each open set $U$ a set (abelian group, ring, $A$-module, etc.) $\Gamma(\mathcal{F},U)$, called \emph{sections}, together with a collection of mappings (homomorphisms) $r^U_V:\Gamma(\mathcal{F},U)\to\Gamma(\mathcal{F},V)$ for open sets $V\subset U$, called \emph{restriction maps}, which satisfies
+    \begin{enumerate}[(1)]
+        \item $r^U_U=\operatorname{id}_U$;
+        \item $r^U_W=r^V_W\circ r^U_V$ provided $W\subset V\subset U$.
+    \end{enumerate}
+    If $s\in\Gamma(\mathcal{F},U)$ and $V\subset U$, $r^U_V(s)$ is usually denoted by $s|_V$.
+    The set $\Gamma(\mathcal{F},X)$ is called \emph{global section}, usually denoted by $\Gamma(\mathcal{F})$.
+\end{defn}
+
+\begin{defn}
+    Let $\mathcal{F}$ be a presheaf over $X$.
+    $\mathcal{F}$ is called a \emph{sheaf} if it additionally satisfies the following \emph{sheaf axioms}:
+    \begin{enumerate}[(1)]
+        \item Given an open cover $\{U_i\}$ of $U\subset X$, if $s,t\in\Gamma(\mathcal{F},U)$ satisfy $s|_{U_i}=t|_{U_i}$ for any $i$, then $s=t$;
+        \item Given an open cover $\{U_i\}$ of $U\subset X$, if $s_i\in\Gamma(\mathcal{F},U_i)$ satisfy $s_i|_{U_i\cap U_j}=s_j|_{U_i\cap U_j}$ for any $i,j$, then there exists an $s\in\Gamma(\mathcal{F},U)$ such that $s|_{U_i}=s_i$.
+    \end{enumerate}
+\end{defn}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item Let $M$ be a smooth manifold, we define the \emph{sheaf of germs of smooth functions} $C^\infty_M$ by
+        \[\Gamma(C^\infty_M,U)=\{f:U\to\mathbb{R}:\ f\text{ is smooth}\}.\]
+        Then $C^\infty_M$ is clearly a sheaf with evident restriction map.
+        \item Let $E\to M$ be a topological vector bundle, that is, the local trivializations are homeomorphisms and sections are merely continuous mappings.
+        Then we have a sheaf associated to $E$ with (use same symbol)
+        \[\Gamma(E,U)=\{s:U\to E|\ \pi\circ s=\operatorname{id}_U\}.\]
+        $E$ has evident restriction map.
+        The notation for global section of sheaf $E$ conincides with the notation of vector bundle $E$.
+        \item We give an example of a presheaf which is not a sheaf.
+        Let $X=X_1\sqcup X_2$ with $X_1,X_2$ open.
+        Define $\Gamma(\mathcal{F},U)=\mathbb{Z}_2$ for any $U\neq\varnothing\subset X$, $\Gamma(\mathcal{F},\varnothing)=\{0\}$, the restriction maps are taken to be identity maps for nonempty open sets, and $r^U_\varnothing$ is the zero homomorphism.
+        Then $\mathcal{F}$ is a presheaf.
+        But take $0\in\Gamma(\mathcal{F},X_1)$, $1\in\Gamma(\mathcal{F},X_2)$, we have
+        \[0|_{X_1\cap X_2}=0|_\varnothing=0=1|_\varnothing=1|_{X_1\cap X_2},\]
+        then by sheaf axiom, there exists $x\in\mathbb{Z}_2=\Gamma(\mathcal{F},X)$ such that $x|_{X_1}=0$, $x|_{X_2}=1$, this is impossible.
+        Hence $\mathcal{F}$ is not a sheaf.
+    \end{enumerate}
+\end{eg}
+
+\begin{defn}
+    Let $\mathcal{F}$ be a presheaf over $X$, the \emph{germ} of $\mathcal{F}$ at $x$, denoted by $\mathcal{F}_x$, is
+    \[\left.\bigsqcup_{x\in U\text{ open}}\Gamma(\mathcal{F},U)\right/\sim,\]
+    where $s\in\Gamma(\mathcal{F},U)$ and $t\in\Gamma(\mathcal{F},V)$ are equivalent (i.e.\ $s\sim t$) if there exists $W\subset U\cap V$ such that $s|_W=t|_W$.
+
+    We have a natural map $\Gamma(\mathcal{F},U)\to\mathcal{F}_x$ for $x\in U$, the image of $s$ under this natural map is denoted by $s_x$.
+\end{defn}
+
+\begin{rem}
+    One can show that if $\mathcal{F}$ is a presheaf of abelian groups, rings, $A$-modules etc., then $\mathcal{F}_x$ carries the corresponding algebraic structure.
+\end{rem}
+
+\begin{defn}
+    Let $\mathcal{F}$ be a presheaf over $X$.
+    The \emph{\'etale space} $\et\mathcal{F}$ of $\mathcal{F}$ is defined as follows:
+    as a set, we have
+    \[\et\mathcal{F}=\bigsqcup_{x\in X}\mathcal{F}_x,\]
+    and $\et\mathcal{F}$ carries the coarsest topology making the mapping
+    \[s:x\mapsto s_x\]
+    continuous for any $s\in\Gamma(\mathcal{F},U)$ and $U\subset X$ open.
+    Denote $\pi:\et\mathcal{F}\to X$ to be the evident projection map.
+\end{defn}
+
+A little observation can tell that
+\begin{prop}
+    $\et\mathcal{F}$ has a basis $\{s(x)\in\mathcal{F}_x|\ x\in U,\ s(x)=s_x\text{ for }s\in\Gamma(\mathcal{F},U)\}$ for all $s\in\Gamma(\mathcal{F},U)$ and $U\subset X$ open.
+\end{prop}
+
+\begin{eg}
+    \begin{enumerate}[(1)]
+        \item Let $E\to M$ be a topological vector bundle, then $E$ is the \'etale space of the associated sheaf of $E$.
+        \item Let $\mathcal{F}$ be a presheaf, we can define a \emph{sheaf} $\tilde{\mathcal{F}}$ by
+        \[\Gamma(\tilde{\mathcal{F}},U)=\{s:U\to\et\mathcal{F}|\ \pi\circ s=\operatorname{id}_U,\ s\text{ is continuous}\}.\]
+        The sheaf is called the \emph{sheafification} of $\mathcal{F}$.
+    \end{enumerate}
+\end{eg}
+
+\subsection*{Continuation}
+

@@ -642,12 +642,17 @@ We give some examples of Lie groups and Lie algebras.
 
 We first review the notion of group actions.
 \begin{defn}
-    A \emph{smooth (left) action} of group $G$ on smooth manifolds $M$ is an assignment of each $g\in G$ a smooth map $\rho_g:M\to M$, which satisfies
+    A \emph{smooth (left) action} of group $G$ on smooth manifolds $M$ is a smooth map
+    \begin{align*}
+        G\times M&\to M\\
+        (g,x)&\mapsto g\cdot x,
+    \end{align*}
+    which satisfies
     \begin{enumerate}[(1)]
-        \item $\rho_e=\operatorname{id}_M$;
-        \item $\rho_h\circ\rho_g=\rho_{hg}$ for $g,h\in G$.
+        \item $e\cdot x=x$;
+        \item $(hg)\cdot x=h\cdot(g\cdot x)$ for $g,h\in G$.
     \end{enumerate}
-    We often write $gx$ for $\rho_g(x)$.
+    Sometimes we omit the dot and simply write $gx$.
     The \emph{orbit} of $x\in M$ is the set $\{gx:\ g\in G\}$.
     The \emph{isotropy group} (or \emph{stabilizer}) of $x\in M$ is the subgroup $G_x:=\{g\in G:\ gx=x\}$.
 \end{defn}
@@ -684,7 +689,7 @@ We now give some examples of quotient manifolds.
     \end{enumerate}
 \end{eg}
 
-\begin{eg}
+\begin{eg}\label{model space forms}
     By algebra, if $G$ acts on $M$ transitively, then $M$ equals to $G/G_x$, $x\in M$.
     \begin{enumerate}[(1)]
         \item The isometry group of Euclidean space $\Isom{\mathbb{R}^n}$ is equal to the semidirect product $\mathrm{O}(n)\ltimes\mathbb{R}^n$, where $\mathbb{R}^n$ represent translations.

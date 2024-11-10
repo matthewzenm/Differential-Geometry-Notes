@@ -1,7 +1,7 @@
 \chapter{Curvature and Topology I}
 In this chapter, we will disucss some topological results derived by curvature restrictions.
 We will follow the order of Ricci curvature with positive lower bound, nonpositive sectional curvature and constant sectional curvature.
-The corresponding results are Bonnet--Myers Theorem, Cartan--Hadamard Theorem and classification theorem of space forms.
+The corresponding results are Bonnet--Myers Theorem, Cartan--Hadamard Theorem and some discussion of distance functions.
 More results on topology by curvature restrictions involves comparison theorem, which will be discussed later.
 
 From this chapter, we will assume that all Riemannian manifolds are complete.
@@ -162,3 +162,92 @@ We decompose the proof into several lemmas.
 \end{proof}
 
 Now Cartan--Hadamard Theorem is the corollary of Lemma~\ref{C-H 1}~and~\ref{C-H 2}.
+
+
+\section{Cut Loci and Distance Functions}
+
+Distance functions control the topology of a Riemannian manifold via comparison theorems.
+But before we discuss comparison theorems, we first need to go through distance functions in detail.
+
+We start this section by an example.
+
+\begin{eg}
+    Consider the cylinder $M=\mathbb{S}^1\times\mathbb{R}$ with product metric.
+    Then $M$ is flat, and by Cartan--Hadamard Theorem, it has no conjugate points.
+    Let $\gamma:[0,2\pi]\to M$ be a generatrix circle, then $\gamma$ is a geodesic.
+    Denote $p=\gamma(0)$, $q=\gamma(\pi)$, then $\gamma|_{[0,\pi]}$ is a length-minimizing geodesic joining $p$ and $q$.
+    But it is not the only length-minimizing geodesic joining $p$ and $q$, as $-\gamma|_{[\pi,2\pi]}$ is another one.
+    Then $q$ spoils the uniqueness of length-minimizing geodesic starts from $p$, without being conjugate to $p$.
+    This inspires us to denote the notion of cut points.
+\end{eg}
+
+Given $v\in T_pM$, $|v|=1$, $\gamma_v:[0,+\infty)\to M$ be a geodesic with $\gamma_v(0)=p$, $\dot\gamma_v(0)=v$.
+Notice that $\gamma_v|_{[0,t_0]}$ is length-minimizing if $d(p,\gamma_v(t_0))=t_0$.
+
+\begin{defn}
+    Under above settings, let $t_0=\sup\{t\in(0,+\infty):\ d(p,\gamma_v(t))=t\}$.
+    If $t_0<+\infty$, we call $\gamma_v(t_0)$ the \emph{cut point} of $p$ along $\gamma_v$.
+    The \emph{cut locus} of $p$ is the set of all cut points of $p$, denoted by $\Cut{p}$.
+\end{defn}
+
+By the definition and Jacobi Theorem (Theorem~\ref{jacobi thm}), the first conjugate point (if exists) must be cut point.
+But converse is generally not true, see Example~\ref{eg of cut loci}.
+The following proposition characterizes cut points.
+
+\begin{prop}
+    Let $\gamma$ be a unit speed geodesic starts from $p$.
+    If $\gamma(t_0)$ is the cut point of $p$ along $\gamma$, then either $\gamma(t_0)$ is conjugate to $p$, or there exists two length-minimizing geodesics from $p$ to $\gamma(t_0)$.
+\end{prop}
+\begin{proof}
+    Let the initial vector of $\gamma$ be $v$.
+    Choose a sequence $\{t_i\}$ decreasingly converges to $t_0$.
+    Let $\sigma_i$ be the unit speed length-minimizing geodesic joining $p$ and $t_i$, with initial vector $v_i$.
+    Define $b_i=d(p,\sigma_i(t_i))=L[\sigma_i]$, then $\sigma_i$ is defined on $[0,b_i]$ and $b_i\to t_0$.
+    Hence up to a subsequence, we have $v_i\to y$ for some $y\in T_pM$ with $|y|=1$.
+    Now we have two cases.
+    \begin{enumerate}[(1)]
+        \item If $v\neq y$, then by some ODE theory, $\sigma_i\to\sigma(t)=\exp_p(ty)$ (up to a subsequence).
+        By the lower semi-coninuity of length functional, we have
+        \[L[\sigma]\leq\lim_{i\to\infty}L[\sigma_i]\leq\lim_{i\to\infty}t_i=t_0.\]
+        On the other hand, $\gamma|_{[0,t_0]}$ is length-minimizing, we have
+        \[L[\sigma]\geq L[\gamma|_{0,t_0}]=t_0.\]
+        Hence $L[\sigma]=t_0$, $\sigma$ is another length-minimizing geodesic joining $p$ and $\gamma(t_0)$.
+        \item If $v=y$, then
+        \[\exp_p(b_iv_i)=\gamma(t_i)=\exp_p(t_iv)\]
+        with both $b_iv_i\to t_0v$ and $t_iv\to t_0v$.
+        This means $\exp_p$ is not injective in a neighborhood of $\gamma(t_0)$, hence $\exp_{p*}|_{\gamma(t_0)}$ degenerates, $\gamma(t_0)$ is conjugate to $p$.
+    \end{enumerate}
+\end{proof}
+
+\begin{eg}\label{eg of cut loci}
+    \begin{enumerate}[(1)]
+        \item Let $M=\mathbb{S}^n$.
+        Then the south pole is conjugate to north pole, as well as the cut point of north pole.
+        \item Let $M=\mathbb{RP}^n$.
+        For simplicity we take $n=2$.
+        We regard $\mathbb{RP}^2$ as the upper hemisphere with antipodal points on equator identified.
+        Then from north pole we move along a ``great circle'' to a point $p$ on equator, the path is a length-minimizing geodesic.
+        However, the path on the same ``great circle'' but on the other side is also a length-minimizing geodesic, so $p$ is the cut point of north pole (along this geodesic).
+        But by the naturality of exponential map, $p$ is not conjugate to north pole, so this is an example of cut point not being conjugate point.
+        \item Let $M=\mathbb{R}^2/\mathbb{Z}^2$ be the flat torus.
+        Let $[0,1]\times[0,1]$ be the fundamental region, and denote $p=(0,0)=(0,1)$.
+        Then $\gamma(t)=(t,0)$ is a geodesic.
+        Notice that if $t_0>1/2$, $\gamma(t)$ is not the length-minimizing geodesic joining $p$ and $(t_0,0)$, as $\sigma(t)=(1-t,0)$ is.
+        By the same reason, we have the cut locus of $p$ is $\{1/2\}\times[0,1/2]\cup[0,1/2]\times\{1/2\}$.
+    \end{enumerate}
+\end{eg}
+
+Let $S_p\subset T_pM$ be the unit sphere.
+For any $v\in S_p$, denote $\gamma_v:[0,+\infty)\to M$ be the geodesic with $\dot\gamma(0)=v$.
+We define a function
+\[\tau:S_p\to(0,+\infty],\ \tau(v)=\begin{cases}
+    +\infty, & \gamma_v\text{ contains no cut point},\\
+    t_0, & \gamma_v(t_0)\text{ is the cut point of }p.
+\end{cases}\]
+
+\begin{prop}
+    $\tau$ is continuous.
+\end{prop}
+\begin{proof}
+    I don't know!
+\end{proof}

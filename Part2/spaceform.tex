@@ -1,0 +1,188 @@
+\chapter{Curvature and Transformation Groups}
+
+In this chapter, we will discuss the space forms which we defined by Lie groups in detail.
+We will show that they are constant curvature, and we will prove their uniqueness up to isometry.
+After this, we will state and prove Myers--Steenrod Theorem and its rigidity result.
+
+\section{Space Forms}
+
+Our goal of this section is to calculate the curvature of space forms.
+It's hard to calculate space forms directly using Lie group definition: this relies on the curvature formulae of Riemannian submersions.
+To overcome this difficulty, we recall the models of space forms, and use these models to calculate their curvature.
+
+\subsection*{Models of Space Forms}
+
+Recall the space forms we introduced in Example~\ref{model space forms}:
+\begin{itemize}
+    \item $\mathbb{R}^n$,
+    \item $\mathbb{S}^n$: $(x^1)^2+\cdots+(x^{n+1})^2=1$ in $\mathbb{R}^{n+1}$,
+    \item $\mathbb{H}^n$: upper component of $(x^1)^2+\cdots+(x^n)^2-(x^{n+1})^2=-1$ in $\mathbb{R}^{n,1}$.
+\end{itemize}
+We will adopt these three models and equip them with Riemannian metrics.
+
+For $\mathbb{R}^n$, we have canonical (flat) metric $\delta=(\d{x^1})^2+\cdots+(\d{x^n})^2$.
+
+For $\mathbb{S}^n$, let $\iota:\mathbb{S}^n\to\mathbb{R}^{n+1}$ be the natural embedding, we have the canonical metric $g=\iota^*\delta$, where $\delta$ is the canonical metric of $\mathbb{R}^{n+1}$.
+
+For $\mathbb{H}^n$, let $\iota:\mathbb{H}^n\to\mathbb{R}^{n,1}$ be the natural embedding.
+Denote $\ell=(\d{x^1})^2+\cdots+(\d{x^n})^2-(\d{x^{n+1}})^2$ be the Lorentz metric of $\mathbb{R}^{n,1}$, we have the canonical metric of $\mathbb{H}^n$ to be $g=\iota^*\ell$.
+We need to show that $g$ is a Riemannian metric.
+\begin{lem}
+    Let $\ell$ be the Lorentz metric of $\mathbb{R}^{n,1}$, $\iota:\mathbb{H}^n\to\mathbb{R}^{n,1}$ be the natural embedding.
+    Then $\iota^*\ell$ is a Riemannian metric.
+\end{lem}
+\begin{proof}
+    Clearly we only need to show $\iota^*\ell$ is positive definite.
+    Let $(x^1,\cdots,x^{n+1})\in\mathbb{H}^n$, we consider its tangent vector $v=(v^1,\cdots,v^{n+1})$.
+    This tangent vector satisfies equation
+    \[v^1x^1+\cdots+v^nx^n-v^{n+1}x^{n+1}=0.\]
+    We calculate the norm (in fact, we cannot call $\langle v,v\rangle$ norm now) of $v$, by Cauchy's inequality, we have
+    \begin{align*}
+        \langle v,v\rangle&=(v^1)^2+\cdots+(v^n)^2-(v^{n+1})^2\\
+        &=(v^1)^2+\cdots+(v^n)^2-\frac{1}{(x^{n+1})^2}(v^1x^1+\cdots+v^nx^n)^2\\
+        &\geq((v^1)^2+\cdots+(v^n)^2)\left(1-\frac{(x^1)^2+\cdots+(x^n)^2}{(x^{n+1})^2}\right)\\
+        &=\frac{1}{(x^{n+1})^2}((v^1)^2+\cdots+(v^n)^2)\\
+        &\geq 0.
+    \end{align*}
+    Clearly, when equality holds, we have $v=0$.
+    Thus $\iota^*\ell$ is a Riemannian metric.
+\end{proof}
+
+\subsection*{Curvature of Space Forms}
+
+Clearly, as $\mathbb{R}^n$ is equipped with flat metric, it has constant curvature $0$.
+We write this into a proposition.
+\begin{prop}
+    For all $p\in\mathbb{R}^n$, we have $\Sect_p{\Pi}=0$ for any plane $\Pi\subset T_p\mathbb{R}^n$.
+\end{prop}
+
+To calculate the curvature of $\mathbb{S}^n$ and $\mathbb{H}^n$, we need to introduce the concept of totally geodesic submanifold.
+
+\begin{defn}
+    Let $M$ be a Riemannian manifold.
+    A submanifold $\Sigma\subset M$ is called a \emph{totally geodesic submanifold} if the second fundamental form vanishes identically.
+    Clearly this is equivalent to every geodesic of $M$ with initial vector in $T_p\Sigma$ is contained in $\Sigma$.
+\end{defn}
+
+By the very definition and Gauss equation, we have
+\begin{lem}
+    If $\Sigma$ is a totally geodesic submanifold of $M$, then for $p\in\Sigma$ and plane $\Pi\subset T_p\Sigma$, the sectional curvatures with respective to $\Sigma$ and $M$ are equal.
+\end{lem}
+
+A nontrivial result is
+\begin{prop}\label{Fix S totally geodesic}
+    Let $(M,g)$ be a complete Riemannian manifold.
+    Let $S\subset\Isom(M,g)$ be a subset, define $\operatorname{Fix}{S}$ be the fixed points of $S$.
+    Then any component of $\operatorname{Fix}{S}$ is totally geodesic submanifold of $M$.
+\end{prop}
+\begin{proof}
+    Let $p\in\operatorname{Fix}{S}$, $V\subset T_pM$ be the Zariski tangent space, that is,
+    \[V:=\{v\in T_pM:\ f_*|_p(v)=v,\ \forall f\in\operatorname{Fix}{S}\}.\]
+    $V$ is well-defined since all $f$ in $\operatorname{Fix}{S}$ fixes $p$.
+    Let $v\in V$, then the initial data of geodesic $\gamma_v(t)=\exp_p(tv)$ are fixed by $S$.
+    Since isometry preseves geodesics, we have $\gamma_v\subset\operatorname{Fix}{S}$.
+    Thus the proposition is proved as soon as we have shown that $\operatorname{Fix}{S}$ is a submanifold.
+
+    Above argument shows $\exp_p$ is defined on the whole $V$.
+    Let $\varepsilon$ so small that $\exp_p:B(0,\varepsilon)\to B(p,\varepsilon)$ is a diffeomorphism.
+    Then by Proposition~\ref{geodesic locally length-min}, every geodesic starts from $p$ in $B(p,\varepsilon)$ is length-minimizing.
+    Let $q\in\operatorname{Fix}{S}\cap B(p,\varepsilon)$, then there exists a unique geodesic $\gamma$ starts from $p$ joining $p$ and $q$.
+    Since $S$ fixes the initial and end points of $\gamma$, and $S$ does not change $\gamma$'s length, by the length-minimizing property of $\gamma$, we have $\gamma$ fixed by $S$.
+    Thus $\gamma\subset\operatorname{Fix}{S}$.
+    This means $\exp_p$ is bijective on $V\cap B(0,\varepsilon)$, hence $\operatorname{Fix}{S}$ is a submanifold.
+    The proposition is thus proved. 
+\end{proof}
+\begin{rem}
+    The first paragraph of above proof does not use the completeness assumption, thus if $\operatorname{Fix}{S}$ is a curve, above argument can show that $\operatorname{Fix}{S}$ is a geodesic.
+    This can occur when $M$ fails to be complete.
+    Consider $\mathbb{R}^2\backslash\{0\}$ equipped with pullback metric of $(\mathbb{R}^2,\delta)$ and $f$ be the reflection with respective to the punctured $x$-axis.
+    Then $f$ is an isometry and fixes the punctured $x$-axis, which is a union of two geodesics.
+\end{rem}
+
+Also we need Theorema Egregium in the following form.
+
+\begin{thm}[Theorema Egregium]
+    Let a $M$ be a $2$-dimensional Riemannian manifold (i.e.\ a Riemannian surface), $p\in M$.
+    If the metric tensor has expression $\d{s^2}=E\d{u^2}+G\d{v^2}$ near $p$, then the sectional curvature at $p$ is
+    \[\Sect_p(T_pM)=-\frac{1}{\sqrt{EG}}\left(\frac{\partial}{\partial{u}}\left(\frac{\partial_u\sqrt{G}}{\sqrt{E}}\right)+\frac{\partial}{\partial{v}}\left(\frac{\partial_v\sqrt{E}}{\sqrt{G}}\right)\right)\]
+\end{thm}
+
+We will not compute this equation here;
+For an elementary proof, see~\cite[Equation~2.131]{Toponogov}.
+
+Now we calculate the curvature of $\mathbb{S}^n$ and $\mathbb{H}^n$.
+
+For $\mathbb{S}^n$, we see that it's a closed subspace of complete metric space $\mathbb{R}^{n+1}$, hence is complete.
+Consider the orthogonal transformation 
+\[A=\operatorname{diag}(1,1,1,-1,\cdots,-1),\]
+we have that $A$ fixes $(x^1)^2+(x^2)^2+(x^3)^2=1$.
+Hence by Proposition~\ref{Fix S totally geodesic}, we only need to calculate the sectional curvature of $\mathbb{S}^2$ (this already shows $\mathbb{S}^n$ has constant curvature, since a Riemannian surface can only have one sectional curvature).
+Choose a coordinate
+\[(u,v)\mapsto(\cos{u}\cos{v},\cos{u}\sin{v},\sin{u}),\]
+it's known the metric tensor under this coordinate is
+\[\d{s^2}=\d{u^2}+\cos^2{u}\d{v^2}.\]
+Using Theorema Egregium, we have
+\begin{align*}
+    \Sect_p(T_p\mathbb{S}^2)&=-\frac{1}{\sqrt{\cos^2{u}}}\left(\frac{\partial{}}{\partial{u}}\left(\frac{\partial_u\sqrt{\cos^2{u}}}{\sqrt{1}}\right)+\frac{\partial{}}{\partial{v}}\left(\frac{\partial_v\sqrt{1}}{\sqrt{\cos^2{u}}}\right)\right)\\
+    &=1.
+\end{align*}
+Thus we obtain
+\begin{prop}
+    $\mathbb{S}^n$ has constant sectional curvature $1$.
+\end{prop}
+
+For $\mathbb{H}^n$, first consider the hyperbola
+\[(x^1)^2-(x^{n+1})^2=-1,\]
+we claim it is a geodesic.
+Let $\gamma(t)=(\cosh{t},0,\cdots,0,\sinh{t})$ ($t\geq 0$) be the parametrization of the hyperbola, denote whose initial vector by 
+\[v=(1,0,\cdots,0).\]
+Since $\mathbb{R}^{n,1}$ has flat metric, we have
+\begin{align*}
+    \D_{\dot\gamma(t)}\dot\gamma(t)&=\frac{\d{\dot\gamma}(t)}{\d{t}}\\
+    &=(\cosh{t},0,\cdots,0,\sinh{t}).
+\end{align*}
+The tangent space $T_{\gamma(t)}\mathbb{H}^n$ is defined by the equation
+\[x^1\cosh{t}=x^{n+1}\sinh{t},\]
+whose orthochronous complement is spanned by $(\cosh{t},0,\cdots,0,\sinh{t})$, which is $\D_{\dot\gamma(t)}\dot\gamma(t)$.
+Hence $\nabla_{\dot\gamma(t)}\dot\gamma(t)=0$, $\gamma$ is a geodesic.
+Let $w\in T_0\mathbb{H}^n$, we can rotate $w$ to $v$, and the rotation can be extended to a orthochronous transformation of $\mathbb{R}^{n,1}$ since it's restricted in $\mathbb{R}^n\times\{0\}$.
+This orthochronous transformation carries $\gamma$ to a geodesic with initial vector $w$, and can be defined on the whole $\mathbb{R}_{\geq 0}$.
+Thus by Hopf--Rinow Theorem, $\mathbb{H}^n$ is complete.
+
+After proving $\mathbb{H}^n$ is complete, we can calculate its curvature using totally geodesic submanifold.
+The orthochronous transformation
+\[A=\operatorname{diag}(1,1,-1,\cdots,-1,1)\]
+fixes $(x^1)^2+(x^2)^2-(x^{n+1})^2=-1$.
+Consider the coordinate
+\[(u,v)\mapsto(\cosh{u}\cos{v},\cosh{u}\sin{v},\sinh{u}),\]
+one can calculate that the expression of metric tensor under this coordinate is
+\[\d{s^2}=\d{u^2}+\cosh^2{u}\d{v^2}.\]
+Using Theorema Egregium, we have
+\begin{align*}
+    \Sect_p(T_p\mathbb{H}^2)&=-\frac{1}{\sqrt{\cosh^2{u}}}\left(\frac{\partial{}}{\partial{u}}\left(\frac{\partial_u\sqrt{\cosh^2{u}}}{\sqrt{1}}\right)+\frac{\partial{}}{\partial{v}}\left(\frac{\partial_v\sqrt{1}}{\sqrt{\cosh^2{u}}}\right)\right)\\
+    &=-1.
+\end{align*}
+Thus we obtain
+\begin{prop}
+    $\mathbb{H}^n$ has sectional curvature $-1$.
+\end{prop}
+
+\section{Uniqueness of Space Forms}
+
+In this section we prove that constant sectional curvature spaces are unique in some sense.
+We have some comments for this.
+
+First, let $(M,g)$ be a Riemannian manifold with constant sectional curvature $K$, we can scale $g$ by a positive constant $C$ to make $(M,Cg)$ into a space with constant sectional curvature $0,1,-1$, depending on the sign of $K$.
+Therefore we only need to consider spaces with sectional curvature $0,1,-1$.
+
+Second, we cannot have uniqueness unless we have some topological restriction.
+Let's consider any Riemannian covering with total space to be a space form, then the base space has constant curvature.
+This enlights us that we may consider universal covering of constant curvature spaces.
+
+Third, the uniqueness is up to an isometry.
+For instance, $\mathrm{O}(n+1)/\mathrm{O}(n)$ as a homogeneous space may be considered different from $\mathbb{S}^n$ ontologically, but they are isometric.
+
+Taking all above into consideration, we have the following theorem.
+\begin{thm}
+    Let $M^n$ be a Riemannian manifold with constant sectional curvature of $0,1,-1$, then the universal covering of $M$ must be isometric to space forms $\mathbb{R}^n$, $\mathbb{S}^n$ or $\mathbb{H}^n$.
+\end{thm}
