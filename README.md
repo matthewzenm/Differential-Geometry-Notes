@@ -1,26 +1,24 @@
 # Differential-Geometry-Notes
 A combined notes of differentiable manifolds and Riemannian geometry.
 
-The writing plan (update to 2024/10/31) is:
+The writing plan (update to 2024/12/26) is:
 
 1. Smooth Manifolds
   - Category of Smooth Manifolds: definition of smooth manifolds and smooth maps, partition of unity.
   - Tangent Space and Tangent Bundle
   - Submanifolds: definition, immersion and embedding
   - Manifolds with Boundary
-2. Lie Groups, Flows and Distributions
+2. Lie Groups and Flows
   - Lie Groups: definition and Lie algebras
   - Quotient Manifolds
   - Flow: one-parameter transformation groups, exponential map, Lie derivatives
   - Adjoint Representation: Lie bracket of matrix groups
-  - Distribution: Frobenius Theorem, foliation
 3. Bundles and Sheaves
   - Definition: standard definition.
   - Construction of Vector Bundles: construct vector bundles via transition maps.
   - Sections: sections, in particular vector fields.
   - Algebraic Operation of Vector Bundles: direct sum, tensor product, quotient and dual.
   - Fiber Bundles and Principal Bundles
-  - Sheaves: definition, étale space, continuation
 4. Tensors
   - Tensor Bundle: tensor product of $TM$ and $T^*M$, double dual isomorphism, tensor product.
   - Differential Forms: wedge product, exterior differential, orientation.
@@ -32,7 +30,6 @@ The writing plan (update to 2024/10/31) is:
   - Rudiments of Measure Theory: Borel measure, Lebesgue integral, LDCT.
   - Integration on Riemannian Manifolds: Lebesgue integral on arbitrary manifolds,  integral of differential forms on orientable manifolds, Sard's theorem.
   - Stokes Theorem and Divergence Theorem
-  - Rudiments of Second Order Elliptic Equations
 6. Covariant Derivation
   - Parallel Transportation: axiomatic definition.
   - Covariant Derivation: definition via parallel transport, Leibniz law.
@@ -54,28 +51,20 @@ The writing plan (update to 2024/10/31) is:
   - Principal Curvatures: definition, umbilical hypersurfaces.
   - Gauss-Codazzi Equations
   - Minimal Surfaces: first variation of area, mean curvature tensor, minimal graph.
-10. More on Lie Groups
-  - Exponential Map
-  - Adjoint Representation
-  - Biinvariant Metrics
-11. Curvature and Topology I
+10. Curvature and Topology I
   - Bonnet-Myers Theorem
   - Cartan-Hadamard Theorem
-12. Space Forms and Symmetry
+  - Distance Function: cut locus, Hessian of distance function as second fundamental form.
+11. Space Forms and Symmetry
   - Curvature of Space Forms
   - Classification of Space Forms
   - Myers-Steenrod Theorem
-13. Comparison Theorems
+12. Comparison Theorems
   - Rauch and Hessian Comparison Theorems
   - Toponogov Comparison Theorem
-  - Distance Function: cut locus, Hessian of distance function as second fundamental form.
   - Laplace Comparison Theorem: proof via Bochner formula, proof via geometric approach, in weak sense.
   - Volume Comparison Theorem
-14. Curvature and Topology II
-  - Sphere Theorem
+13. Curvature and Topology II
+  - $1/4$-Pinched Sphere Theorem
   - Maximal Diameter Theorem
   - Cheeger-Gromoll Splitting Theorem
-15. Curvature and Analysis
-  - Estimate of Gradient
-  - Dirichlet Problem: geometric boundary, solvability.
-  - Estimate of First Eigenvalue
